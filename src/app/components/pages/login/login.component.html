@@ -1,0 +1,28 @@
+<div class="flex p-8 m-8 w-8/12 mx-auto secondary-bg rounded-3xl gap-8 h-80">
+    <div class="flex-1">
+        <div class="text-center mb-8 flex flex-col justify-center items-center h-full">
+            <h2 class="text-2xl font-bold mb-2">Login your acc<span>O</span>unt!</h2>
+            <p class="text-sm text-gray-600">Welcome back! Please login to continue sharing your art and creativity with
+                the community.</p>
+        </div>
+    </div>
+    <div class="flex-1">
+        <form class="mt-6">
+            <p-floatlabel class="mb-8">
+                <input class="w-full" pInputText id="over_label" autocomplete="off" />
+                <label for="over_label">Email</label>
+            </p-floatlabel>
+            <p-floatlabel class="mb-4">
+                <p-password [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [toggleMask]="true"
+                    class="w-full" id="over_label" autocomplete="off" />
+                <label for="over_label">Password</label>
+            </p-floatlabel>
+            <p class="mb-4">Forget your password? <span class="cursor-pointer">Reset password</span></p>
+            <div class="flex justify-end gap-4">
+                <button routerLink="/register"
+                    class="py-2 px-12 w-full rounded-3xl bg-transparent border-orange-400 border-2 text-orange-400">Register</button>
+                <button routerLink="/login" class="py-2 px-12 w-full rounded-3xl">Login</button>
+            </div>
+        </form>
+    </div>
+</div>

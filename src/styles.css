@@ -27,12 +27,12 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--primary-text);
 }
 
-p, i, label{
-    color: var(--secondary-text);
+p, label, i{
+    color: var(--secondary-text) !important;
 }
 
 span, i:hover{
-    color: var(--tertiary);
+    color: var(--tertiary) !important;
 }
 
 button {
