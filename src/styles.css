@@ -1,1 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+/* Google Font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Tailwind Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary-bg: #1a1a1a;
+    --secondary-bg: #202020;
+    --primary-text: #fbfbfb;
+    --secondary-text: #878787;
+    --tertiary: #f56e0f;
+}
+
+body {
+    background: var(--primary-bg);
+    font-family: 'Poppins', sans-serif;
+}
+
+nav, footer{
+    background-color: var(--secondary-bg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-text);
+}
+
+p, i, label{
+    color: var(--secondary-text);
+}
+
+i:hover{
+    color: var(--tertiary);
+}
+
+button {
+    background: var(--tertiary);
+    color: var(--primary-text);
+}
