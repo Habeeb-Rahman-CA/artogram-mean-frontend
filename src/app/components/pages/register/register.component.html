@@ -9,21 +9,21 @@
     <div class="flex-1">
         <form>
             <p-floatlabel class="mb-8">
-                <input class="w-full" pInputText id="over_label" autocomplete="off" />
+                <input [(ngModel)]="name" name="name" class="w-full" pInputText id="over_label" autocomplete="off" />
                 <label for="over_label">Name</label>
             </p-floatlabel>
             <p-floatlabel class="mb-8">
-                <input class="w-full" pInputText id="over_label" autocomplete="off" />
+                <input [(ngModel)]="email" name="email" class="w-full" pInputText id="over_label" autocomplete="off" />
                 <label for="over_label">Email</label>
             </p-floatlabel>
             <p-floatlabel class="mb-6">
-                <p-password [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [toggleMask]="true"
+                <p-password [(ngModel)]="password" name="password" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [toggleMask]="true"
                     class="w-full" id="over_label" autocomplete="off" />
                 <label for="over_label">Password</label>
             </p-floatlabel>
             <div class="flex justify-end gap-4">
                 <button routerLink="/login" class="py-2 px-12 w-full rounded-3xl bg-transparent border-orange-400 border-2 text-orange-400">Login</button>
-                <button routerLink="/register" class="py-2 px-12 w-full rounded-3xl">Register</button>
+                <button (click)="register()" routerLink="/register" class="py-2 px-12 w-full rounded-3xl">Register</button>
             </div>
         </form>
     </div>
