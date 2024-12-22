@@ -1,1 +1,46 @@
-<p>dashboard works!</p>
+<div class="p-8 m-8">
+    <div class="flex gap-4">
+        <div class="w-2/5 secondary-bg p-8 rounded-3xl">
+            <p class="text-xl pb-8">My Profile</p>
+            <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" size="xlarge"
+                class="mb-4" />
+            <h4 class="mb-2">Name : Habeeb Rahman CA</h4>
+            <h4 class="mb-2">Email : habeebrahmanca22gmail.com</h4>
+            <div class="flex gap-2 items-center mb-8">
+                <h4>Link:</h4>
+                <input type="text" [value]="textToCopy"
+                    class="text-gray-400 overflow-hidden bg-transparent w-full border-none outline-none" readonly>
+                <i (click)="copyText()" pTooltip="Copy URL" class="ri-file-copy-line text-xl"></i>
+            </div>
+            <button class="w-full p-2 rounded-3xl">Edit Profile</button>
+        </div>
+        <div class="w-3/5">
+            <div class="secondary-bg p-10 rounded-3xl">
+                <div class="flex items-center justify-center flex-col gap-6">
+                    <p-avatar-group>
+                        <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" size="large" shape="circle" />
+                        <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" size="large" shape="circle" />
+                        <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/onyamalimba.png" size="large" shape="circle" />
+                        <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/ionibowcher.png" size="large" shape="circle" />
+                        <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/xuxuefeng.png" size="large" shape="circle" />
+                        <p-avatar label="+5" shape="circle" size="large" />
+                    </p-avatar-group>
+                    <div class="flex gap-2 hover:gap-4 cursor-pointer transition-all duration-300 items-center">
+                        <h3 class="text-2xl">Manage Profiles</h3>
+                        <button class="py-2 px-3 rounded-3xl"><i class="ri-arrow-right-line !text-white hover:!text-white text-xl"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-4 mt-4">
+                <div class="w-1/2 secondary-bg p-10 rounded-3xl flex flex-col items-center justify-center gap-2 cursor-pointer">
+                    <i class="ri-bar-chart-line text-4xl transition-all duration-300"></i>
+                    <h3 class="text-2xl">Monitor Activites</h3>
+                </div>
+                <div class="w-1/2 secondary-bg p-10 rounded-3xl flex flex-col items-center justify-center gap-2 cursor-pointer">
+                    <i class="ri-questionnaire-line text-4xl transition-all duration-300"></i>
+                    <h3 class="text-2xl">Help Center</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
