@@ -26,7 +26,7 @@ export class LoginComponent {
         alert('Logged in successfully')
         this.email = ''
         this.password = ''
-        this.router.navigate(['/dashboard'])
+        this.router.navigate(['/admin-dashboard'])
       },
       error: () => alert('Error logging in')
     })

@@ -4,12 +4,12 @@ import { AvatarGroup } from 'primeng/avatargroup';
 import { Tooltip } from 'primeng/tooltip';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-admin-dashboard',
   imports: [Avatar, Tooltip, AvatarGroup],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  templateUrl: './admin-dashboard.component.html',
+  styleUrl: './admin-dashboard.component.css'
 })
-export class DashboardComponent {
+export class AdminDashboardComponent {
 
   textToCopy: string = 'www.artogram.com/habeebrahmanca22'
 
