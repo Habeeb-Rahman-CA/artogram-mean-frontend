@@ -7,6 +7,7 @@ import { AdminDashboardComponent } from './components/pages/admin-dashboard/admi
 import { ManageProfileComponent } from './components/pages/manage-profile/manage-profile.component';
 import { MonitorActivityComponent } from './components/pages/monitor-activity/monitor-activity.component';
 import { SettingsComponent } from './components/pages/settings/settings.component';
+import { ArtistDashboardComponent } from './components/pages/artist-dashboard/artist-dashboard.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,5 +19,7 @@ export const routes: Routes = [
     { path: 'admin-dashboard', component: AdminDashboardComponent },
     { path: 'manage-profile', component: ManageProfileComponent },
     { path: 'monitor-activity', component: MonitorActivityComponent },
-    {path: 'settings', component: SettingsComponent}
+    { path: 'settings', component: SettingsComponent },
+    //artist routes
+    { path: 'artist-dashboard', component: ArtistDashboardComponent },
 ];
