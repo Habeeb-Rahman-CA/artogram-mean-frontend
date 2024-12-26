@@ -8,6 +8,7 @@ import { ManageProfileComponent } from './components/pages/manage-profile/manage
 import { MonitorActivityComponent } from './components/pages/monitor-activity/monitor-activity.component';
 import { SettingsComponent } from './components/pages/settings/settings.component';
 import { ArtistDashboardComponent } from './components/pages/artist-dashboard/artist-dashboard.component';
+import { CollaborationComponent } from './components/pages/collaboration/collaboration.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -22,4 +23,5 @@ export const routes: Routes = [
     { path: 'settings', component: SettingsComponent },
     //artist routes
     { path: 'artist-dashboard', component: ArtistDashboardComponent },
+    { path: 'collaboration', component: CollaborationComponent },
 ];
