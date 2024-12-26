@@ -9,6 +9,7 @@ import { MonitorActivityComponent } from './components/pages/monitor-activity/mo
 import { SettingsComponent } from './components/pages/settings/settings.component';
 import { ArtistDashboardComponent } from './components/pages/artist-dashboard/artist-dashboard.component';
 import { CollaborationComponent } from './components/pages/collaboration/collaboration.component';
+import { MyProductComponent } from './components/pages/my-product/my-product.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -24,4 +25,5 @@ export const routes: Routes = [
     //artist routes
     { path: 'artist-dashboard', component: ArtistDashboardComponent },
     { path: 'collaboration', component: CollaborationComponent },
+    { path: 'my-products', component: MyProductComponent }
 ];
