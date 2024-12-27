@@ -11,6 +11,10 @@ import { ArtistDashboardComponent } from './components/pages/artist-dashboard/ar
 import { CollaborationComponent } from './components/pages/collaboration/collaboration.component';
 import { MyProductComponent } from './components/pages/my-product/my-product.component';
 import { JobsComponent } from './components/pages/jobs/jobs.component';
+import { EmployerDashboardComponent } from './components/pages/employer-dashboard/employer-dashboard.component';
+import { InsightComponent } from './components/pages/insight/insight.component';
+import { HireArtistComponent } from './components/pages/hire-artist/hire-artist.component';
+import { ManageJobsComponent } from './components/pages/manage-jobs/manage-jobs.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -27,5 +31,10 @@ export const routes: Routes = [
     { path: 'artist-dashboard', component: ArtistDashboardComponent },
     { path: 'collaboration', component: CollaborationComponent },
     { path: 'my-products', component: MyProductComponent },
-    { path: 'jobs', component: JobsComponent }
+    { path: 'jobs', component: JobsComponent },
+    // employer routes
+    { path: 'employer-dashboard', component: EmployerDashboardComponent },
+    { path: 'insight', component: InsightComponent },
+    { path: 'hire-artist', component: HireArtistComponent },
+    { path: 'manage-jobs', component: ManageJobsComponent }
 ];
