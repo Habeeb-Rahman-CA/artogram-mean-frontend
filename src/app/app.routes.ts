@@ -16,13 +16,13 @@ import { InsightComponent } from './components/pages/insight/insight.component';
 import { HireArtistComponent } from './components/pages/hire-artist/hire-artist.component';
 import { ManageJobsComponent } from './components/pages/manage-jobs/manage-jobs.component';
 import { CustomerProfileComponent } from './components/pages/customer-profile/customer-profile.component';
+import { ProductDetailComponent } from './components/pages/product-detail/product-detail.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'products', component: ProductsComponent },
     // admin routes
     { path: 'admin-dashboard', component: AdminDashboardComponent },
     { path: 'manage-profile', component: ManageProfileComponent },
@@ -38,6 +38,8 @@ export const routes: Routes = [
     { path: 'insight', component: InsightComponent },
     { path: 'hire-artist', component: HireArtistComponent },
     { path: 'manage-jobs', component: ManageJobsComponent },
-    // csutomer routes
-    { path: 'customer-profile', component: CustomerProfileComponent }
+    // customer routes
+    { path: 'products', component: ProductsComponent },
+    { path: 'customer-profile', component: CustomerProfileComponent },
+    { path: 'products/:id', component: ProductDetailComponent }
 ];
