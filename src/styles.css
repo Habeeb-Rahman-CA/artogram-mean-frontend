@@ -39,3 +39,12 @@ button {
     background: var(--tertiary);
     color: var(--primary-text);
 }
+
+.hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}

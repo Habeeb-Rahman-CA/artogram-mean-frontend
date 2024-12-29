@@ -17,6 +17,7 @@ import { HireArtistComponent } from './components/pages/hire-artist/hire-artist.
 import { ManageJobsComponent } from './components/pages/manage-jobs/manage-jobs.component';
 import { CustomerProfileComponent } from './components/pages/customer-profile/customer-profile.component';
 import { ProductDetailComponent } from './components/pages/product-detail/product-detail.component';
+import { ArtistDetailComponent } from './components/pages/artist-detail/artist-detail.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -30,6 +31,7 @@ export const routes: Routes = [
     { path: 'settings', component: SettingsComponent },
     // artist routes
     { path: 'artist-dashboard', component: ArtistDashboardComponent },
+    { path: 'artist/:id', component: ArtistDetailComponent },
     { path: 'collaboration', component: CollaborationComponent },
     { path: 'my-products', component: MyProductComponent },
     { path: 'jobs', component: JobsComponent },
@@ -41,5 +43,5 @@ export const routes: Routes = [
     // customer routes
     { path: 'products', component: ProductsComponent },
     { path: 'customer-profile', component: CustomerProfileComponent },
-    { path: 'products/:id', component: ProductDetailComponent }
+    { path: 'products/:id', component: ProductDetailComponent },
 ];
