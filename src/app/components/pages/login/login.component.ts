@@ -22,11 +22,25 @@ export class LoginComponent {
 
   login() {
     this.authService.loginUser(this.email, this.password).subscribe({
-      next: () =>{
+      next: (res: any) => {
         alert('Logged in successfully')
         this.email = ''
         this.password = ''
-        this.router.navigate(['/admin-dashboard'])
+        this.authService.setUser(res.user)
+
+        // Navigation based on role
+        const role = this.authService.getUserRole()
+        if (role === 'admin') {
+          this.router.navigate(['/admin-dashboard'])
+        } else if (role === 'artist') {
+          this.router.navigate(['/artist-dashboard'])
+        } else if (role === 'employer') {
+          this.router.navigate(['/employer-dashboard'])
+        } else if (role === 'customer') {
+          this.router.navigate(['/products'])
+        } else {
+          alert('Something went wrong')
+        }
       },
       error: () => alert('Error logging in')
     })
