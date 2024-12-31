@@ -5,7 +5,7 @@
     </div>
     <h1 class="text-4xl font-bold cursor-pointer transition-all duration-300">Art<span>O</span>gram</h1>
     <div class="text-2xl flex gap-12">
-        <i pTooltip="My Profile" tooltipPosition="bottom" showDelay="600" class="ri-user-3-line cursor-pointer transition-all duration-300"></i>
+        <i (click)="getDashboard()" pTooltip="My Profile" tooltipPosition="bottom" showDelay="600" class="ri-user-3-line cursor-pointer transition-all duration-300"></i>
         <i (click)="logout()" pTooltip="Logout" tooltipPosition="bottom" showDelay="600" class="ri-logout-circle-line cursor-pointer transition-all duration-300"></i>
     </div>
 </nav>
