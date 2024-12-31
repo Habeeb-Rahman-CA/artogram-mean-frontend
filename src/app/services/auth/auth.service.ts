@@ -22,6 +22,11 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/login`, { email, password }, { withCredentials: true });
   }
 
+  //Logout API
+  logoutUser() {
+    return this.http.post(`${this.baseUrl}/logout`, {}, { withCredentials: true });
+  }
+
   //Set User data to an subject
   setUser(data: any) {
     localStorage.setItem('currentUser', JSON.stringify(data))
@@ -36,11 +41,8 @@ export class AuthService {
 
   //Clear user data from LS
   clearUser() {
-    return this.userData.next(null)
+      this.userData.next(null)
+      localStorage.removeItem('currentUser')
   }
 
-  //Logout API
-  logoutUser() {
-    return this.http.post(`${this.baseUrl}/logout`, {}, { withCredentials: true });
-  }
 }
