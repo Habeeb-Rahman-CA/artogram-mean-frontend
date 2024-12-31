@@ -17,8 +17,8 @@ export class LoginComponent {
   authService = inject(AuthService)
   router = inject(Router)
 
-  email: string = ''
-  password: string = ''
+  email: string = 'habeebrahmanca22@gmail.com'
+  password: string = 'habizz'
 
   login() {
     this.authService.loginUser(this.email, this.password).subscribe({
@@ -27,7 +27,6 @@ export class LoginComponent {
         this.email = ''
         this.password = ''
         this.authService.setUser(res.user)
-
         // Navigation based on role
         const role = this.authService.getUserRole()
         if (role === 'admin') {

@@ -3,33 +3,14 @@ import { RouterModule } from '@angular/router';
 import { Avatar } from 'primeng/avatar';
 import { Tooltip } from 'primeng/tooltip';
 import { AuthService } from '../../../services/auth/auth.service';
+import { ProfileCardComponent } from "../../layout/profile-card/profile-card.component";
 
 @Component({
   selector: 'app-artist-dashboard',
-  imports: [RouterModule, Avatar, Tooltip],
+  imports: [RouterModule, ProfileCardComponent],
   templateUrl: './artist-dashboard.component.html',
   styleUrl: './artist-dashboard.component.css'
 })
-export class ArtistDashboardComponent implements OnInit {
-
-  authService = inject(AuthService)
-
-  currentUserData: any
-
-  textToCopy: string = 'www.artogram.com/habeebrahmanca22'
-
-  ngOnInit(): void {
-      this.getUser()
-  }
-
-  copyText() {
-    navigator.clipboard.writeText(this.textToCopy)
-  }
-
-  getUser(){
-    this.authService.getUser().subscribe((data) => {
-      this.currentUserData = data
-    })
-  }
+export class ArtistDashboardComponent {
 
 }
