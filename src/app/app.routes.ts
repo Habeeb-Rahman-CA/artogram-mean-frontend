@@ -18,8 +18,12 @@ import { ManageJobsComponent } from './components/pages/manage-jobs/manage-jobs.
 import { CustomerProfileComponent } from './components/pages/customer-profile/customer-profile.component';
 import { ProductDetailComponent } from './components/pages/product-detail/product-detail.component';
 import { ArtistDetailComponent } from './components/pages/artist-detail/artist-detail.component';
+import { UploadProductComponent } from './components/pages/upload-product/upload-product.component';
+import { ProductListComponent } from './components/pages/product-list/product-list.component';
+import { OrdersPaymentsComponent } from './components/pages/orders-payments/orders-payments.component';
 
 export const routes: Routes = [
+    // basic routes
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
@@ -34,6 +38,9 @@ export const routes: Routes = [
     { path: 'artist/:id', component: ArtistDetailComponent },
     { path: 'collaboration', component: CollaborationComponent },
     { path: 'my-products', component: MyProductComponent },
+    { path: 'upload-product', component: UploadProductComponent },
+    { path: 'product-list', component: ProductListComponent },
+    { path: 'orders-payments', component: OrdersPaymentsComponent },
     { path: 'jobs', component: JobsComponent },
     // employer routes
     { path: 'employer-dashboard', component: EmployerDashboardComponent },

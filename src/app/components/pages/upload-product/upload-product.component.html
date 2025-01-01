@@ -1,0 +1,38 @@
+<div class="m-8 p-4 secondary-bg rounded-3xl">
+    <div class="flex justify-between items-center mb-4">
+        <p class="text-lg">Upload New Artwork</p>
+        <button class="w-36 p-1 rounded-3xl">Upload</button>
+    </div>
+    <div class="flex gap-12 relative">
+        <div class="w-1/3 cursor-crosshair" (click)="input.click()" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+            <img class="w-full h-[360px] object-cover rounded-3xl" [src]="img" alt="">
+            <input [(ngModel)]="img" name="productImgUrl" placeholder="Enter Image URL"
+                type="file" (change)="onInputChange($event)" hidden #input>
+        </div>
+        <div class="w-2/3">
+            <form>
+                <p-floatlabel class="mb-8">
+                    <input name="name" class="w-full p-2 rounded-xl bg-neutral-800 text-white" pInputText
+                        id="over_label" autocomplete="off" />
+                    <label for="over_label">Name</label>
+                </p-floatlabel>
+                <p-floatlabel class="mb-8">
+                    <p-select [(ngModel)]="category" name="category"
+                        class="w-full !rounded-xl !bg-neutral-800 !text-white !border-none" [options]="categories"
+                        optionLabel="name" inputId="over_label" />
+                    <label for="over_label">Category</label>
+                </p-floatlabel>
+                <p-floatlabel class="mb-8">
+                    <textarea pTextArea rows="5" name="email" class="w-full p-2 rounded-xl bg-neutral-800 text-white"
+                        style="resize: none;" id="over_label" autocomplete="off"></textarea>
+                    <label for="over_label">Description</label>
+                </p-floatlabel>
+                <p-floatlabel class="mb-8">
+                    <input name="email" class="w-full p-2 rounded-xl bg-neutral-800 text-white" pInputText
+                        id="over_label" autocomplete="off" />
+                    <label for="over_label">Price</label>
+                </p-floatlabel>
+            </form>
+        </div>
+    </div>
+</div>

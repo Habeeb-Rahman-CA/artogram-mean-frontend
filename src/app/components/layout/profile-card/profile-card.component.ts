@@ -3,6 +3,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { Avatar } from 'primeng/avatar';
 import { Tooltip } from 'primeng/tooltip';
 import { RouterModule } from '@angular/router';
+import { IUser } from '../../../model/user';
 
 @Component({
   selector: 'app-profile-card',
@@ -13,7 +14,7 @@ import { RouterModule } from '@angular/router';
 export class ProfileCardComponent implements OnInit {
   authService = inject(AuthService)
 
-  currentUserData: any 
+  currentUserData!: IUser
   textToCopy: string = ''
 
   copyText() {
@@ -21,7 +22,7 @@ export class ProfileCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.currentUserData = this.authService.userData.value
-      this.textToCopy = 'www.artogram.com/' + this.currentUserData.name.replace(/\s+/g, '-')
+    this.currentUserData = this.authService.userData.value
+    this.textToCopy = 'www.artogram.com/' + this.currentUserData.name.replace(/\s+/g, '-')
   }
 }

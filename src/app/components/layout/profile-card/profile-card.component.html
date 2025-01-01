@@ -1,5 +1,5 @@
 <p class="text-xl pb-8">My Profile</p>
-<p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/onyamalimba.png" size="xlarge" shape="square"
+<p-avatar [image]="currentUserData.profilePic" size="xlarge" shape="circle"
     class="mb-4" />
 <h4 class="mb-2">Name : {{currentUserData.name}}</h4>
 <h4 class="mb-2">Email : {{currentUserData.email}}</h4>
