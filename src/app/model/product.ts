@@ -1,11 +1,11 @@
 export interface IProduct {
-    _id: string
+    _id?: string
     name: string
     category: string
     img: string
     desc: string
     price: string
-    createdBy: {
+    createdBy?: {
         _id: string
         name: string
     }

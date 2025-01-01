@@ -10,7 +10,7 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl = 'http://localhost:8001/api/products';
+  baseUrl = 'http://localhost:8001/api/product';
 
   getAllProducts(): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(this.baseUrl, { withCredentials: true })
@@ -20,8 +20,16 @@ export class ProductService {
     return this.http.get<IProduct>(`${this.baseUrl}/${id}`, { withCredentials: true })
   }
 
+  getProductByUserId(): Observable<IProduct[]> {
+    return this.http.get<IProduct[]>(`${this.baseUrl}/user`, { withCredentials: true })
+  }
+
   createProduct(product: IProduct): Observable<IProduct> {
     return this.http.post<IProduct>(this.baseUrl, product, { withCredentials: true })
+  }
+
+  uploadImg(formData: FormData){
+    return this.http.post(`${this.baseUrl}/upload`, formData, {withCredentials: true})
   }
 
   updateProduct(id: string, product: IProduct): Observable<IProduct> {
