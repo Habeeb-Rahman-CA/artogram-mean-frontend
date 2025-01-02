@@ -1,24 +1,19 @@
 <div class="m-8 p-4 secondary-bg rounded-3xl flex items-center gap-8">
-    <img class="w-2/5 rounded-3xl object-cover" src="https://wallpapers.com/images/featured/art-dajgwkpkb3im2q3u.jpg"
-        alt="">
+    <img class="w-2/5 h-[400px] rounded-3xl object-cover" [src]="product.img" alt="">
     <div class="w-3/5">
         <div class="flex justify-between items-center mb-4">
             <div>
-                <h1 class="text-2xl font-bold">Product Name</h1>
-                <p class="text-sm">Category</p>
+                <h1 class="text-2xl font-bold">{{product.name}}</h1>
+                <p class="text-sm">{{product.category}}</p>
             </div>
             <i class="ri-heart-line text-3xl px-4 cursor-pointer duration-300 transition-all"></i>
         </div>
         <div class="mb-8">
             <h6>Description</h6>
-            <p class="text-sm">Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis quos non
-                maiores et explicabo, magnam ad impedit expedita cum eius totam ullam, quasi, quia deleniti! Eaque
-                aliquam enim repudiandae rem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eum id
-                accusantium quia rerum minima odit quisquam, mollitia deleniti fuga placeat dolorem impedit culpa est
-                obcaecati adipisci molestiae tempora at.</p>
+            <p class="text-sm">{{product.desc}}</p>
         </div>
         <div class="mb-8">
-            <h5 class="text-3xl">$100</h5>
+            <h5 class="text-3xl">{{product.price | currency: 'INR'}}</h5>
             <p class="text-xs">MRP inclusive for all taxes</p>
         </div>
         <button class="btn-primary w-full p-2 rounded-3xl">Add to Cart</button>
@@ -27,11 +22,11 @@
 
 <div class="p-4 secondary-bg rounded-3xl flex items-center justify-between gap-8 m-8">
     <div class="flex items-center gap-4">
-        <img class="w-16 h-16 rounded-full object-cover" src="https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
-            alt="">
+        <img class="w-16 h-16 rounded-full object-cover"
+            [src]="product.createdBy?.profilePic || 'https://cdn-icons-png.flaticon.com/512/6858/6858504.png'" alt="">
         <div>
-            <h6 class="text-lg">Habeeb Rahman</h6>
-            <p class="text-sm">Category</p>
+            <h6 class="text-lg">{{product.createdBy?.name}}</h6>
+            <p class="text-sm">{{product.category}}</p>
         </div>
     </div>
     <div class="flex items-center gap-4">
@@ -42,120 +37,36 @@
 <div class="rounded-3xl m-8 mt-12">
     <p class="text-center text-3xl">Suggested Posts</p>
     <div class="flex overflow-x-auto hide-scrollbar">
-        <div class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
-            <img class="w-full h-[250px] object-cover rounded-t-3xl"
-                src="https://wallpapers.com/images/featured/art-dajgwkpkb3im2q3u.jpg" alt="">
-            <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
-                <div class="flex flex-col">
-                    <h1 class="text-xl">DarkCastle Art</h1>
-                    <p class="text-sm">Habeeb Rahman</p>
+        @for (suggestedProduct of suggestedProductList; track $index) {
+            <div (click)="viewProduct(suggestedProduct._id)" class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
+                <img class="w-full h-[250px] object-cover rounded-t-3xl"
+                    [src]="suggestedProduct.img" alt="">
+                <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
+                    <div class="flex flex-col">
+                        <h1 class="text-xl">{{suggestedProduct.name}}</h1>
+                        <p class="text-sm">{{suggestedProduct.createdBy?.name}}</p>
+                    </div>
+                    <h6 class="text-xl">{{suggestedProduct.price}}</h6>
                 </div>
-                <h6 class="text-xl">$100</h6>
             </div>
-        </div>
-        <div class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
-            <img class="w-full h-[250px] object-cover rounded-t-3xl"
-                src="https://wallpapers.com/images/featured/art-dajgwkpkb3im2q3u.jpg" alt="">
-            <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
-                <div class="flex flex-col">
-                    <h1 class="text-xl">DarkCastle Art</h1>
-                    <p class="text-sm">Habeeb Rahman</p>
-                </div>
-                <h6 class="text-xl">$100</h6>
-            </div>
-        </div>
-        <div class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
-            <img class="w-full h-[250px] object-cover rounded-t-3xl"
-                src="https://wallpapers.com/images/featured/art-dajgwkpkb3im2q3u.jpg" alt="">
-            <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
-                <div class="flex flex-col">
-                    <h1 class="text-xl">DarkCastle Art</h1>
-                    <p class="text-sm">Habeeb Rahman</p>
-                </div>
-                <h6 class="text-xl">$100</h6>
-            </div>
-        </div>
-        <div class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
-            <img class="w-full h-[250px] object-cover rounded-t-3xl"
-                src="https://wallpapers.com/images/featured/art-dajgwkpkb3im2q3u.jpg" alt="">
-            <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
-                <div class="flex flex-col">
-                    <h1 class="text-xl">DarkCastle Art</h1>
-                    <p class="text-sm">Habeeb Rahman</p>
-                </div>
-                <h6 class="text-xl">$100</h6>
-            </div>
-        </div>
-        <div class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
-            <img class="w-full h-[250px] object-cover rounded-t-3xl"
-                src="https://wallpapers.com/images/featured/art-dajgwkpkb3im2q3u.jpg" alt="">
-            <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
-                <div class="flex flex-col">
-                    <h1 class="text-xl">DarkCastle Art</h1>
-                    <p class="text-sm">Habeeb Rahman</p>
-                </div>
-                <h6 class="text-xl">$100</h6>
-            </div>
-        </div>
+        }
     </div>
 </div>
 <div class="rounded-3xl m-8">
     <p class="text-3xl text-center">Popular Posts</p>
     <div class="flex overflow-x-auto hide-scrollbar">
-        <div class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
-            <img class="w-full h-[250px] object-cover rounded-t-3xl"
-                src="https://wallpapers.com/images/featured/art-dajgwkpkb3im2q3u.jpg" alt="">
-            <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
-                <div class="flex flex-col">
-                    <h1 class="text-xl">DarkCastle Art</h1>
-                    <p class="text-sm">Habeeb Rahman</p>
+        @for (popularProduct of popularProductList; track $index) {
+            <div (click)="viewProduct(popularProduct._id)" class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
+                <img class="w-full h-[250px] object-cover rounded-t-3xl"
+                    [src]="popularProduct.img" alt="">
+                <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
+                    <div class="flex flex-col">
+                        <h1 class="text-xl">{{popularProduct.name}}</h1>
+                        <p class="text-sm">{{popularProduct.createdBy?.name}}</p>
+                    </div>
+                    <h6 class="text-xl">{{popularProduct.price | currency: 'INR'}}</h6>
                 </div>
-                <h6 class="text-xl">$100</h6>
             </div>
-        </div>
-        <div class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
-            <img class="w-full h-[250px] object-cover rounded-t-3xl"
-                src="https://wallpapers.com/images/featured/art-dajgwkpkb3im2q3u.jpg" alt="">
-            <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
-                <div class="flex flex-col">
-                    <h1 class="text-xl">DarkCastle Art</h1>
-                    <p class="text-sm">Habeeb Rahman</p>
-                </div>
-                <h6 class="text-xl">$100</h6>
-            </div>
-        </div>
-        <div class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
-            <img class="w-full h-[250px] object-cover rounded-t-3xl"
-                src="https://wallpapers.com/images/featured/art-dajgwkpkb3im2q3u.jpg" alt="">
-            <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
-                <div class="flex flex-col">
-                    <h1 class="text-xl">DarkCastle Art</h1>
-                    <p class="text-sm">Habeeb Rahman</p>
-                </div>
-                <h6 class="text-xl">$100</h6>
-            </div>
-        </div>
-        <div class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
-            <img class="w-full h-[250px] object-cover rounded-t-3xl"
-                src="https://wallpapers.com/images/featured/art-dajgwkpkb3im2q3u.jpg" alt="">
-            <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
-                <div class="flex flex-col">
-                    <h1 class="text-xl">DarkCastle Art</h1>
-                    <p class="text-sm">Habeeb Rahman</p>
-                </div>
-                <h6 class="text-xl">$100</h6>
-            </div>
-        </div>
-        <div class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
-            <img class="w-full h-[250px] object-cover rounded-t-3xl"
-                src="https://wallpapers.com/images/featured/art-dajgwkpkb3im2q3u.jpg" alt="">
-            <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
-                <div class="flex flex-col">
-                    <h1 class="text-xl">DarkCastle Art</h1>
-                    <p class="text-sm">Habeeb Rahman</p>
-                </div>
-                <h6 class="text-xl">$100</h6>
-            </div>
-        </div>
+        }
     </div>
 </div>

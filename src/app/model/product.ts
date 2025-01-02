@@ -7,6 +7,7 @@ export interface IProduct {
     price: string
     createdBy?: {
         _id: string
-        name: string
+        name: string,
+        profilePic: string
     }
 }

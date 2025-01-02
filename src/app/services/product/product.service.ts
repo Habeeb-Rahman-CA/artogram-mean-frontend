@@ -16,7 +16,7 @@ export class ProductService {
     return this.http.get<IProduct[]>(this.baseUrl, { withCredentials: true })
   }
 
-  getProductById(id: string): Observable<IProduct> {
+  getProductById(id: string | null): Observable<IProduct> {
     return this.http.get<IProduct>(`${this.baseUrl}/${id}`, { withCredentials: true })
   }
 

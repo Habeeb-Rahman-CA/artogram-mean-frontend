@@ -18,21 +18,23 @@
         }
     </div>
     <div class="grid lg:grid-cols-4">
-        <div class="card  rounded-lg overflow-hidden m-8 cursor-pointer">
-            <div class="card-img-top">
-                <img class="w-full h-[250px] object-cover"
-                    src="https://wallpapers.com/images/featured/art-dajgwkpkb3im2q3u.jpg" alt="">
-            </div>
-            <div class="secondary-bg p-4">
-                <div class="flex justify-between items-center mb-1">
-                    <h1 class="text-xl">Art</h1>
-                    <p class="text-xs py-1 px-2 rounded-3xl !text-white bg-orange-500">Category</p>
+        @for (product of products; track $index) {
+            <div class="card rounded-lg overflow-hidden m-8 cursor-pointer" (click)="viewProduct(product._id)">
+                <div class="card-img-top">
+                    <img class="w-full h-[250px] object-cover"
+                        [src]="product.img" alt="">
                 </div>
-                <div class="flex justify-between items-center">
-                    <p>Artist</p>
-                    <h6>$200.00</h6>
+                <div class="secondary-bg p-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <h1 class="text-xl">{{product.name}}</h1>
+                        <p class="text-xs py-1 px-2 rounded-3xl !text-white bg-orange-500">{{product.category}}</p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <p>{{product.createdBy?.name}}</p>
+                        <h6>{{product.price | currency: 'INR'}}</h6>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     </div>
 </div>
