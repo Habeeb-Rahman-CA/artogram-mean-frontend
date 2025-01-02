@@ -2,26 +2,66 @@
     <p class="text-xl mb-4">Products List</p>
     <div class="grid lg:grid-cols-4">
         @for (product of products; track $index) {
-            <div class="card rounded-lg overflow-hidden m-8 cursor-pointer">
-                <div class="card-img-top">
-                    <img class="w-full h-[250px] object-cover"
-                        [src]="product.img" alt="">
+        <div class="card rounded-lg overflow-hidden m-8 cursor-pointer">
+            <div class="card-img-top">
+                <img class="w-full h-[250px] object-cover" [src]="product.img" alt="">
+            </div>
+            <div class="secondary-bg p-4">
+                <div class="flex justify-between items-center mb-1">
+                    <h1 class="text-xl">{{product.name}}</h1>
+                    <p class="text-xs py-1 px-2 rounded-3xl !text-white border border-orange-500">{{product.category}}
+                    </p>
                 </div>
-                <div class="secondary-bg p-4">
-                    <div class="flex justify-between items-center mb-1">
-                        <h1 class="text-xl">{{product.name}}</h1>
-                        <p class="text-xs py-1 px-2 rounded-3xl !text-white border border-orange-500">{{product.category}}</p>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <p class="text-[11px]">ID: {{product._id}}</p>
-                        <h6>{{product.price | currency: 'INR'}}</h6>
-                    </div>
-                    <div class="flex items-center gap-4 w-full mt-4">
-                        <button class="w-full rounded-3xl">Edit</button>
-                        <button class="w-full rounded-3xl">Delete</button>
-                    </div>
+                <div class="flex justify-between items-center">
+                    <p class="text-[11px]">ID: {{product._id}}</p>
+                    <h6>{{product.price | currency: 'INR'}}</h6>
+                </div>
+                <div class="flex items-center gap-4 w-full mt-4">
+                    <!-------------------- Update dialog --------------------->
+                    <button class="w-full rounded-3xl" (click)="showUpdateDialog(product)">Update</button>
+                    <p-dialog header="Edit Product" [modal]="true" maximizable="true" [(visible)]="visible"
+                        [style]="{ width: '50rem', backgroundColor: '#1a1a1a', border: 'none' }">
+                        <p class="mb-4">Update your product information</p>
+                        <form>
+                            <div class="mb-2">
+                                <label for="name">Name</label>
+                                <input [(ngModel)]="selectedProduct.name" name="name"
+                                    class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="name"
+                                    autocomplete="off" />
+                            </div>
+                            <div class="mb-2">
+                                <label for="category">Category</label>
+                                <select [(ngModel)]="selectedProduct.category" name="category"
+                                    class="mt-1 w-full rounded-xl bg-neutral-800 text-white border-none p-2"
+                                    id="category">
+                                    <option *ngFor="let category of categories" [value]="category">{{ category }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <label for="description">Description</label>
+                                <textarea [(ngModel)]="selectedProduct.desc" rows="5" name="description"
+                                    class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" style="resize: none;"
+                                    id="description" autocomplete="off"></textarea>
+                            </div>
+                            <div class="mb-2">
+                                <label for="price">Price</label>
+                                <input [(ngModel)]="selectedProduct.price" name="price"
+                                    class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="price"
+                                    autocomplete="off" />
+                            </div>
+                        </form>
+                        <div class="flex justify-end gap-2 mt-8">
+                            <button class="w-40 p-1 rounded-3xl" (click)="visible = false">Cancel</button>
+                            <button class="w-40 p-1 rounded-3xl"
+                                (click)="updateProduct(selectedProduct._id, selectedProduct)">Save</button>
+                        </div>
+                    </p-dialog>
+
+                    <button class="w-full rounded-3xl" (click)="deleteProduct(product._id)">Delete</button>
                 </div>
             </div>
+        </div>
         }
     </div>
 </div>

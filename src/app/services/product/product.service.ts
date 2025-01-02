@@ -32,11 +32,11 @@ export class ProductService {
     return this.http.post(`${this.baseUrl}/upload`, formData, {withCredentials: true})
   }
 
-  updateProduct(id: string, product: IProduct): Observable<IProduct> {
+  updateProduct(id: string | undefined, product: IProduct): Observable<IProduct> {
     return this.http.put<IProduct>(`${this.baseUrl}/${id}`, product, { withCredentials: true })
   }
 
-  deleteProduct(id: string) {
+  deleteProduct(id: string | undefined ) {
     return this.http.delete(`${this.baseUrl}/${id}`, { withCredentials: true })
   }
 }

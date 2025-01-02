@@ -2,7 +2,7 @@ export interface IProduct {
     _id?: string
     name: string
     category: string
-    img: string
+    img?: string
     desc: string
     price: string
     createdBy?: {
