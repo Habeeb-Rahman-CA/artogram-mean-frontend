@@ -1,40 +1,37 @@
 <div class="p-4 m-4">
     <div class="flex gap-4 items-center">
-        <input type="text" class="secondary-bg text-white p-2 rounded-3xl w-full" placeholder="Search">
-        <select name="categories" class="secondary-bg text-zinc-400 rounded-3xl p-2 w-80">
+        <input [(ngModel)]="searchQuery" (input)="applyFilter()" type="text"
+            class="secondary-bg text-white p-2 rounded-3xl w-full" placeholder="Search" name="search">
+        <select name="categories" class="secondary-bg text-zinc-400 rounded-3xl p-2 w-80" [(ngModel)]="selectedCategory"
+            (change)="applyFilter()">
             <option value="">All</option>
-            <option value="painting">Painting</option>
-            <option value="drawing">Drawing</option>
-            <option value="sculpture">Sculpture</option>
-            <option value="photography">Photography</option>
-            <option value="digital-art">Digital Art</option>
+            @for (category of categories; track $index) {
+            <option [value]="category">{{category}}</option>
+            }
         </select>
-        @if (sort) {
-        <i class="ri-sort-asc secondary-bg py-2 px-3 cursor-pointer text-lg rounded-full"
-            (click)="toggleSortOrder()"></i>
-        } @else {
-        <i class="ri-sort-desc secondary-bg py-2 px-3 cursor-pointer text-lg rounded-full"
-            (click)="toggleSortOrder()"></i>
-        }
+        <i class="secondary-bg py-2 px-3 cursor-pointer text-lg rounded-full"
+            [ngClass]="{'ri-sort-asc': sort, 'ri-sort-desc': !sort}" (click)="toggleSortOrder()"></i>
     </div>
+    @if (filteredProduct.length === 0) {
+    <p class="text-center py-40 text-2xl font-semibold">No Product is found</p>
+    }
     <div class="grid lg:grid-cols-4">
-        @for (product of products; track $index) {
-            <div class="card rounded-lg overflow-hidden m-8 cursor-pointer" (click)="viewProduct(product._id)">
-                <div class="card-img-top">
-                    <img class="w-full h-[250px] object-cover"
-                        [src]="product.img" alt="">
+        @for (product of filteredProduct; track $index) {
+        <div class="card rounded-lg overflow-hidden m-8 cursor-pointer" (click)="viewProduct(product._id)">
+            <div class="card-img-top">
+                <img class="w-full h-[250px] object-cover" [src]="product.img" alt="">
+            </div>
+            <div class="secondary-bg p-4">
+                <div class="flex justify-between items-center mb-1">
+                    <h1 class="text-xl">{{product.name}}</h1>
+                    <p class="text-xs py-1 px-2 rounded-3xl !text-white bg-orange-500">{{product.category}}</p>
                 </div>
-                <div class="secondary-bg p-4">
-                    <div class="flex justify-between items-center mb-1">
-                        <h1 class="text-xl">{{product.name}}</h1>
-                        <p class="text-xs py-1 px-2 rounded-3xl !text-white bg-orange-500">{{product.category}}</p>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <p>{{product.createdBy?.name}}</p>
-                        <h6>{{product.price | currency: 'INR'}}</h6>
-                    </div>
+                <div class="flex justify-between items-center">
+                    <p>{{product.createdBy?.name}}</p>
+                    <h6>{{product.price | currency: 'INR'}}</h6>
                 </div>
             </div>
+        </div>
         }
     </div>
 </div>
