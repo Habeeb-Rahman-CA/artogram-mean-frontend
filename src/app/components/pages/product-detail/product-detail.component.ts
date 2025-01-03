@@ -55,13 +55,17 @@ export class ProductDetailComponent implements OnInit {
     })
   }
 
-  addCart(productId: string | undefined){
+  addCart(productId: string | undefined) {
     this.cartService.addCart(this.userId, productId).subscribe({
-      next: (res)=> {
-        alert('Product added to cart')
-        console.log(res);
+      next: (res: any) => {
+        if (res.alreadyExists) {
+          alert('Product is already exist in the cart')
+        } else {
+          console.log(res.cart.products);
+          alert('Product added to cart')
+        }
       },
-      error: (err) =>{
+      error: (err) => {
         alert('failed to add cart')
         console.error(err.message);
       }

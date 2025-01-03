@@ -21,6 +21,9 @@ import { ArtistDetailComponent } from './components/pages/artist-detail/artist-d
 import { UploadProductComponent } from './components/pages/upload-product/upload-product.component';
 import { ProductListComponent } from './components/pages/product-list/product-list.component';
 import { OrdersPaymentsComponent } from './components/pages/orders-payments/orders-payments.component';
+import { MyCartComponent } from './components/pages/my-cart/my-cart.component';
+import { MyWishlistComponent } from './components/pages/my-wishlist/my-wishlist.component';
+import { TrackOrderComponent } from './components/pages/track-order/track-order.component';
 
 export const routes: Routes = [
     // basic routes
@@ -51,4 +54,7 @@ export const routes: Routes = [
     { path: 'products', component: ProductsComponent },
     { path: 'customer-profile', component: CustomerProfileComponent },
     { path: 'products/:id', component: ProductDetailComponent },
+    { path: 'my-cart', component: MyCartComponent },
+    { path: 'my-wishlist', component: MyWishlistComponent },
+    { path: 'track-order', component: TrackOrderComponent }
 ];
