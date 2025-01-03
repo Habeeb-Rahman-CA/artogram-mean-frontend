@@ -6,7 +6,7 @@
                 <h1 class="text-2xl font-bold">{{product.name}}</h1>
                 <p class="text-sm">{{product.category}}</p>
             </div>
-            <i class="ri-heart-line text-3xl px-4 cursor-pointer duration-300 transition-all"></i>
+            <i class="ri-heart-line text-3xl px-4 cursor-pointer duration-300 transition-all" (click)="addWishlist(product._id)"></i>
         </div>
         <div class="mb-8">
             <h6>Description</h6>

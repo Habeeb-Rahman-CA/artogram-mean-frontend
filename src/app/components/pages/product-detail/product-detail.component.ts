@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../services/cart/cart.service';
 import { AuthService } from '../../../services/auth/auth.service';
+import { WishlistService } from '../../../services/wishlist/wishlist.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -17,6 +18,8 @@ export class ProductDetailComponent implements OnInit {
   authService = inject(AuthService)
   productService = inject(ProductService)
   cartService = inject(CartService)
+  wishlistService = inject(WishlistService)
+
   route = inject(ActivatedRoute)
   router = inject(Router)
 
@@ -61,13 +64,28 @@ export class ProductDetailComponent implements OnInit {
         if (res.alreadyExists) {
           alert('Product is already exist in the cart')
         } else {
-          console.log(res.cart.products);
           alert('Product added to cart')
         }
       },
       error: (err) => {
         alert('failed to add cart')
         console.error(err.message);
+      }
+    })
+  }
+
+  addWishlist(productId: string | undefined) {
+    this.wishlistService.addWishlist(this.userId, productId).subscribe({
+      next: (res: any) => {
+        if (res.alreadyExists) {
+          alert('Product is already exist in the wishlist')
+        } else {
+          alert('Product added to wishlist')
+        }
+      },
+      error: (err) => {
+        alert('failed to add wishlist')
+        console.error(err.message)
       }
     })
   }
