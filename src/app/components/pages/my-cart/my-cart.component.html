@@ -1,41 +1,48 @@
 <div class="flex gap-8 secondary-bg rounded-3xl m-8 p-4 h-[500px]">
     <div class="w-3/5 overflow-y-auto scrollbar">
         <p class="text-xl">Add Delivery Address</p>
-        <label class="my-4 border-2 border-solid border-neutral-700 p-4 w-full flex justify-between has-[:checked]:bg-neutral-800 has-[:checked]:border-orange-600 has-[:checked]:ring-neutral-700 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
+        <label
+            class="my-4 border-2 border-solid border-neutral-700 p-4 w-full flex justify-between has-[:checked]:bg-neutral-800 has-[:checked]:border-orange-600 has-[:checked]:ring-neutral-700 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
             <div class="flex gap-8">
                 <i class="ri-map-pin-add-line text-2xl"></i>
                 <h1 class="text-lg">Current Address</h1>
             </div>
             <input type="radio" value="address" name="address" class="checked:border-slate-500 ..." />
         </label>
-        <label class="my-4 border-2 border-solid border-neutral-700 p-4 w-full flex justify-between has-[:checked]:bg-neutral-800 has-[:checked]:border-orange-600 has-[:checked]:ring-neutral-700 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
+        <label
+            class="my-4 border-2 border-solid border-neutral-700 p-4 w-full flex justify-between has-[:checked]:bg-neutral-800 has-[:checked]:border-orange-600 has-[:checked]:ring-neutral-700 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
             <div class="flex gap-8">
                 <i class="ri-map-pin-add-line text-2xl"></i>
                 <h1 class="text-lg">Current Address</h1>
             </div>
             <input type="radio" value="address" name="address" class="checked:border-slate-500 ..." />
         </label>
-        <label class="my-4 border-2 border-solid border-neutral-700 p-4 w-full flex justify-between has-[:checked]:bg-neutral-800 has-[:checked]:border-orange-600 has-[:checked]:ring-neutral-700 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
+        <label
+            class="my-4 border-2 border-solid border-neutral-700 p-4 w-full flex justify-between has-[:checked]:bg-neutral-800 has-[:checked]:border-orange-600 has-[:checked]:ring-neutral-700 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
             <div class="flex gap-8">
                 <i class="ri-map-pin-add-line text-2xl"></i>
                 <h1 class="text-lg">Current Address</h1>
             </div>
             <input type="radio" value="address" name="address" class="checked:border-slate-500 ..." />
         </label>
-        <div class="my-4 border-2 border-dashed border-neutral-700 p-4 w-full flex gap-8 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
+        <div
+            class="my-4 border-2 border-dashed border-neutral-700 p-4 w-full flex gap-8 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
             <i class="ri-map-pin-add-line text-2xl"></i>
             <h1 class="text-lg">Add New Address</h1>
         </div>
     </div>
 
-    <div class="w-2/5 overflow-y-auto scrollbar">
+    <div class="w-2/5">
         <p class="text-xl">My Cart</p>
-        @for (item of cart; track $index) {
+        <div class="overflow-y-auto scrollbar h-80">
+            @for (item of cart; track $index) {
             <div class="flex items-center justify-between my-4">
                 <div class="flex gap-4 items-center">
                     <div class="relative group" (click)="deleteCart(item._id)">
-                        <img [src]="item.img" class="h-20 w-20 object-cover rounded-lg bg-black hover:opacity-30 transition-all duration-300 cursor-pointer">
-                        <i class="ri-delete-bin-6-line mx-4 text-2xl cursor-pointer absolute left-3 top-6 !text-red-700 hover:!text-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 group"></i>
+                        <img [src]="item.img"
+                            class="h-20 w-20 object-cover rounded-lg bg-black hover:opacity-30 transition-all duration-300 cursor-pointer">
+                        <i
+                            class="ri-delete-bin-6-line mx-4 text-2xl cursor-pointer absolute left-3 top-6 !text-red-700 hover:!text-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 group"></i>
                     </div>
                     <div class="flex flex-col">
                         <h1 class="text-xl">{{item.name}}</h1>
@@ -44,6 +51,12 @@
                 </div>
                 <h1 class="text-xl px-4">{{item.price | currency: 'INR'}}</h1>
             </div>
-        }
+            }
+        </div>
+        <div class="flex items-center justify-between border-t border-neutral-700 py-4">
+            <p class="text-lg">Total Price</p>
+            <h1 class="px-4 text-lg">{{cartTotal | currency: 'INR'}}</h1>
+        </div>
+        <button class="w-full p-2 rounded-lg">Pay {{cartTotal | currency: "INR"}}</button>
     </div>
 </div>

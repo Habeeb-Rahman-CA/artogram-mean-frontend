@@ -19,6 +19,7 @@ export class MyCartComponent implements OnInit {
   userId = this.authService.userData.value._id
   cart: IProduct[] = []
   cartId: string = ''
+  cartTotal: number = 0
 
   ngOnInit(): void {
       this.getCart()
@@ -29,6 +30,7 @@ export class MyCartComponent implements OnInit {
       next: (res:any) =>{
         this.cart = res.cart[0].products
         this.cartId = res.cart[0]._id
+        this.cartTotal = this.cart.reduce((sum, product) => sum + parseFloat(product.price), 0)
       },
       error: (err) =>{
         alert('Error while fetching')
