@@ -25,11 +25,31 @@
             </div>
             <input type="radio" value="address" name="address" class="checked:border-slate-500 ..." />
         </label>
-        <div
+        <div (click)="showDialog()"
             class="my-4 border-2 border-dashed border-neutral-700 p-4 w-full flex gap-8 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
             <i class="ri-map-pin-add-line text-2xl"></i>
             <h1 class="text-lg">Add New Address</h1>
         </div>
+        <p-dialog header="Add Address" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem', backgroundColor: '#1a1a1a', border: 'none' }">
+            <form class="flex gap-4" action="">
+                <div class="w-1/2 flex flex-col gap-2">
+                    <input class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text" placeholder="Full Name">
+                    <input class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text" placeholder="Phone Number">
+                    <input class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text" placeholder="Address">
+                    <input class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text" placeholder="Landmark">
+                </div>
+                <div class="w-1/2 flex flex-col gap-2">
+                    <input class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text" placeholder="Street">
+                    <input class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text" placeholder="City">
+                    <input class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text" placeholder="Pincode">
+                    <input class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text" placeholder="State">
+                </div>
+            </form>
+            <div class="flex justify-center items-center gap-2 mt-8">
+                <button class="w-40 p-1 rounded-3xl" (click)="visible = false">Cancel</button>
+                <button class="w-40 p-1 rounded-3xl">Save</button>
+            </div>
+        </p-dialog>
     </div>
 
     <div class="w-2/5">

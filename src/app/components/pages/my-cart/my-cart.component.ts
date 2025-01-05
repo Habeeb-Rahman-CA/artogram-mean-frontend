@@ -4,10 +4,11 @@ import { CartService } from '../../../services/cart/cart.service';
 import { IProduct } from '../../../model/product';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
   selector: 'app-my-cart',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DialogModule],
   templateUrl: './my-cart.component.html',
   styleUrl: './my-cart.component.css'
 })
@@ -20,6 +21,7 @@ export class MyCartComponent implements OnInit {
   cart: IProduct[] = []
   cartId: string = ''
   cartTotal: number = 0
+  visible: boolean = false;
 
   ngOnInit(): void {
       this.getCart()
@@ -52,4 +54,7 @@ export class MyCartComponent implements OnInit {
     })
   }
 
+  showDialog(){
+    this.visible = true
+  }
 }

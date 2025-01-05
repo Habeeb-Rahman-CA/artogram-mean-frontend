@@ -4,11 +4,22 @@ export interface IUser {
     createdAt: string
     email: string
     gender: string
-    location: string
+    adresses?: Array<IAddress>
     name: string
     password: string
     phoneNumber: string
     profilePic: string
     role: string
     _id: string
+}
+
+export interface IAddress {
+    fullName: string; 
+    phoneNumber: string;
+    address: string;
+    street: string;
+    landmark: string;
+    city: string;
+    pincode: string;
+    state: string;
 }
