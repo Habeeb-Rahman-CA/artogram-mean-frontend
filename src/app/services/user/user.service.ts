@@ -19,4 +19,8 @@ export class UserService {
     return this.http.post(`${this.baseUrl}/address`, address, { withCredentials: true })
   }
 
+  deleteAddress(addressId: string | undefined){
+    return this.http.delete(`${this.baseUrl}/address/${addressId}`, {withCredentials: true})
+  }
+
 }
