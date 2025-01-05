@@ -28,6 +28,17 @@ export class MyCartComponent implements OnInit {
   addressShown: boolean = false
   addressList: IAddress[] = []
 
+  selectedAddress: IAddress = {
+    address: '',
+    city: '',
+    fullName: '',
+    landmark: '',
+    phoneNumber: '',
+    pincode: '',
+    state: '',
+    street: ''
+  }
+
   address: IAddress = {
     address: '',
     city: '',
@@ -79,11 +90,9 @@ export class MyCartComponent implements OnInit {
     this.addressShown = true
   }
 
-  addAddress(){
-    console.log(this.address);
+  addAddress() {
     this.userService.addAddress(this.address).subscribe({
-      next: (res) => {
-        console.log(res);
+      next: () => {
         this.visible = false
         alert('added new address')
         this.getAddress()
@@ -95,17 +104,15 @@ export class MyCartComponent implements OnInit {
     })
   }
 
-  getAddress(){
+  getAddress() {
     this.userService.getAddresses().subscribe({
-      next: (res: any) =>{
+      next: (res: any) => {
         this.addressList = res.addresses
-        console.log(res.addresses[0]);
-        console.log(res.addresses[1]);
       }
     })
   }
 
-  deleteAddress(addressId: string | undefined){
+  deleteAddress(addressId: string | undefined) {
     this.userService.deleteAddress(addressId).subscribe({
       next: () => {
         alert('deleted successfully')

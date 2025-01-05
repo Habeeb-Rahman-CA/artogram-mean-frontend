@@ -2,23 +2,25 @@
     <div class="w-3/5 overflow-y-auto scrollbar">
         <p class="text-xl">Add Delivery Address</p>
         @for (address of addressList; track $index) {
-            <label
-                class="my-4 border-2 border-solid border-neutral-700 p-4 w-full flex justify-between has-[:checked]:bg-neutral-800 has-[:checked]:border-orange-600 has-[:checked]:ring-neutral-700 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
-                <div (click)="showAddress()" class="flex gap-8">
-                    <i class="ri-map-pin-add-line text-2xl"></i>
-                    <h1 class="text-lg">{{address.address}}</h1>
-                </div>
-                <input type="radio" value="address" name="address" class="checked:border-slate-500 ..." />
-            </label>
-            <p-dialog header="Address" [modal]="true" [(visible)]="addressShown"
-                [style]="{ width: '50rem', backgroundColor: '#1a1a1a', border: 'none' }">
-                <div class="flex py-4 gap-4">
-                    <h1 class="text-xl">Name: {{address.fullName}}</h1>
-                    <h1 class="text-xl">Phone: {{address.phoneNumber}}</h1>
-                </div>
-                <h1 class="text-xl">{{address.address}}, {{address.landmark}}, {{address.street}}, {{address.city}}, {{address.state}}, {{address.pincode}}</h1>
-                <button (click)="deleteAddress(address._id)">Delete</button>
-            </p-dialog>
+        <label
+            class="my-4 border-2 border-solid border-neutral-700 p-4 w-full flex justify-between has-[:checked]:bg-neutral-800 has-[:checked]:border-orange-600 has-[:checked]:ring-neutral-700 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
+            <div (click)="showAddress()" class="flex gap-8">
+                <i class="ri-map-pin-add-line text-2xl"></i>
+                <h1 class="text-lg">{{address.address}}</h1>
+            </div>
+            <input [(ngModel)]="selectedAddress" type="radio" [value]="address" name="address"
+                class="checked:border-slate-500" />
+        </label>
+        <p-dialog header="Address" [modal]="true" [(visible)]="addressShown"
+            [style]="{ width: '50rem', backgroundColor: '#1a1a1a', border: 'none' }">
+            <div class="flex py-4 gap-4">
+                <h1 class="text-xl">Name: {{address.fullName}}</h1>
+                <h1 class="text-xl">Phone: {{address.phoneNumber}}</h1>
+            </div>
+            <h1 class="text-xl">{{address.address}}, {{address.landmark}}, {{address.street}}, {{address.city}},
+                {{address.state}}, {{address.pincode}}</h1>
+            <button (click)="deleteAddress(address._id)">Delete</button>
+        </p-dialog>
         }
         <div (click)="showDialog()"
             class="my-4 border-2 border-dashed border-neutral-700 p-4 w-full flex gap-8 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
