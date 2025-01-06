@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { IAddress } from '../../../model/user';
 import { UserService } from '../../../services/user/user.service';
+import { OrderService } from '../../../services/order/order.service';
 
 @Component({
   selector: 'app-my-cart',
@@ -19,25 +20,17 @@ export class MyCartComponent implements OnInit {
   authService = inject(AuthService)
   cartService = inject(CartService)
   userService = inject(UserService)
+  orderService = inject(OrderService)
 
   userId = this.authService.userData.value._id
   cart: IProduct[] = []
   cartId: string = ''
   cartTotal: number = 0
   visible: boolean = false;
+
   addressShown: boolean = false
   addressList: IAddress[] = []
-
-  selectedAddress: IAddress = {
-    address: '',
-    city: '',
-    fullName: '',
-    landmark: '',
-    phoneNumber: '',
-    pincode: '',
-    state: '',
-    street: ''
-  }
+  selectedAddress: string = ''
 
   address: IAddress = {
     address: '',
@@ -122,6 +115,19 @@ export class MyCartComponent implements OnInit {
       error: (err) => {
         alert('failed to delete')
         console.error(err.message)
+      }
+    })
+  }
+
+  checkout(){
+    this.orderService.checkout(this.selectedAddress).subscribe({
+      next: () => {
+        alert('Order placed successfully')
+        this.cart = []
+      },
+      error: (err) => {
+        console.error(err.message)
+        alert('failed to place order')
       }
     })
   }

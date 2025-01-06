@@ -8,9 +8,10 @@
                 <i class="ri-map-pin-add-line text-2xl"></i>
                 <h1 class="text-lg">{{address.address}}</h1>
             </div>
-            <input [(ngModel)]="selectedAddress" type="radio" [value]="address" name="address"
+            <input [(ngModel)]="selectedAddress" type="radio" [value]="address._id" name="address"
                 class="checked:border-slate-500" />
         </label>
+        <!-- dialog to show address -->
         <p-dialog header="Address" [modal]="true" [(visible)]="addressShown"
             [style]="{ width: '50rem', backgroundColor: '#1a1a1a', border: 'none' }">
             <div class="flex py-4 gap-4">
@@ -66,7 +67,7 @@
             </div>
         </p-dialog>
     </div>
-
+    <!-- cart section  -->
     <div class="w-2/5">
         <p class="text-xl">My Cart</p>
         <div class="overflow-y-auto scrollbar h-80">
@@ -92,6 +93,6 @@
             <p class="text-lg">Total Price</p>
             <h1 class="px-4 text-lg">{{cartTotal | currency: 'INR'}}</h1>
         </div>
-        <button class="w-full p-2 rounded-lg">Pay {{cartTotal | currency: "INR"}}</button>
+        <button (click)="checkout()" class="w-full p-2 rounded-lg">Checkout</button>
     </div>
 </div>
