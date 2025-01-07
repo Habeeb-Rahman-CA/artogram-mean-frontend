@@ -36,6 +36,11 @@
 </div>
 <div class="rounded-3xl m-8 mt-12">
     <p class="text-center text-3xl">Suggested Posts</p>
+    @if (suggestedProductList.length === 0) {
+        <div class="flex items-center justify-center h-72">
+            <h1 class="text-lg">Suggested Posts are Unavailable</h1>
+        </div>
+    }
     <div class="flex overflow-x-auto scrollbar">
         @for (suggestedProduct of suggestedProductList; track $index) {
             <div (click)="viewProduct(suggestedProduct._id)" class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
@@ -54,6 +59,11 @@
 </div>
 <div class="rounded-3xl m-8">
     <p class="text-3xl text-center">Popular Posts</p>
+    @if (popularProductList.length === 0) {
+        <div class="flex items-center justify-center h-72">
+            <h1 class="text-lg">Popular Posts are Unavailable</h1>
+        </div>
+    }
     <div class="flex overflow-x-auto scrollbar">
         @for (popularProduct of popularProductList; track $index) {
             <div (click)="viewProduct(popularProduct._id)" class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">

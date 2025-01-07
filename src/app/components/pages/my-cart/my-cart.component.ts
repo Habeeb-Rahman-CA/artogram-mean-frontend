@@ -8,6 +8,7 @@ import { DialogModule } from 'primeng/dialog';
 import { IAddress } from '../../../model/user';
 import { UserService } from '../../../services/user/user.service';
 import { OrderService } from '../../../services/order/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-cart',
@@ -21,6 +22,7 @@ export class MyCartComponent implements OnInit {
   cartService = inject(CartService)
   userService = inject(UserService)
   orderService = inject(OrderService)
+  router = inject(Router)
 
   userId = this.authService.userData.value._id
   cart: IProduct[] = []
@@ -119,7 +121,7 @@ export class MyCartComponent implements OnInit {
     })
   }
 
-  checkout(){
+  checkout() {
     this.orderService.checkout(this.selectedAddress).subscribe({
       next: () => {
         alert('Order placed successfully')

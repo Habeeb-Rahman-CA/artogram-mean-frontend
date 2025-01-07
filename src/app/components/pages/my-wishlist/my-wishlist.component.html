@@ -1,6 +1,9 @@
 <div class="flex gap-8 secondary-bg rounded-3xl m-8 p-4 h-[500px]">
     <div class="w-full overflow-y-auto scrollbar">
         <p class="text-xl">My Wishlist</p>
+        @if (wishlist.length === 0) {
+            <div class="flex items-center justify-center h-80"><p class="text-2xl">No Wishlists</p></div>
+        }
         @for (item of wishlist; track $index) {
         <div class="flex items-center justify-between my-4 hover:bg-neutral-800 rounded-3xl p-4 mr-4 cursor-pointer">
             <div class="flex gap-4 w-2/3 items-center" (click)="viewProduct(item._id)">

@@ -1,4 +1,4 @@
-<div class="flex gap-8 secondary-bg rounded-3xl m-8 p-4 h-[500px]">
+<div class="flex gap-8 secondary-bg rounded-3xl m-8 p-4 h-[520px]">
     <div class="w-3/5 overflow-y-auto scrollbar">
         <p class="text-xl">Add Delivery Address</p>
         @for (address of addressList; track $index) {
@@ -70,6 +70,9 @@
     <!-- cart section  -->
     <div class="w-2/5">
         <p class="text-xl">My Cart</p>
+        @if (cart.length === 0) {
+                <p class="text-xl text-center relative top-36">No items</p>
+        }
         <div class="overflow-y-auto scrollbar h-80">
             @for (item of cart; track $index) {
             <div class="flex items-center justify-between my-4">

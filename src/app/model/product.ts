@@ -11,3 +11,30 @@ export interface IProduct {
         profilePic: string
     }
 }
+
+interface IAddress {
+    fullName: string;
+    phoneNumber: string;
+    address: string;
+    street: string;
+    landmark: string;
+    city: string;
+    pincode: string;
+    state: string;
+    _id?: string
+}
+
+interface OrderItem {
+    product: IProduct
+    price: number;
+}
+
+export interface IOrder {
+    _id?: string
+    userId: string
+    items: OrderItem[];
+    total: number;
+    address: IAddress;
+    status: 'Placed' | 'Shipped' | 'Delivered' | 'Cancelled';
+    createdAt: Date;
+}

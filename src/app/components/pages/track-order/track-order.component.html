@@ -1,1 +1,81 @@
-<p>track-order works!</p>
+<div class="m-8 p-4 secondary-bg rounded-3xl">
+    <p class="text-xl">Track My Order</p>
+    @if(orderList.length === 0){
+        <div class="flex items-center justify-center h-80">
+            <p class="text-2xl">No Orders</p>
+        </div>
+    }
+    @for (order of orderList; track $index) {
+    <div class="flex gap-8 mt-4 mb-4 border-b border-neutral-800">
+        <div class="w-1/2 h-80 overflow-y-auto scrollbar">
+            @for (item of order.items; track $index) {
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex gap-4 items-center">
+                    <img [src]="item.product.img" alt="" class="w-36 h-36 object-cover rounded-2xl">
+                    <div class="flex flex-col gap-2">
+                        <h1 class="text-2xl">{{item.product.name}}</h1>
+                        <p class="text-lg">{{item.product.category}}</p>
+                    </div>
+                </div>
+                <h1 class="text-xl">{{item.product.price | currency: 'INR'}}</h1>
+            </div>
+            }
+        </div>
+        <div class="w-1/2 h-80">
+            <div class="flex items-center justify-between">
+                <p class="text-xl mb-2 underline">Delivery Details</p>
+                @if (order.status === 'Shipped') {
+                <button pTooltip="Order shipped, cancellation not possible"
+                    tooltipPosition="left" showDelay="1000"
+                    class="border border-orange-500 rounded-3xl bg-transparent w-28" disabled>No Cancel</button>
+                } @else if (order.status === 'Placed') {
+                <button (click)="cancelOrder(order._id)" pTooltip="Cancel your order before it is confirmed"
+                    tooltipPosition="left" showDelay="1000"
+                    class="border border-orange-500 rounded-3xl bg-transparent w-28">Cancel</button>
+                } @else {
+                <button (click)="deleteOrder(order._id)" pTooltip="Remove your order" tooltipPosition="left"
+                    showDelay="1000" class="border border-orange-500 rounded-3xl bg-transparent w-28">Remove</button>
+                }
+
+            </div>
+            <div class="flex gap-2 text-lg">
+                <p>Full Name: </p>
+                <h1>{{order.address.fullName}}</h1>
+            </div>
+            <div class="flex gap-2 text-lg">
+                <p>Phone Number: </p>
+                <h1>{{order.address.phoneNumber}}</h1>
+            </div>
+            <div class="flex gap-2 text-lg">
+                <p>Address: </p>
+                <h1>{{order.address.address}},{{order.address.landmark}}, {{order.address.street}},
+                    {{order.address.city}}, {{order.address.pincode}}, {{order.address.state}}</h1>
+            </div>
+            <p class="text-xl mt-4 mb-2 underline">Order Details</p>
+            <div class="flex gap-2 text-lg">
+                <p>Ordered Date: </p>
+                <h1>{{order.createdAt | date: 'mediumDate'}}</h1>
+            </div>
+            <div class="flex gap-2 text-lg">
+                <p>Delivery Date: </p>
+                <h1>{{order.createdAt | addDays: 7| date: 'mediumDate'}}</h1>
+            </div>
+            <div class="flex gap-2 text-lg">
+                <p>Status: </p>
+                @if (order.status === 'Cancelled') {
+                <h1 class="text-red-500">Order {{order.status}} <i
+                        class="ri-close-line !text-white p-1 rounded-full text-xs bg-red-500"></i></h1>
+                } @else if (order.status === 'Placed') {
+                <h1 class="text-blue-500">Order {{order.status}} <i
+                        class="ri-shopping-cart-line !text-white p-1 rounded-full text-xs bg-blue-500"></i></h1>
+                } @else if (order.status === 'Shipped') {
+                <h1 class="text-yellow-500">Order {{order.status}} <i
+                        class="ri-truck-line !text-white p-1 rounded-full text-xs bg-yellow-500"></i></h1>
+                } @else {
+                <h1 class="text-green-500">Order {{order.status}}  <i class="ri-check-double-fill !text-white p-1 rounded-full text-xs bg-green-500"></i></h1>
+                }
+            </div>
+        </div>
+    </div>
+    }
+</div>
