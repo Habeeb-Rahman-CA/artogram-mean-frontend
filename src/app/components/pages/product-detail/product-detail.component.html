@@ -51,7 +51,7 @@
                         <h1 class="text-xl">{{suggestedProduct.name}}</h1>
                         <p class="text-sm">{{suggestedProduct.createdBy?.name}}</p>
                     </div>
-                    <h6 class="text-xl">{{suggestedProduct.price}}</h6>
+                    <h6 class="text-xl">{{suggestedProduct.price | currency: 'INR'}}</h6>
                 </div>
             </div>
         }

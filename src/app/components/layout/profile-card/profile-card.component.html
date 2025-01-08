@@ -1,6 +1,6 @@
 <p class="text-xl pb-8">My Profile</p>
-<p-avatar [image]="currentUserData.profilePic || 'https://cdn-icons-png.flaticon.com/512/6858/6858504.png'" size="xlarge" shape="circle"
-    class="mb-4" />
+<p-avatar [image]="currentUserData.profilePic || 'https://cdn-icons-png.flaticon.com/512/6858/6858504.png'"
+    size="xlarge" shape="circle" class="mb-4" />
 <h4 class="mb-2">Name : {{currentUserData.name}}</h4>
 <h4 class="mb-2">Email : {{currentUserData.email}}</h4>
 <div class="flex gap-2 items-center mb-8">
@@ -10,8 +10,20 @@
     <i (click)="copyText()" pTooltip="Copy URL" class="ri-file-copy-line text-xl"></i>
 </div>
 <div class="flex gap-2">
-    <button class="w-full p-2 rounded-3xl">Edit Profile</button>
+    <button class="w-full p-2 rounded-3xl" (click)="showDialog()">Edit Profile</button>
+    <p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible"
+        [style]="{ width: '50rem', backgroundColor: '#1a1a1a', border: 'none' }">
+        <div class="relative h-60">
+            <img [src]="" alt="" class="w-full h-40 rounded-t-3xl border">
+            <img [src]="" alt="" class="w-40 h-40 rounded-full border absolute left-8 top-16">
+        </div>
+            <form action="">
+                <input name="name"
+                        class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
+                        placeholder="Name">
+            </form>
+    </p-dialog>
     @if (currentUserData.role === 'customer') {
-        <button class="w-full p-2 rounded-3xl">Upgrade Account</button>
+    <button class="w-full p-2 rounded-3xl">Upgrade Account</button>
     }
 </div>

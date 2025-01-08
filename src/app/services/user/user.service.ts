@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IAddress } from '../../model/user';
+import { IAddress, IUser } from '../../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +11,20 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  updateUserProfile(user: IUser) {
+    return this.http.put(`${this.baseUrl}/profile`, { user }, { withCredentials: true })
+  }
+
   getAddresses() {
-    return this.http.get(`${this.baseUrl}/address`, {withCredentials: true})
+    return this.http.get(`${this.baseUrl}/address`, { withCredentials: true })
   }
 
   addAddress(address: IAddress) {
     return this.http.post(`${this.baseUrl}/address`, address, { withCredentials: true })
   }
 
-  deleteAddress(addressId: string | undefined){
-    return this.http.delete(`${this.baseUrl}/address/${addressId}`, {withCredentials: true})
+  deleteAddress(addressId: string | undefined) {
+    return this.http.delete(`${this.baseUrl}/address/${addressId}`, { withCredentials: true })
   }
 
 }
