@@ -31,7 +31,7 @@ interface OrderItem {
 
 export interface IOrder {
     _id?: string
-    userId: string
+    user: string
     items: OrderItem[];
     total: number;
     address: IAddress;

@@ -18,8 +18,12 @@ export class OrderService {
     return this.http.get(this.baseUrl, { withCredentials: true })
   }
 
-  getAllOrders(){
-    
+  getAllOrders() {
+    return this.http.get(`${this.baseUrl}/admin`, { withCredentials: true })
+  }
+
+  getArtistProductOrder() {
+    return this.http.get(`${this.baseUrl}/artist`, { withCredentials: true })
   }
 
   cancelOrder(orderId: string | undefined) {

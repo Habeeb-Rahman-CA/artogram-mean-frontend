@@ -1,4 +1,31 @@
 <div class="m-8 p-4 secondary-bg rounded-3xl">
     <p class="text-xl">Orders And Payments</p>
-    <h1>here i have to add the artist artwork orders</h1>
+    <table class="w-full mt-4 text-white text-center">
+        <thead>
+            <tr>
+                <th class="p-2">User ID</th>
+                <th class="p-2">Product</th>
+                <th class="p-2">Address</th>
+                <th class="p-2">Price</th>
+                <th class="p-2">Status</th>
+                <th class="p-2">Payment</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (order of orders; track $index) {
+                <tr>
+                    <td class="p-2">{{order.user}}</td>
+                    <td class="p-2">
+                        @for (item of order.items; track $index) {
+                            <h1>{{item.product.name}}</h1>
+                        }
+                    </td>
+                    <td class="p-2">{{order.address.address}}, {{order.address.city}}</td>
+                    <td class="p-2">{{order.total | currency: 'INR'}}</td>
+                    <td class="p-2 text-green-500">{{order.status}}</td>
+                    <td class="p-2 text-red-500">Pending</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
