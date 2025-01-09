@@ -7,6 +7,7 @@ import { IUser } from '../../../model/user';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../../services/user/user.service';
 
 @Component({
   selector: 'app-profile-card',
@@ -16,10 +17,20 @@ import { CommonModule } from '@angular/common';
 })
 export class ProfileCardComponent implements OnInit {
   authService = inject(AuthService)
+  userService = inject(UserService)
 
   currentUserData!: IUser
   textToCopy: string = ''
   visible: boolean = false
+
+  userDetails: Partial<IUser> = {
+    name: this.currentUserData?.name,
+    bio: '',
+    profilePic: '',
+    coverPic: '',
+    gender: '',
+    phoneNumber: ''
+  }
 
   copyText() {
     navigator.clipboard.writeText(this.textToCopy)
@@ -30,7 +41,22 @@ export class ProfileCardComponent implements OnInit {
     this.textToCopy = 'www.artogram.com/' + this.currentUserData.name.replace(/\s+/g, '-')
   }
 
-  showDialog(){
+  showDialog() {
     this.visible = true
   }
+
+  updateProfile() {
+    this.userService.updateUserProfile(this.userDetails).subscribe({
+      next: (res) => {
+        console.log(res);
+        alert('Profile Updated')
+        this.visible = false
+      },
+      error:(err) =>{
+        alert('Profile failed updated')
+        console.error(err)
+      }
+    })
+  }
+
 }

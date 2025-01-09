@@ -11,10 +11,15 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  updateUserProfile(user: IUser) {
+  //User APIs
+  updateUserProfile(user: Partial<IUser>) {
     return this.http.put(`${this.baseUrl}/profile`, { user }, { withCredentials: true })
   }
+  uploadUserImage(formData: FormData){
+    return this.http.post(`${this.baseUrl}/upload`, formData, {withCredentials: true})
+  }
 
+  //Address APIs
   getAddresses() {
     return this.http.get(`${this.baseUrl}/address`, { withCredentials: true })
   }

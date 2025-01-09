@@ -17,11 +17,18 @@
             <img [src]="" alt="" class="w-full h-40 rounded-t-3xl border">
             <img [src]="" alt="" class="w-40 h-40 rounded-full border absolute left-8 top-16">
         </div>
-            <form action="">
-                <input name="name"
-                        class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
-                        placeholder="Name">
-            </form>
+        <form class="flex flex-col gap-2" action="">
+            <div class="flex gap-2">
+                <input name="name" class="p-2 w-full rounded-lg bg-neutral-800 text-white border-none outline-none"
+                    type="text" placeholder="Name">
+                <input name="name" class="p-2 w-full rounded-lg bg-neutral-800 text-white border-none outline-none"
+                    type="text" placeholder="Gender">
+            </div>
+            <textarea name="name" rows="4" class="p-2 w-full rounded-lg bg-neutral-800 text-white border-none outline-none"
+                type="text" placeholder="Bio"></textarea>
+            <input name="name" class="p-2 w-full rounded-lg bg-neutral-800 text-white border-none outline-none"
+                type="text" placeholder="Phone">
+        </form>
     </p-dialog>
     @if (currentUserData.role === 'customer') {
     <button class="w-full p-2 rounded-3xl">Upgrade Account</button>

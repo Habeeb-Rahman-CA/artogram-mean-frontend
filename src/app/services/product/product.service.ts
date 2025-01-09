@@ -12,6 +12,7 @@ export class ProductService {
 
   baseUrl = 'http://localhost:8001/api/product';
 
+  //Product APIs
   getAllProducts(): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(this.baseUrl, { withCredentials: true })
   }
