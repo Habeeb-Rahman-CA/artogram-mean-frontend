@@ -12,7 +12,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 
 @Component({
   selector: 'app-profile-card',
-  imports: [ Tooltip, RouterModule, DialogModule, FormsModule, CommonModule, RadioButtonModule],
+  imports: [Tooltip, RouterModule, DialogModule, FormsModule, CommonModule, RadioButtonModule],
   templateUrl: './profile-card.component.html',
   styleUrl: './profile-card.component.css'
 })
@@ -38,12 +38,25 @@ export class ProfileCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentUserData = this.authService.userData.value
-    this.textToCopy = 'www.artogram.com/' + this.currentUserData.name.replace(/\s+/g, '-')
+    this.getUser()
   }
-
+  
   showDialog() {
     this.visible = true
+  }
+  
+  getUser() {
+    this.userService.getUser().subscribe({
+      next: (res: any) => {
+        this.authService.setUser(res.user)
+        this.currentUserData = res.user
+        this.textToCopy = 'www.artogram.com/' + this.currentUserData.name.replace(/\s+/g, '-')
+      },
+      error: (err) => {
+        console.error(err.message)
+        alert('failed to load user data')
+      }
+    })
   }
 
   uploadImg(file: File, imgType: 'profilePic' | 'coverPic') {
@@ -64,11 +77,11 @@ export class ProfileCardComponent implements OnInit {
   updateProfile() {
     this.userService.updateUserProfile(this.userDetails).subscribe({
       next: (res) => {
-        console.log(res);
         alert('Profile Updated')
+        this.getUser()
         this.visible = false
       },
-      error:(err) =>{
+      error: (err) => {
         alert('Profile failed updated')
         console.error(err.message)
       }
