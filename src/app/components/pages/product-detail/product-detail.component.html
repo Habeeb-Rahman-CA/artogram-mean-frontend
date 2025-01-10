@@ -31,7 +31,7 @@
     </div>
     <div class="flex items-center gap-4">
         <button class="py-2 w-36 rounded-3xl border-2 border-orange-500 bg-transparent text-orange-500">Connect</button>
-        <button class="py-2 w-36 rounded-3xl">View</button>
+        <button class="py-2 w-36 rounded-3xl" (click)="viewArtist(product.createdBy?._id)">View</button>
     </div>
 </div>
 <div class="rounded-3xl m-8 mt-12">

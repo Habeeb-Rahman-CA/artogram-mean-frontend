@@ -16,10 +16,19 @@ export class UserService {
     return this.http.get(this.baseUrl, { withCredentials: true })
   }
 
+  getUserById(id: string) {
+    return this.http.get(`${this.baseUrl}/${id}`, { withCredentials: true })
+  }
+
+  getAllArtist() {
+    return this.http.get(`${this.baseUrl}/artist`, { withCredentials: true })
+  }
+
   updateUserProfile(user: Partial<IUser>) {
     return this.http.patch(`${this.baseUrl}/profile`, { user }, { withCredentials: true })
   }
 
+  //Upload User Image
   uploadUserImage(formData: FormData) {
     return this.http.post(`${this.baseUrl}/upload`, formData, { withCredentials: true })
   }

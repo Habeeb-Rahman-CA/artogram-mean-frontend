@@ -22,16 +22,17 @@
                     (change)="onInputChange($event, 'coverPic')" hidden #coverPic>
             </div>
             <div class="absolute left-8 top-16 cursor-pointer" (click)="profilePic.click()">
-                <img [src]="userDetails.profilePic || 'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg'" alt=""
-                    class="w-40 h-40 rounded-full border object-cover">
+                <img [src]="userDetails.profilePic || 'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg'"
+                    alt="" class="w-40 h-40 rounded-full border object-cover">
                 <input name="profilePic" accept="image/*" placeholder="Enter Image URL" type="file"
                     (change)="onInputChange($event, 'profilePic')" hidden #profilePic>
             </div>
         </div>
         <form class="flex flex-col gap-2" action="">
             <div class="flex gap-2">
-                <input name="username" [(ngModel)]="userDetails.name" class="p-2 w-full rounded-lg bg-neutral-800 text-white border-none outline-none"
-                    type="text" placeholder="Name">
+                <input name="username" [(ngModel)]="userDetails.name"
+                    class="p-2 w-full rounded-lg bg-neutral-800 text-white border-none outline-none" type="text"
+                    placeholder="Name">
                 <!-- radio for gender -->
                 <div class="relative max-w-sm flex w-full flex-col rounded-xl bg-neutral-800">
                     <nav class="flex min-w-[240px] flex-row gap-1 p-2 rounded-lg bg-neutral-800">
@@ -57,7 +58,8 @@
                             <label class="flex w-full cursor-pointer items-center px-3 py-2">
                                 <div class="inline-flex items-center">
                                     <label class="relative flex items-center cursor-pointer">
-                                        <input [(ngModel)]="userDetails.gender" name="gender" type="radio" value="Female"
+                                        <input [(ngModel)]="userDetails.gender" name="gender" type="radio"
+                                            value="Female"
                                             class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-slate-400 transition-all"
                                             checked />
                                         <span
@@ -92,8 +94,14 @@
             <textarea [(ngModel)]="userDetails.bio" name="bio" rows="4"
                 class="p-2 w-full rounded-lg bg-neutral-800 text-white border-none outline-none" type="text"
                 placeholder="Bio"></textarea>
-            <input [(ngModel)]="userDetails.phoneNumber" name="phoneNumber" class="p-2 w-full rounded-lg bg-neutral-800 text-white border-none outline-none"
-                type="text" placeholder="Phone">
+            <div class="gap-2 flex items-center">
+                <input [(ngModel)]="userDetails.phoneNumber" name="phoneNumber"
+                    class="p-2 w-full rounded-lg bg-neutral-800 text-white border-none outline-none" type="text"
+                    placeholder="Phone">
+                <input [(ngModel)]="userDetails.location" name="location"
+                    class="p-2 w-full rounded-lg bg-neutral-800 text-white border-none outline-none" type="text"
+                    placeholder="Location">
+            </div>
         </form>
         <button class="w-full rounded-3xl mt-4 p-2" (click)="updateProfile()">Save Profile</button>
     </p-dialog>

@@ -5,6 +5,7 @@ export interface IUser {
     email: string
     gender: string
     adresses?: Array<IAddress>
+    location: string
     name: string
     password: string
     phoneNumber: string

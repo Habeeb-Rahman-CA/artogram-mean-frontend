@@ -93,4 +93,8 @@ export class ProductDetailComponent implements OnInit {
   viewProduct(id: string | undefined) {
     this.router.navigate(['/products', id])
   }
+
+  viewArtist(id: string | undefined){
+    this.router.navigate(['/artist', id])
+  }
 }

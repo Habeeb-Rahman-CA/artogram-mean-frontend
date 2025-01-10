@@ -30,7 +30,8 @@ export class ProfileCardComponent implements OnInit {
     profilePic: '',
     coverPic: '',
     gender: '',
-    phoneNumber: ''
+    phoneNumber: '',
+    location: ''
   }
 
   copyText() {
