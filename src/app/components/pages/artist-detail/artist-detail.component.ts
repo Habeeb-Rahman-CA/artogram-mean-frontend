@@ -32,6 +32,7 @@ export class ArtistDetailComponent implements OnInit {
     })
   }
 
+  // Artist based APIs 
   getArtist(id: string) {
     this.userService.getUserById(id).subscribe({
       next: (res: any) => {
@@ -68,6 +69,7 @@ export class ArtistDetailComponent implements OnInit {
     })
   }
 
+  //Params based router
   viewProduct(id: string | undefined) {
     this.router.navigate(['/products', id])
   }

@@ -32,6 +32,7 @@ export class UploadProductComponent implements OnInit {
     this.categories = ['Painting', 'Drawing', 'Sculpture', 'Photography', 'Digital Art']
   }
 
+  //Upload image(Cloudinary)
   uploadImg(file: File) {
     const formData = new FormData()
     formData.append('img', file, file.name)
@@ -47,6 +48,7 @@ export class UploadProductComponent implements OnInit {
     })
   }
 
+  //Upload Product and Input Change
   uploadProduct() {
     this.productService.createProduct(this.product).subscribe({
       next: () => {

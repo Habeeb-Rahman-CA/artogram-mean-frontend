@@ -1,7 +1,9 @@
 <div class="p-4 m-4">
     <div class="flex gap-4 items-center">
+        <!-- Search Filter -->
         <input [(ngModel)]="searchQuery" (input)="applyFilter()" type="text"
             class="secondary-bg text-white p-2 rounded-3xl w-full" placeholder="Search" name="search">
+        <!-- Category Filter -->
         <select name="categories" class="secondary-bg text-zinc-400 rounded-3xl p-2 w-80" [(ngModel)]="selectedCategory"
             (change)="applyFilter()">
             <option value="">All</option>
@@ -9,12 +11,14 @@
             <option [value]="category">{{category}}</option>
             }
         </select>
+        <!-- Sort Filter -->
         <i class="secondary-bg py-2 px-3 cursor-pointer text-lg rounded-full"
             [ngClass]="{'ri-sort-asc': sort, 'ri-sort-desc': !sort}" (click)="toggleSortOrder()"></i>
     </div>
     @if (filteredProduct.length === 0) {
     <p class="text-center py-40 text-2xl font-semibold">No Product is found</p>
     }
+    <!-- Products based on Filter -->
     <div class="grid lg:grid-cols-4">
         @for (product of filteredProduct; track $index) {
         <div class="card rounded-lg overflow-hidden m-8 cursor-pointer" (click)="viewProduct(product._id)">

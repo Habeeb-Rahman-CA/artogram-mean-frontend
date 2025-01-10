@@ -50,6 +50,7 @@ export class MyCartComponent implements OnInit {
     this.getAddress()
   }
 
+  //Cart based APIs
   getCart() {
     this.cartService.getCart(this.userId).subscribe({
       next: (res: any) => {
@@ -77,14 +78,7 @@ export class MyCartComponent implements OnInit {
     })
   }
 
-  showDialog() {
-    this.visible = true
-  }
-
-  showAddress() {
-    this.addressShown = true
-  }
-
+//Address based APIs
   addAddress() {
     this.userService.addAddress(this.address).subscribe({
       next: () => {
@@ -121,6 +115,7 @@ export class MyCartComponent implements OnInit {
     })
   }
 
+  //Checkout API
   checkout() {
     this.orderService.checkout(this.selectedAddress).subscribe({
       next: () => {
@@ -132,5 +127,14 @@ export class MyCartComponent implements OnInit {
         alert('failed to place order')
       }
     })
+  }
+
+  //Dialog Open
+  showDialog() {
+    this.visible = true
+  }
+
+  showAddress() {
+    this.addressShown = true
   }
 }

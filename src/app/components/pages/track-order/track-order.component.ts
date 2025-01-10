@@ -23,6 +23,7 @@ export class TrackOrderComponent implements OnInit {
     this.getAllOrders()
   }
 
+  //Order APIs
   getAllOrders() {
     this.orderService.getOrder().subscribe({
       next: (res: any) => {

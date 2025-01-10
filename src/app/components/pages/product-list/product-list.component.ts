@@ -38,6 +38,7 @@ export class ProductListComponent implements OnInit {
     this.visible = true;
   }
 
+  //Product APIs
   getProducts() {
     this.productService.getProductByUserId().subscribe({
       next: (res) => {

@@ -10,10 +10,12 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
+  //Checkout API
   checkout(addressId: string | undefined) {
     return this.http.post(`${this.baseUrl}/checkout`, { addressId }, { withCredentials: true })
   }
 
+  //Order APIs
   getOrder() {
     return this.http.get(this.baseUrl, { withCredentials: true })
   }

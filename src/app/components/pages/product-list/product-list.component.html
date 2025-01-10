@@ -22,8 +22,8 @@
                     <h6>{{product.price | currency: 'INR'}}</h6>
                 </div>
                 <div class="flex items-center gap-4 w-full mt-4">
-                    <!-------------------- Update dialog --------------------->
                     <button class="w-full rounded-3xl" (click)="showUpdateDialog(product)">Update</button>
+                    <!-- Edit Product Dialog -->
                     <p-dialog header="Edit Product" [modal]="true" maximizable="true" [(visible)]="visible"
                         [style]="{ width: '50rem', backgroundColor: '#1a1a1a', border: 'none' }">
                         <p class="mb-4">Update your product information</p>
@@ -62,7 +62,6 @@
                                 (click)="updateProduct(selectedProduct._id, selectedProduct)">Save</button>
                         </div>
                     </p-dialog>
-
                     <button class="w-full rounded-3xl" (click)="deleteProduct(product._id)">Delete</button>
                 </div>
             </div>

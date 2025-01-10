@@ -16,6 +16,7 @@ export class NavbarComponent {
 
   currentUser = this.authService.userData
 
+  //Dashboard navigation based on tole
   getDashboard() {
     if (this.currentUser.value && this.currentUser.value.role) {
       if (this.currentUser.value.role === 'customer') {

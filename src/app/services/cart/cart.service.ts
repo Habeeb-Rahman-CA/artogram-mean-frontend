@@ -10,14 +10,15 @@ export class CartService {
 
   constructor(private http: HttpClient) { }
 
+  //Cart APIs
   addCart(userId: string, productId: string | undefined) {
     return this.http.post(this.baseUrl, { userId, productId }, { withCredentials: true })
   }
-
+  
   getCart(userId: string) {
     return this.http.get(`${this.baseUrl}/${userId}`, { withCredentials: true })
   }
-
+  
   deleteCartItem(cartId: string, productId: string | undefined){
     return this.http.delete(`${this.baseUrl}/${cartId}/products/${productId}`, {withCredentials: true})
   }

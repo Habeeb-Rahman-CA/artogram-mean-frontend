@@ -1,4 +1,5 @@
 <div class="flex gap-8 secondary-bg rounded-3xl m-8 p-4 h-[520px]">
+    <!-- Address Section -->
     <div class="w-3/5 overflow-y-auto scrollbar">
         <p class="text-xl">Add Delivery Address</p>
         @for (address of addressList; track $index) {
@@ -67,7 +68,7 @@
             </div>
         </p-dialog>
     </div>
-    <!-- cart section  -->
+    <!-- Cart Section  -->
     <div class="w-2/5">
         <p class="text-xl">My Cart</p>
         @if (cart.length === 0) {

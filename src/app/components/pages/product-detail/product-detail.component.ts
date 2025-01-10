@@ -48,6 +48,7 @@ export class ProductDetailComponent implements OnInit {
     })
   }
 
+  //Product APIs 
   getProductById(id: string | null) {
     this.productService.getProductById(id).subscribe({
       next: (res: any) => {
@@ -58,6 +59,7 @@ export class ProductDetailComponent implements OnInit {
     })
   }
 
+  //Add Cart API
   addCart(productId: string | undefined) {
     this.cartService.addCart(this.userId, productId).subscribe({
       next: (res: any) => {
@@ -74,6 +76,7 @@ export class ProductDetailComponent implements OnInit {
     })
   }
 
+  //Add Wishlist API
   addWishlist(productId: string | undefined) {
     this.wishlistService.addWishlist(this.userId, productId).subscribe({
       next: (res: any) => {
@@ -90,6 +93,7 @@ export class ProductDetailComponent implements OnInit {
     })
   }
 
+  //Dialog Open
   viewProduct(id: string | undefined) {
     this.router.navigate(['/products', id])
   }

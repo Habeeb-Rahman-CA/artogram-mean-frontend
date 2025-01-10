@@ -10,6 +10,7 @@ export class WishlistService {
 
   constructor(private http: HttpClient) { }
 
+  //Wishlist APIs
   getWishlist(userId: string) {
     return this.http.get(`${this.baseUrl}/${userId}`, { withCredentials: true })
   }
