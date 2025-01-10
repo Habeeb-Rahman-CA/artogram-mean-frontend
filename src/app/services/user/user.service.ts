@@ -13,7 +13,7 @@ export class UserService {
 
   //User APIs
   updateUserProfile(user: Partial<IUser>) {
-    return this.http.put(`${this.baseUrl}/profile`, { user }, { withCredentials: true })
+    return this.http.patch(`${this.baseUrl}/profile`, { user }, { withCredentials: true })
   }
   uploadUserImage(formData: FormData){
     return this.http.post(`${this.baseUrl}/upload`, formData, {withCredentials: true})
