@@ -16,6 +16,10 @@ export class UserService {
     return this.http.get(this.baseUrl, { withCredentials: true })
   }
 
+  getAllUser() {
+    return this.http.get(`${this.baseUrl}/admin`, { withCredentials: true })
+  }
+
   getUserById(id: string) {
     return this.http.get(`${this.baseUrl}/${id}`, { withCredentials: true })
   }

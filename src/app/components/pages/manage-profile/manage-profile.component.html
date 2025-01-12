@@ -4,24 +4,51 @@
         <table class="table-fixed w-full text-center">
             <thead>
                 <tr class="text-white">
-                    <th>UID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Action</th>
+                    <th class="p-2">UID</th>
+                    <th class="p-2">Name</th>
+                    <th class="p-2">Email</th>
+                    <th class="p-2">Role</th>
+                    <th class="p-2">Action</th>
                 </tr>
             </thead>
             <tbody class="text-white">
+                @for (user of userList; track $index) {
                 <tr>
-                    <td>24624658723894732</td>
-                    <td>Habeeb</td>
-                    <td>habgmail.com</td>
-                    <td>Admin</td>
+                    <td class="p-2">{{user._id}}</td>
+                    <td class="p-2">{{user.name | titlecase}}</td>
+                    <td class="p-2">{{user.email}}</td>
+                    <td class="p-2">{{user.role | uppercase}}</td>
                     <td class="flex justify-center gap-4 my-1">
-                        <button class="px-4 rounded-3xl">Edit</button>
-                        <button class="px-4 rounded-3xl">View</button>
+                        <button class="px-4 rounded-3xl">Message</button>
+                        <button class="px-4 rounded-3xl" (click)="op.toggle($event)">View</button>
+                        <p-popover #op>
+                            <div class="p-4">
+                                <div class="flex gap-8 items-center pb-2">
+                                    <img [src]="user.profilePic || 'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg'"
+                                        class="w-20 h-20 object-cover rounded-full">
+                                    <div>
+                                        <h1 class="text-neutral-900 text-lg">{{user.name | uppercase}}</h1>
+                                        <h2 class="text-neutral-700 text-sm">{{user.role | titlecase}}</h2>
+                                    </div>
+                                </div>
+                                <div class="flex gap-8">
+                                    <div class="flex gap-4 flex-col items-center">
+                                        <h1 class="text-neutral-800 text-sm">Email: {{user.email}}</h1>
+                                        <h2 class="text-neutral-800 text-sm">Phone: {{user.phoneNumber ||
+                                            'Unavailable'}}</h2>
+                                    </div>
+                                    <div class="flex gap-4 flex-col items-center">
+                                        <h1 class="text-neutral-800 text-sm">Location: {{user.location ||
+                                            'Unavailable'}}</h1>
+                                        <h2 class="text-neutral-800 text-sm">Signed: {{user.createdAt | date:
+                                            'mediumDate'}}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </p-popover>
                     </td>
                 </tr>
+                }
             </tbody>
         </table>
     </div>
