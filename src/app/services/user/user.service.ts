@@ -28,6 +28,10 @@ export class UserService {
     return this.http.get(`${this.baseUrl}/artist`, { withCredentials: true })
   }
 
+  getAllArtistExceptLogger(){
+    return this.http.get(`${this.baseUrl}/collab`, {withCredentials: true})
+  }
+
   updateUserProfile(user: Partial<IUser>) {
     return this.http.patch(`${this.baseUrl}/profile`, { user }, { withCredentials: true })
   }
