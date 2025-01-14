@@ -1,98 +1,86 @@
 <div class="m-8 secondary-bg p-4 rounded-3xl">
     <div class="flex justify-between items-center mb-2">
         <p class="text-xl ">Manage Jobs</p>
-        <button class="rounded-full px-3 py-2"><i
-                class="ri-add-line !text-white hover:!text-white text-xl"></i></button>
+        <button class="rounded-full px-3 py-2" (click)="showDialog()">
+            <i class="ri-add-line !text-white hover:!text-white text-xl"></i>
+        </button>
     </div>
-    <table class="table-fixed w-full text-center border-separate border-spacing-y-2">
-        <thead class="text-zinc-100">
-            <tr>
-                <th>Job Title</th>
-                <th>Company</th>
-                <th>Location</th>
-                <th>Salary</th>
-                <th>Posted On</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody class="text-white">
-            <tr>
-                <td>Graphic Designer</td>
-                <td>Artistic Creations</td>
-                <td>New York, NY</td>
-                <td>$50,000</td>
-                <td>2023-10-01</td>
-                <td class="flex justify-center items-center gap-4">
-                    <button class="w-full rounded-3xl">Edit</button>
-                    <button class="w-full rounded-3xl">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Illustrator</td>
-                <td>Creative Minds</td>
-                <td>Los Angeles, CA</td>
-                <td>$45,000</td>
-                <td>2023-09-15</td>
-                <td class="flex justify-center items-center gap-4">
-                    <button class="w-full rounded-3xl">Edit</button>
-                    <button class="w-full rounded-3xl">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Animator</td>
-                <td>Animation Studio</td>
-                <td>San Francisco, CA</td>
-                <td>$60,000</td>
-                <td>2023-08-20</td>
-                <td class="flex justify-center items-center gap-4">
-                    <button class="w-full rounded-3xl">Edit</button>
-                    <button class="w-full rounded-3xl">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Art Director</td>
-                <td>Design Hub</td>
-                <td>Chicago, IL</td>
-                <td>$70,000</td>
-                <td>2023-07-10</td>
-                <td class="flex justify-center items-center gap-4">
-                    <button class="w-full rounded-3xl">Edit</button>
-                    <button class="w-full rounded-3xl">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Illustrator</td>
-                <td>Creative Minds</td>
-                <td>Los Angeles, CA</td>
-                <td>$45,000</td>
-                <td>2023-09-15</td>
-                <td class="flex justify-center items-center gap-4">
-                    <button class="w-full rounded-3xl">Edit</button>
-                    <button class="w-full rounded-3xl">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Animator</td>
-                <td>Animation Studio</td>
-                <td>San Francisco, CA</td>
-                <td>$60,000</td>
-                <td>2023-08-20</td>
-                <td class="flex justify-center items-center gap-4">
-                    <button class="w-full rounded-3xl">Edit</button>
-                    <button class="w-full rounded-3xl">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Art Director</td>
-                <td>Design Hub</td>
-                <td>Chicago, IL</td>
-                <td>$70,000</td>
-                <td>2023-07-10</td>
-                <td class="flex justify-center items-center gap-4">
-                    <button class="w-full rounded-3xl">Edit</button>
-                    <button class="w-full rounded-3xl">Delete</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- create job oppertunity dialog -->
+    <p-dialog header="Post New Job Oppertunities" [modal]="true" maximizable="true" [(visible)]="visible"
+        [style]="{ width: '50rem', backgroundColor: '#1a1a1a', border: 'none' }">
+        <form action="">
+        <div class="flex gap-4 w-full">
+            <div class="mb-2  w-full">
+                <label class="text-sm" cla for="title">Title of Job</label>
+                <input [(ngModel)]="job.title" name="name" class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="title" autocomplete="off" />
+            </div>
+            <div class="mb-2 w-full">
+                <label class="text-sm"  for="companyName" >Name of the Company</label>
+                <input [(ngModel)]="job.companyName" name="companyName" class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="companyName" autocomplete="off" />
+            </div>
+        </div>
+        <div class="mb-2 w-full">
+            <label class="text-sm"  for="description" >Job Description</label>
+            <textarea [(ngModel)]="job.description" rows="5" name="description" class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" style="resize: none;" id="description" autocomplete="off"></textarea>
+        </div>
+        <div class="flex gap-4 w-full">
+            <div class="mb-2 w-full">
+                <label class="text-sm" for="jobType" >Job Type</label>
+                <select [(ngModel)]="job.jobType" name="jobType" class="mt-1 w-full rounded-xl bg-neutral-800 text-white border-none p-2" id="jobType">
+                    <option *ngFor="let jobType of jobTypes" [value]="jobType">{{ jobType }}</option>
+                </select>
+            </div>
+            <div class="mb-2 w-full">
+                <label class="text-sm" for="category" >Category</label>
+                <select [(ngModel)]="job.category" name="category" class="mt-1 w-full rounded-xl bg-neutral-800 text-white border-none p-2" id="category">
+                    <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                </select>
+            </div>
+            <div class="mb-2 w-full">
+                <label class="text-sm" for="location">Location</label>
+                <input [(ngModel)]="job.location" name="location" class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="location" autocomplete="off" />
+            </div>
+        </div>
+        <div class="flex gap-4 w-full">
+            <div class="mb-2 w-full">
+                <label class="text-sm" for="salary">Salary Range</label>
+                <input [(ngModel)]="job.salary" name="salary" class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="salary" autocomplete="off" />
+            </div>
+            <div class="mb-2 w-full">
+                <label class="text-sm"  for="opennings" >Number of Opennings</label>
+                <input [(ngModel)]="job.numberOfOpening" name="opennings" class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="opennings" autocomplete="off" />
+            </div>
+        </div>
+        <button class="p-2 w-full rounded-3xl mt-4" (click)="createJob()">Post Now</button>
+    </form>
+    </p-dialog>
+    <!-- display posted jobs -->
+    <div class="h-[400px] overflow-y-auto scrollba">
+        <table class="table-fixed w-full text-center border-separate border-spacing-y-2">
+            <thead class="text-zinc-100">
+                <tr>
+                    <th class="p-2">Job Title</th>
+                    <th class="p-2">Company</th>
+                    <th class="p-2">Location</th>
+                    <th class="p-2">Salary</th>
+                    <th class="p-2">Posted On</th>
+                    <th class="p-2">Action</th>
+                </tr>
+            </thead>
+            <tbody class="text-white">
+                <tr>
+                    <td class="p-2">Graphic Designer</td>
+                    <td class="p-2">Artistic Creations</td>
+                    <td class="p-2">New York, NY</td>
+                    <td class="p-2">$50,000</td>
+                    <td class="p-2">2023-10-01</td>
+                    <td class="flex justify-center items-center py-2 pr-2 gap-4">
+                        <button class="w-full rounded-3xl">Edit</button>
+                        <button class="w-full rounded-3xl">Delete</button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
 </div>
