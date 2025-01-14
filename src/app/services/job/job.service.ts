@@ -20,4 +20,12 @@ export class JobService {
     return this.http.get(this.baseUrl, { withCredentials: true })
   }
 
+  closeJobById(jobId: string | undefined) {
+    return this.http.patch(`${this.baseUrl}/close`, { jobId }, { withCredentials: true })
+  }
+
+  deleteJobById(id: string | undefined) {
+    return this.http.delete(`${this.baseUrl}/${id}`, { withCredentials: true })
+  }
+
 }

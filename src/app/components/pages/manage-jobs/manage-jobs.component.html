@@ -64,21 +64,32 @@
                     <th class="p-2">Location</th>
                     <th class="p-2">Salary</th>
                     <th class="p-2">Posted On</th>
+                    <th class="p-2">Status</th>
                     <th class="p-2">Action</th>
                 </tr>
             </thead>
             <tbody class="text-white">
-                <tr>
-                    <td class="p-2">Graphic Designer</td>
-                    <td class="p-2">Artistic Creations</td>
-                    <td class="p-2">New York, NY</td>
-                    <td class="p-2">$50,000</td>
-                    <td class="p-2">2023-10-01</td>
-                    <td class="flex justify-center items-center py-2 pr-2 gap-4">
-                        <button class="w-full rounded-3xl">Edit</button>
-                        <button class="w-full rounded-3xl">Delete</button>
-                    </td>
-                </tr>
+                @for (job of jobList; track $index) {
+                    <tr>
+                        <td class="p-2">{{job.title}}</td>
+                        <td class="p-2">{{job.companyName}}</td>
+                        <td class="p-2">{{job.location}}</td>
+                        <td class="p-2">{{job.salary | currency: 'INR'}}</td>
+                        <td class="p-2">{{job.postedDate | date: 'mediumDate'}}</td>
+                        @if (job.status === 'Open') {
+                            <td class="p-2 text-green-500">{{job.status}}</td>
+                        } @else {
+                            <td class="p-2 text-red-500">{{job.status}}</td>
+                        }
+                        <td class="flex justify-center items-center py-2 pr-2 gap-4">
+                            @if (job.status === 'Open') {
+                                <button (click)="closeJob(job._id)" class="w-full rounded-3xl">Close</button>
+                            } @else {
+                                <button (click)="deleteJob(job._id)" class="w-full rounded-3xl">Delete</button>
+                            }
+                        </td>
+                    </tr>
+                }
 
             </tbody>
         </table>
