@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { JobService } from '../../../services/job/job.service';
 import { IHireJob, IJob } from '../../../model/job';
 import { DialogModule } from 'primeng/dialog';
@@ -17,7 +17,13 @@ export class JobsComponent implements OnInit {
   visible: boolean = false
   hireReqList: IHireJob[] = []
   jobList: IJob[] = []
-  selectedHireReq!: IHireJob
+  selectedHireReq: IHireJob = {
+    title: '',
+    companyName: '',
+    description: '',
+    salary: '',
+    location: '',
+  }
 
   ngOnInit(): void {
     this.getHireReqs()
@@ -27,6 +33,7 @@ export class JobsComponent implements OnInit {
   getHireReqs() {
     this.jobService.getHireReq().subscribe({
       next: (res: any) => {
+        console.log(res.hireReq);
         this.hireReqList = res.hireReq
       },
       error: (err) => {
@@ -36,12 +43,12 @@ export class JobsComponent implements OnInit {
     })
   }
 
-  getAllJobs(){
+  getAllJobs() {
     this.jobService.getAllJobs().subscribe({
-      next:(res: any)=>{
+      next: (res: any) => {
         this.jobList = res.jobs
       },
-      error: (err)=>{
+      error: (err) => {
         alert('failed to fetch all the jobs')
         console.error(err.message)
       }
@@ -53,6 +60,7 @@ export class JobsComponent implements OnInit {
       next: () => {
         alert("Response sented successfully")
         this.getHireReqs()
+        this.visible = false
       },
       error: (err) => {
         alert('failed to sent the response')
@@ -66,6 +74,7 @@ export class JobsComponent implements OnInit {
       next: () => {
         alert("Response sented successfully")
         this.getHireReqs()
+        this.visible = false
       },
       error: (err) => {
         alert('failed to sent the response')
