@@ -13,3 +13,19 @@ export interface IJob {
     postedDate?: Date
     deadlineDate?: Date
 }
+
+export interface IHireJob {
+    _id?: string
+    title: string
+    companyName: string
+    description: string
+    recruiter?: {
+        _id: string,
+        name: string,
+        email: string
+    }
+    artist?: string
+    salary: string
+    location: string
+    status?: 'Pending' | 'Accepted' | 'Rejected'
+}

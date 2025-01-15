@@ -19,20 +19,61 @@
     <div class="secondary-bg p-4 w-1/3 rounded-3xl h-[400px] overflow-y-auto scrollbar">
         <p class="text-lg mb-2">List of Artist</p>
         @for (artist of artistList; track $index) {
-            <div class="flex justify-between w-full mb-2 p-2">
-                <div class="flex gap-2 items-center">
-                    <img [src]="artist.profilePic || 'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'"
-                        class="w-10 h-10 rounded-full object-cover">
-                    <div class="flex flex-col">
-                        <h1>{{artist.name}}</h1>
-                        <h1 class="text-xs">{{artist.email}}</h1>
-                    </div>
-                </div>
-                <div class="flex gap-2">
-                    <button class="rounded-3xl px-4 py-1">Hire</button>
-                    <button class="rounded-3xl px-4 py-1" (click)="viewArtist(artist._id)">View</button>
+        <div class="flex justify-between w-full mb-2 p-2">
+            <div class="flex gap-2 items-center">
+                <img [src]="artist.profilePic || 'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'"
+                    class="w-10 h-10 rounded-full object-cover">
+                <div class="flex flex-col">
+                    <h1>{{artist.name}}</h1>
+                    <h1 class="text-xs">{{artist.email}}</h1>
                 </div>
             </div>
+            <div class="flex gap-2">
+                <button class="rounded-3xl px-4 py-1" (click)="showDialog(artist)">Hire</button>
+                <button class="rounded-3xl px-4 py-1" (click)="viewArtist(artist._id)">View</button>
+                <!-- Dialog for senting hiring request -->
+                <p-dialog header="Sent Hiring Request for Artist" [modal]="true" maximizable="true" [(visible)]="visible"
+                    [style]="{ width: '50rem', backgroundColor: '#1a1a1a', border: 'none' }">
+                    <form action="">
+                        <div class="flex gap-4 w-full">
+                            <div class="mb-2  w-full">
+                                <label class="text-sm" cla for="title">Title of Job</label>
+                                <input [(ngModel)]="hireReq.title" name="name"
+                                    class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="title"
+                                    autocomplete="off" />
+                            </div>
+                            <div class="mb-2 w-full">
+                                <label class="text-sm" for="companyName">Name of the Company</label>
+                                <input [(ngModel)]="hireReq.companyName" name="companyName"
+                                    class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="companyName"
+                                    autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="mb-2 w-full">
+                            <label class="text-sm" for="description">Job Description</label>
+                            <textarea [(ngModel)]="hireReq.description" rows="5" name="description"
+                                class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" style="resize: none;"
+                                id="description" autocomplete="off"></textarea>
+                        </div>
+                        <div class="flex gap-4 w-full">
+                            <div class="mb-2 w-full">
+                                <label class="text-sm" for="salary">Salary Range</label>
+                                <input [(ngModel)]="hireReq.salary" name="salary"
+                                    class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="salary"
+                                    autocomplete="off" />
+                            </div>
+                            <div class="mb-2 w-full">
+                                <label class="text-sm" for="location">Location</label>
+                                <input [(ngModel)]="hireReq.location" name="location"
+                                    class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="location"
+                                    autocomplete="off" />
+                            </div>
+                        </div>
+                        <button class="p-2 w-full rounded-3xl mt-4" (click)="sentHireReq(selectedArtist._id)">Sent Request</button>
+                    </form>
+                </p-dialog>
+            </div>
+        </div>
         }
     </div>
 </div>
