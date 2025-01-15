@@ -24,7 +24,12 @@ export interface IHireJob {
         name: string,
         email: string
     }
-    artist?: string
+    artist?: {
+        _id: string,
+        name: string,
+        email: string,
+        profilePic: string
+    }
     salary: string
     location: string
     status?: 'Pending' | 'Accepted' | 'Rejected'

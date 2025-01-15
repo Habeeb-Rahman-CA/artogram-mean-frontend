@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { JobService } from '../../../services/job/job.service';
-import { IHireJob } from '../../../model/job';
+import { IHireJob, IJob } from '../../../model/job';
 import { DialogModule } from 'primeng/dialog';
 import { CommonModule } from '@angular/common';
 
@@ -16,10 +16,12 @@ export class JobsComponent implements OnInit {
 
   visible: boolean = false
   hireReqList: IHireJob[] = []
+  jobList: IJob[] = []
   selectedHireReq!: IHireJob
 
   ngOnInit(): void {
     this.getHireReqs()
+    this.getAllJobs()
   }
 
   getHireReqs() {
@@ -34,13 +36,38 @@ export class JobsComponent implements OnInit {
     })
   }
 
+  getAllJobs(){
+    this.jobService.getAllJobs().subscribe({
+      next:(res: any)=>{
+        this.jobList = res.jobs
+      },
+      error: (err)=>{
+        alert('failed to fetch all the jobs')
+        console.error(err.message)
+      }
+    })
+  }
+
   sentResponseAccepted(requestId: string | undefined) {
     this.jobService.sentHireRes(requestId, 'Accepted').subscribe({
-      next: () =>{
+      next: () => {
         alert("Response sented successfully")
         this.getHireReqs()
       },
-      error: (err) =>{
+      error: (err) => {
+        alert('failed to sent the response')
+        console.error(err.message)
+      }
+    })
+  }
+
+  sentResponseRejected(requestId: string | undefined) {
+    this.jobService.sentHireRes(requestId, 'Rejected').subscribe({
+      next: () => {
+        alert("Response sented successfully")
+        this.getHireReqs()
+      },
+      error: (err) => {
         alert('failed to sent the response')
         console.error(err.message)
       }

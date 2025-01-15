@@ -20,6 +20,10 @@ export class JobService {
     return this.http.get(this.baseUrl, { withCredentials: true })
   }
 
+  getAllJobs(){
+    return this.http.get(`${this.baseUrl}/artist`, {withCredentials: true})
+  }
+
   closeJobById(jobId: string | undefined) {
     return this.http.patch(`${this.baseUrl}/close`, { jobId }, { withCredentials: true })
   }
@@ -39,6 +43,10 @@ export class JobService {
 
   getHireReq() {
     return this.http.get(`${this.baseUrl}/hire/request`, { withCredentials: true })
+  }
+
+  getHireRes() {
+    return this.http.get(`${this.baseUrl}/hire/response`, { withCredentials: true })
   }
 
 }

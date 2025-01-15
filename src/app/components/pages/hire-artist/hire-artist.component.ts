@@ -23,6 +23,7 @@ export class HireArtistComponent implements OnInit {
   visible: boolean = false
   selectedArtist!: IUser
   artistList: IUser[] = []
+  hireResList: IHireJob[] = []
   hireReq: IHireJob = {
     title: '',
     companyName: '',
@@ -33,6 +34,7 @@ export class HireArtistComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllArtist()
+    this.getHireRes()
   }
 
   //get all artist
@@ -76,6 +78,18 @@ export class HireArtistComponent implements OnInit {
       },
       error: (err) => {
         alert('failed to sent the request')
+        console.error(err.message)
+      }
+    })
+  }
+
+  getHireRes(){
+    this.jobService.getHireRes().subscribe({
+      next:(res: any)=>{
+        this.hireResList = res.hireRes
+      },
+      error: (err)=>{
+        alert('failed to fetch')
         console.error(err.message)
       }
     })
