@@ -23,6 +23,8 @@ export class ProfileCardComponent implements OnInit {
   currentUserData!: IUser
   textToCopy: string = ''
   visible: boolean = false
+  isUpgradeOpen: boolean = false
+  selectedRole: string = ''
 
   userDetails: Partial<IUser> = {
     name: '',
@@ -44,6 +46,22 @@ export class ProfileCardComponent implements OnInit {
   
   showDialog() {
     this.visible = true
+  }
+  showUpgradeDialog() {
+    this.isUpgradeOpen = true
+  }
+
+  upgradeRole(){
+    this.userService.upgradeRoleReq(this.selectedRole).subscribe({
+      next: ()=>{
+        alert('Sented upgrade request to admin, you account will be upgraded within 24h')
+        this.isUpgradeOpen = false
+      },
+      error: (err)=>{
+        console.error(err.message)
+        alert('failed to sent the request')
+      }
+    })
   }
   
   getUser() {

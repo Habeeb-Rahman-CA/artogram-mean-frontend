@@ -13,18 +13,26 @@
         </thead>
         <tbody>
             @for (order of orders; track $index) {
-                <tr>
-                    <td class="p-2">{{order.user}}</td>
-                    <td class="p-2">
-                        @for (item of order.items; track $index) {
-                            <h1>{{item.product.name}}</h1>
-                        }
-                    </td>
-                    <td class="p-2">{{order.address.address}}, {{order.address.city}}</td>
-                    <td class="p-2">{{order.total | currency: 'INR'}}</td>
-                    <td class="p-2 text-green-500">{{order.status}}</td>
-                    <td class="p-2 text-red-500">Pending</td>
-                </tr>
+            <tr>
+                <td class="p-2">{{order.user}}</td>
+                <td class="p-2">
+                    @for (item of order.items; track $index) {
+                    <h1>{{item.product.name}}</h1>
+                    }
+                </td>
+                <td class="p-2">{{order.address.address}}, {{order.address.city}}</td>
+                <td class="p-2">{{order.total | currency: 'INR'}}</td>
+                @if (order.status === 'Cancelled') {
+                <td class="p-2 text-red-500">{{order.status}}</td>
+                } @else if (order.status === 'Placed') {
+                <td class="p-2 text-blue-500">{{order.status}}</td>
+                } @else if (order.status === 'Shipped') {
+                <td class="p-2 text-yellow-500">{{order.status}}</td>
+                } @else {
+                <td class="p-2 text-green-500">{{order.status}}</td>
+                }
+                <td class="p-2 text-red-500">Pending</td>
+            </tr>
             }
         </tbody>
     </table>

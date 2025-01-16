@@ -17,8 +17,8 @@ export class LoginComponent {
   authService = inject(AuthService)
   router = inject(Router)
 
-  email: string = 'emp@gmail.com'
-  password: string = 'emp'
+  email: string = 'emp10@gmail.com'
+  password: string = 'emp10'
 
   login() {
     this.authService.loginUser(this.email, this.password).subscribe({

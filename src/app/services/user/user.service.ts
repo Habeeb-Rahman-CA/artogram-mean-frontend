@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IAddress, IUser } from '../../model/user';
+import { IAddress, IUpgradeRole, IUser } from '../../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +28,8 @@ export class UserService {
     return this.http.get(`${this.baseUrl}/artist`, { withCredentials: true })
   }
 
-  getAllArtistExceptLogger(){
-    return this.http.get(`${this.baseUrl}/collab`, {withCredentials: true})
+  getAllArtistExceptLogger() {
+    return this.http.get(`${this.baseUrl}/collab`, { withCredentials: true })
   }
 
   updateUserProfile(user: Partial<IUser>) {
@@ -52,6 +52,23 @@ export class UserService {
 
   deleteAddress(addressId: string | undefined) {
     return this.http.delete(`${this.baseUrl}/address/${addressId}`, { withCredentials: true })
+  }
+
+  //Upgrade role APIs
+  upgradeRoleReq(response: string) {
+    return this.http.post(`${this.baseUrl}/upgrade/request`, { response }, { withCredentials: true })
+  }
+
+  getUpgradeRoleReq() {
+    return this.http.get(`${this.baseUrl}/upgrade/request`, { withCredentials: true })
+  }
+
+  upgradeRoleRes(response: IUpgradeRole) {
+    return this.http.patch(`${this.baseUrl}/upgrade/response`, response, { withCredentials: true })
+  }
+
+  rejectUpgradeRole(id: string | undefined) {
+    return this.http.delete(`${this.baseUrl}/upgrade/reject/${id}`, { withCredentials: true })
   }
 
 }

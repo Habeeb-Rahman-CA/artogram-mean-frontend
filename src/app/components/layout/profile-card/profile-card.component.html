@@ -106,6 +106,43 @@
         <button class="w-full rounded-3xl mt-4 p-2" (click)="updateProfile()">Save Profile</button>
     </p-dialog>
     @if (currentUserData.role === 'customer') {
-    <button class="w-full p-2 rounded-3xl">Upgrade Account</button>
+    <button class="w-full p-2 rounded-3xl" (click)="showUpgradeDialog()">Upgrade</button>
+    <p-dialog header="Upgrade your account" [modal]="true" [(visible)]="isUpgradeOpen"
+        [style]="{ width: '44rem', backgroundColor: '#1a1a1a', border: 'none' }">
+        <p>Sent Request to Admin for upgrade your account</p>
+        <div class="flex gap-8 p-4">
+            <div class="w-1/2">
+                <label
+                    class="border border-neutral-700 flex flex-col items-center justify-center p-4 rounded-3xl cursor-pointer has-[:checked]:bg-neutral-800 has-[:checked]:border-orange-600 has-[:checked]:ring-neutral-700 hover:bg-neutral-800 transition-all duration-300 has-[:checked]:rotate-0 hover:-rotate-2">
+                    <img src="https://static.vecteezy.com/system/resources/previews/052/455/813/non_2x/a-person-is-on-a-document-icon-free-vector.jpg"
+                        alt="" class="w-40 h-40 rounded-full">
+                    <h1 class="text-xl mt-4 mb-2 uppercase">To Employer</h1>
+                    <p class="text-xs text-justify">Becoming an employer on Artogram unlocks exclusive features,
+                        including
+                        job management, employee hiring, in-depth insights, and more, empowering you to streamline
+                        your
+                        recruitment process and grow your team effectively.</p>
+                    <input [(ngModel)]="selectedRole" type="radio" value="employer" name="account" class="checked:border-slate-500" hidden />
+                </label>
+            </div>
+            <div class="w-1/2">
+                <label
+                    class="border border-neutral-700 flex flex-col items-center justify-center p-4 rounded-3xl cursor-pointer has-[:checked]:bg-neutral-800 has-[:checked]:border-orange-600 has-[:checked]:ring-neutral-700 hover:bg-neutral-800 transition-all duration-300 has-[:checked]:rotate-0 hover:rotate-2">
+                    <img src="https://static.vecteezy.com/system/resources/previews/054/260/804/non_2x/a-man-with-a-paintbrush-and-a-paintbrush-icon-free-vector.jpg"
+                        alt="" class="w-40 h-40 rounded-full">
+                    <h1 class="text-xl mt-4 mb-2 uppercase">To Artist</h1>
+                    <p class="text-xs text-justify">Becoming an artist on Artogram unlocks exclusive features, including
+                        artwork management, art sales, job applications, and more, empowering
+                        you to showcase your talent, connect with opportunities, and grow your artistic career
+                        effectively.
+                    </p>
+                    <input [(ngModel)]="selectedRole" type="radio" value="artist" name="account" class="checked:border-slate-500" hidden />
+                </label>
+            </div>
+        </div>
+        <div class="px-4 py-2 flex items-center justify-center">
+            <button class="p-2 w-40 rounded-3xl" (click)="upgradeRole()">Sent Request</button>
+        </div>
+    </p-dialog>
     }
 </div>

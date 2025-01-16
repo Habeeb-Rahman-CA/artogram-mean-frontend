@@ -15,7 +15,7 @@ export interface IUser {
 }
 
 export interface IAddress {
-    fullName: string; 
+    fullName: string;
     phoneNumber: string;
     address: string;
     street: string;
@@ -24,4 +24,13 @@ export interface IAddress {
     pincode: string;
     state: string;
     _id?: string
+}
+
+export interface IUpgradeRole {
+    _id?: string
+    user: {
+        name: string
+        email: string
+    }
+    newRole: string
 }

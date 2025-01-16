@@ -9,50 +9,61 @@
     <p-dialog header="Post New Job Oppertunities" [modal]="true" maximizable="true" [(visible)]="visible"
         [style]="{ width: '50rem', backgroundColor: '#1a1a1a', border: 'none' }">
         <form action="">
-        <div class="flex gap-4 w-full">
-            <div class="mb-2  w-full">
-                <label class="text-sm" cla for="title">Title of Job</label>
-                <input [(ngModel)]="job.title" name="name" class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="title" autocomplete="off" />
+            <div class="flex gap-4 w-full">
+                <div class="mb-2  w-full">
+                    <label class="text-sm" cla for="title">Title of Job</label>
+                    <input [(ngModel)]="job.title" name="name"
+                        class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="title" autocomplete="off" />
+                </div>
+                <div class="mb-2 w-full">
+                    <label class="text-sm" for="companyName">Name of the Company</label>
+                    <input [(ngModel)]="job.companyName" name="companyName"
+                        class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="companyName"
+                        autocomplete="off" />
+                </div>
             </div>
             <div class="mb-2 w-full">
-                <label class="text-sm"  for="companyName" >Name of the Company</label>
-                <input [(ngModel)]="job.companyName" name="companyName" class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="companyName" autocomplete="off" />
+                <label class="text-sm" for="description">Job Description</label>
+                <textarea [(ngModel)]="job.description" rows="5" name="description"
+                    class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" style="resize: none;" id="description"
+                    autocomplete="off"></textarea>
             </div>
-        </div>
-        <div class="mb-2 w-full">
-            <label class="text-sm"  for="description" >Job Description</label>
-            <textarea [(ngModel)]="job.description" rows="5" name="description" class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" style="resize: none;" id="description" autocomplete="off"></textarea>
-        </div>
-        <div class="flex gap-4 w-full">
-            <div class="mb-2 w-full">
-                <label class="text-sm" for="jobType" >Job Type</label>
-                <select [(ngModel)]="job.jobType" name="jobType" class="mt-1 w-full rounded-xl bg-neutral-800 text-white border-none p-2" id="jobType">
-                    <option *ngFor="let jobType of jobTypes" [value]="jobType">{{ jobType }}</option>
-                </select>
+            <div class="flex gap-4 w-full">
+                <div class="mb-2 w-full">
+                    <label class="text-sm" for="jobType">Job Type</label>
+                    <select [(ngModel)]="job.jobType" name="jobType"
+                        class="mt-1 w-full rounded-xl bg-neutral-800 text-white border-none p-2" id="jobType">
+                        <option *ngFor="let jobType of jobTypes" [value]="jobType">{{ jobType }}</option>
+                    </select>
+                </div>
+                <div class="mb-2 w-full">
+                    <label class="text-sm" for="category">Category</label>
+                    <select [(ngModel)]="job.category" name="category"
+                        class="mt-1 w-full rounded-xl bg-neutral-800 text-white border-none p-2" id="category">
+                        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                    </select>
+                </div>
+                <div class="mb-2 w-full">
+                    <label class="text-sm" for="location">Location</label>
+                    <input [(ngModel)]="job.location" name="location"
+                        class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="location" autocomplete="off" />
+                </div>
             </div>
-            <div class="mb-2 w-full">
-                <label class="text-sm" for="category" >Category</label>
-                <select [(ngModel)]="job.category" name="category" class="mt-1 w-full rounded-xl bg-neutral-800 text-white border-none p-2" id="category">
-                    <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-                </select>
+            <div class="flex gap-4 w-full">
+                <div class="mb-2 w-full">
+                    <label class="text-sm" for="salary">Salary Range</label>
+                    <input [(ngModel)]="job.salary" name="salary"
+                        class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="salary" autocomplete="off" />
+                </div>
+                <div class="mb-2 w-full">
+                    <label class="text-sm" for="opennings">Number of Opennings</label>
+                    <input [(ngModel)]="job.numberOfOpening" name="opennings"
+                        class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="opennings"
+                        autocomplete="off" />
+                </div>
             </div>
-            <div class="mb-2 w-full">
-                <label class="text-sm" for="location">Location</label>
-                <input [(ngModel)]="job.location" name="location" class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="location" autocomplete="off" />
-            </div>
-        </div>
-        <div class="flex gap-4 w-full">
-            <div class="mb-2 w-full">
-                <label class="text-sm" for="salary">Salary Range</label>
-                <input [(ngModel)]="job.salary" name="salary" class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="salary" autocomplete="off" />
-            </div>
-            <div class="mb-2 w-full">
-                <label class="text-sm"  for="opennings" >Number of Opennings</label>
-                <input [(ngModel)]="job.numberOfOpening" name="opennings" class="mt-1 w-full p-2 rounded-xl bg-neutral-800 text-white" id="opennings" autocomplete="off" />
-            </div>
-        </div>
-        <button class="p-2 w-full rounded-3xl mt-4" (click)="createJob()">Post Now</button>
-    </form>
+            <button class="p-2 w-full rounded-3xl mt-4" (click)="createJob()">Post Now</button>
+        </form>
     </p-dialog>
     <!-- display posted jobs -->
     <div class="h-[400px] overflow-y-auto scrollba">
@@ -70,25 +81,21 @@
             </thead>
             <tbody class="text-white">
                 @for (job of jobList; track $index) {
-                    <tr>
-                        <td class="p-2">{{job.title}}</td>
-                        <td class="p-2">{{job.companyName}}</td>
-                        <td class="p-2">{{job.location}}</td>
-                        <td class="p-2">{{job.salary | currency: 'INR'}}</td>
-                        <td class="p-2">{{job.postedDate | date: 'mediumDate'}}</td>
+                <tr>
+                    <td class="p-2">{{job.title}}</td>
+                    <td class="p-2">{{job.companyName}}</td>
+                    <td class="p-2">{{job.location}}</td>
+                    <td class="p-2">{{job.salary | currency: 'INR'}}</td>
+                    <td class="p-2">{{job.postedDate | date: 'mediumDate'}}</td>
+                    <td [ngClass]="job.status === 'Open'? 'text-green-500':'text-red-500'" class="p-2 ">{{job.status}}</td>
+                    <td class="flex justify-center items-center py-2 pr-2 gap-4">
                         @if (job.status === 'Open') {
-                            <td class="p-2 text-green-500">{{job.status}}</td>
+                        <button (click)="closeJob(job._id)" class="w-full rounded-3xl">Close</button>
                         } @else {
-                            <td class="p-2 text-red-500">{{job.status}}</td>
+                        <button (click)="deleteJob(job._id)" class="w-full rounded-3xl">Delete</button>
                         }
-                        <td class="flex justify-center items-center py-2 pr-2 gap-4">
-                            @if (job.status === 'Open') {
-                                <button (click)="closeJob(job._id)" class="w-full rounded-3xl">Close</button>
-                            } @else {
-                                <button (click)="deleteJob(job._id)" class="w-full rounded-3xl">Delete</button>
-                            }
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
                 }
 
             </tbody>

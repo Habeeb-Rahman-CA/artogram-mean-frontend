@@ -1,10 +1,9 @@
-<div class="flex items-center justify-center m-8">
-    <div class="w-full p-4 secondary-bg rounded-3xl h-[400px] overflow-y-auto">
-        <h1 class="text-lg text-zinc-300 pb-4 text-center">Manage Profiles</h1>
+<div class="flex gap-4 items-center justify-center m-8">
+    <div class="w-8/12 p-4 secondary-bg rounded-3xl h-[400px] overflow-y-auto scrollbar">
+        <p class="text-lg pb-4 text-center">Manage Profiles</p>
         <table class="table-fixed w-full text-center">
             <thead>
                 <tr class="text-white">
-                    <th class="p-2">UID</th>
                     <th class="p-2">Name</th>
                     <th class="p-2">Email</th>
                     <th class="p-2">Role</th>
@@ -14,7 +13,6 @@
             <tbody class="text-white">
                 @for (user of userList; track $index) {
                 <tr>
-                    <td class="p-2">{{user._id}}</td>
                     <td class="p-2">{{user.name | titlecase}}</td>
                     <td class="p-2">{{user.email}}</td>
                     <td class="p-2">{{user.role | uppercase}}</td>
@@ -51,5 +49,23 @@
                 }
             </tbody>
         </table>
+    </div>
+    <div class="w-4/12 p-4 secondary-bg rounded-3xl h-[400px] overflow-y-auto scrollbar">
+        <p class="text-lg pb-4 text-center">Upgrade Request</p>
+        @if (upgradeRoleReqList.length === 0) {
+            <div class="pt-32 text-lg flex items-center justify-center">
+                <p>No Requests</p>
+            </div>
+        }
+        @for (upgradeRoleReq of upgradeRoleReqList; track $index) {
+            <div class="bg-neutral-800 flex items-center justify-between rounded-3xl mb-2 p-4">
+                    <h1 class="text-sm">{{upgradeRoleReq.user.email}}</h1>
+                    <span class="text-sm">{{upgradeRoleReq.newRole | uppercase}}</span>
+                <div class="flex gap-2">
+                    <button (click)="rejectUpgradeRole(upgradeRoleReq._id)" class="text-sm bg-transparent border border-orange-500 hover:border-red-500 transition-all duration-300 py-1 px-3 rounded-3xl">Reject</button>
+                    <button (click)="upgradeRoleRes(upgradeRoleReq)" class="text-sm bg-transparent border border-orange-500 hover:border-green-500 transition-all duration-300 py-1 px-3 rounded-3xl">Accept</button>
+                </div>
+            </div>
+        }
     </div>
 </div>
