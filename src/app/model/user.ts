@@ -33,4 +33,5 @@ export interface IUpgradeRole {
         email: string
     }
     newRole: string
+    isUpgraded?: string
 }

@@ -1,20 +1,30 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { Tooltip } from 'primeng/tooltip';
 import { AuthService } from '../../../services/auth/auth.service';
+import { NotificationService } from '../../../services/notification/notification.service';
+import { BadgeModule } from 'primeng/badge';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterModule, Tooltip],
+  imports: [RouterModule, Tooltip, BadgeModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
   authService = inject(AuthService)
+  notificationService = inject(NotificationService)
   router = inject(Router)
 
   currentUser = this.authService.userData
+  notificationCount: number = 0
+
+  ngOnInit(): void {
+    this.notificationService.upgradeResCount$.subscribe((count) => {
+      this.notificationCount = count
+    })
+  }
 
   //Dashboard navigation based on tole
   getDashboard() {
@@ -32,6 +42,10 @@ export class NavbarComponent {
       alert('You are not logged In')
       this.router.navigate(['/login'])
     }
+  }
+
+  navigateToNotifyPanel() {
+    this.router.navigate(['/notification', this.currentUser.value._id])
   }
 
   logout() {

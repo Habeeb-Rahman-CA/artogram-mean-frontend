@@ -71,4 +71,8 @@ export class UserService {
     return this.http.delete(`${this.baseUrl}/upgrade/reject/${id}`, { withCredentials: true })
   }
 
+  getUpgradeRoleRes(id: string) {
+    return this.http.get(`${this.baseUrl}/upgrade/response/${id}`, { withCredentials: true })
+  }
+
 }

@@ -1,0 +1,20 @@
+<div class="m-8 secondary-bg p-4 rounded-3xl h-[400px] overflow-y-auto scrollbar">
+    <p class="text-lg mb-4">Notifications</p>
+    @for (upgradeRes of upgradeResList; track $index) {
+    <div
+        class="border-t border-b border-neutral-800 p-4 hover:bg-neutral-800 transition-all duration-300 has-[:checked]:bg-neutral-800">
+        <div class="flex justify-between text-sm">
+            <span>New Message</span>
+            <p>12/01/2025 - 04:30pm</p>
+        </div>
+        <h1 class="text-center">You account has been promoted to <span>{{upgradeRes.newRole | titlecase}}</span> Account</h1>
+        <div class="flex justify-between text-sm">
+            <p>From: ArtOgram Admin</p>
+            <div class="flex gap-2">
+                <p>Mark As Read</p>
+                <input type="checkbox" class="w-4 accent-orange-500">
+            </div>
+        </div>
+    </div>
+    }
+</div>

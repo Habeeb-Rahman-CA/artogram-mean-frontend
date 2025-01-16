@@ -24,6 +24,7 @@ import { OrdersPaymentsComponent } from './components/pages/orders-payments/orde
 import { MyCartComponent } from './components/pages/my-cart/my-cart.component';
 import { MyWishlistComponent } from './components/pages/my-wishlist/my-wishlist.component';
 import { TrackOrderComponent } from './components/pages/track-order/track-order.component';
+import { NotificationComponent } from './components/pages/notification/notification.component';
 
 export const routes: Routes = [
     // basic routes
@@ -31,6 +32,7 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'notification/:id', component: NotificationComponent },
     // admin routes
     { path: 'admin-dashboard', component: AdminDashboardComponent },
     { path: 'manage-profile', component: ManageProfileComponent },
