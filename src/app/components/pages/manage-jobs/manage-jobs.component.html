@@ -67,6 +67,11 @@
     </p-dialog>
     <!-- display posted jobs -->
     <div class="h-[400px] overflow-y-auto scrollba">
+        @if (jobList.length === 0) {
+        <div class="flex items-center justify-center mt-32 text-xl">
+            <p>No Jobs Posted</p>
+        </div>
+        } @else {
         <table class="table-fixed w-full text-center border-separate border-spacing-y-2">
             <thead class="text-zinc-100">
                 <tr>
@@ -87,7 +92,8 @@
                     <td class="p-2">{{job.location}}</td>
                     <td class="p-2">{{job.salary | currency: 'INR'}}</td>
                     <td class="p-2">{{job.postedDate | date: 'mediumDate'}}</td>
-                    <td [ngClass]="job.status === 'Open'? 'text-green-500':'text-red-500'" class="p-2 ">{{job.status}}</td>
+                    <td [ngClass]="job.status === 'Open'? 'text-green-500':'text-red-500'" class="p-2 ">{{job.status}}
+                    </td>
                     <td class="flex justify-center items-center py-2 pr-2 gap-4">
                         @if (job.status === 'Open') {
                         <button (click)="closeJob(job._id)" class="w-full rounded-3xl">Close</button>
@@ -97,8 +103,8 @@
                     </td>
                 </tr>
                 }
-
             </tbody>
         </table>
+        }
     </div>
 </div>
