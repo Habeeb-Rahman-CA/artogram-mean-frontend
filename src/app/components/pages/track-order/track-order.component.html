@@ -7,6 +7,9 @@
     }
     @for (order of orderList; track $index) {
     <div class="flex gap-8 mt-4 mb-4 border-b border-neutral-800">
+        <div class="font-extrabold text-6xl text-neutral-800">
+            {{$index + 1}}
+        </div>
         <div class="w-1/2 h-80 overflow-y-auto scrollbar">
             @for (item of order.items; track $index) {
             <div class="flex items-center justify-between mb-4">
@@ -17,7 +20,7 @@
                         <p class="text-lg">{{item.product.category}}</p>
                     </div>
                 </div>
-                <h1 class="text-xl">{{item.product.price | currency: 'INR'}}</h1>
+                <h1 class="text-xl px-4">{{item.product.price | currency: 'INR'}}</h1>
             </div>
             }
         </div>
