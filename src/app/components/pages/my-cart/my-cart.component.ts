@@ -30,7 +30,7 @@ export class MyCartComponent implements OnInit {
   windowRef = inject(WindowService)
   router = inject(Router)
 
-  Razorpay:any
+  Razorpay: any
   userId = this.authService.userData.value._id
   cart: IProduct[] = []
   cartId: string = ''
@@ -142,12 +142,13 @@ export class MyCartComponent implements OnInit {
           modal: {
             ondismiss: () => {
               alert('Payment process was cancelled.');
+              this.cart = []
             }
           }
         };
         const razorpay = new this.windowRef.nativeWindow.Razorpay(options)
         razorpay.open()
-        alert('Order placed and Payment Processing')
+        alert('Order placed and Payment Processing...')
       },
       error: (err) => {
         console.error(err.message)
@@ -157,15 +158,16 @@ export class MyCartComponent implements OnInit {
   }
   
   //Verified payment
-  verifyPayment(paymentResponse: any, razorpayOrderId: string){
+  verifyPayment(paymentResponse: any, razorpayOrderId: string) {
     this.orderService.verifyPayment(paymentResponse, razorpayOrderId).subscribe({
-      next: ()=>{
-        alert('Payment verified successfully and Order shipped')
+      next: () => {
+        alert('Payment verified successfully and Order shipped!')
         this.cart = []
       },
       error: (err) => {
         console.error(err.message);
         alert('Payment verification failed!');
+        this.cart = []
       }
     })
   }
