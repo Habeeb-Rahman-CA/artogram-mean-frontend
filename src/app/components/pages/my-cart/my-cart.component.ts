@@ -9,10 +9,11 @@ import { IAddress } from '../../../model/user';
 import { UserService } from '../../../services/user/user.service';
 import { OrderService } from '../../../services/order/order.service';
 import { Router } from '@angular/router';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-my-cart',
-  imports: [CommonModule, FormsModule, DialogModule],
+  imports: [CommonModule, FormsModule, DialogModule, TooltipModule],
   templateUrl: './my-cart.component.html',
   styleUrl: './my-cart.component.css'
 })
@@ -78,7 +79,7 @@ export class MyCartComponent implements OnInit {
     })
   }
 
-//Address based APIs
+  //Address based APIs
   addAddress() {
     this.userService.addAddress(this.address).subscribe({
       next: () => {

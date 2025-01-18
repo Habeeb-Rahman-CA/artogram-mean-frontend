@@ -1,78 +1,97 @@
-<div class="flex gap-8 secondary-bg rounded-3xl m-8 p-4 h-[520px]">
+<div class="flex gap-8 secondary-bg rounded-3xl m-8 p-4 h-[490px]">
     <!-- Address Section -->
-    <div class="w-3/5 overflow-y-auto scrollbar">
-        <p class="text-xl">Add Delivery Address</p>
-        @for (address of addressList; track $index) {
-        <label
-            class="my-4 border-2 border-solid border-neutral-700 p-4 w-full flex justify-between has-[:checked]:bg-neutral-800 has-[:checked]:border-orange-600 has-[:checked]:ring-neutral-700 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
-            <div (click)="showAddress()" class="flex gap-8">
+    <div class="w-3/5 ">
+        <div class="h-[349px] border-b border-neutral-700  overflow-y-auto scrollbar">
+            <p class="text-xl">Add Delivery Address</p>
+            @for (address of addressList; track $index) {
+            <label
+                class="my-4 border-2 border-solid border-neutral-700 p-4 w-full flex justify-between has-[:checked]:bg-neutral-800 has-[:checked]:border-orange-600 has-[:checked]:ring-neutral-700 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
+                <div (click)="showAddress()" class="flex gap-8">
+                    <i class="ri-map-pin-add-line text-2xl"></i>
+                    <h1 class="text-lg">{{address.address}}</h1>
+                </div>
+                <input [(ngModel)]="selectedAddress" type="radio" [value]="address._id" name="address"
+                    class="checked:border-slate-500 hidden" />
+            </label>
+            <!-- dialog to show address -->
+            <p-dialog header="Address" [modal]="true" [(visible)]="addressShown"
+                [style]="{ width: '50rem', backgroundColor: '#1a1a1a', border: 'none' }">
+                <div class="flex py-4 gap-4">
+                    <h1 class="text-xl">Name: {{address.fullName}}</h1>
+                    <h1 class="text-xl">Phone: {{address.phoneNumber}}</h1>
+                </div>
+                <h1 class="text-xl">{{address.address}}, {{address.landmark}}, {{address.street}}, {{address.city}},
+                    {{address.state}}, {{address.pincode}}</h1>
+                <button class="p-1 w-full mt-4 rounded-3xl" (click)="deleteAddress(address._id)">Delete</button>
+            </p-dialog>
+            }
+            <div (click)="showDialog()"
+                class="my-4 border-2 border-dashed border-neutral-700 p-4 w-full flex gap-8 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
                 <i class="ri-map-pin-add-line text-2xl"></i>
-                <h1 class="text-lg">{{address.address}}</h1>
+                <h1 class="text-lg">Add New Address</h1>
             </div>
-            <input [(ngModel)]="selectedAddress" type="radio" [value]="address._id" name="address"
-                class="checked:border-slate-500" />
-        </label>
-        <!-- dialog to show address -->
-        <p-dialog header="Address" [modal]="true" [(visible)]="addressShown"
-            [style]="{ width: '50rem', backgroundColor: '#1a1a1a', border: 'none' }">
-            <div class="flex py-4 gap-4">
-                <h1 class="text-xl">Name: {{address.fullName}}</h1>
-                <h1 class="text-xl">Phone: {{address.phoneNumber}}</h1>
-            </div>
-            <h1 class="text-xl">{{address.address}}, {{address.landmark}}, {{address.street}}, {{address.city}},
-                {{address.state}}, {{address.pincode}}</h1>
-            <button (click)="deleteAddress(address._id)">Delete</button>
-        </p-dialog>
-        }
-        <div (click)="showDialog()"
-            class="my-4 border-2 border-dashed border-neutral-700 p-4 w-full flex gap-8 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
-            <i class="ri-map-pin-add-line text-2xl"></i>
-            <h1 class="text-lg">Add New Address</h1>
+            <!-- dialog of the add address -->
+            <p-dialog header="Add Address" [modal]="true" [(visible)]="visible"
+                [style]="{ width: '50rem', backgroundColor: '#1a1a1a', border: 'none' }">
+                <form class="flex gap-4" action="">
+                    <div class="w-1/2 flex flex-col gap-2">
+                        <input [(ngModel)]="address.fullName" name="fullName"
+                            class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
+                            placeholder="Full Name">
+                        <input [(ngModel)]="address.phoneNumber" name="phoneNumber"
+                            class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
+                            placeholder="Phone Number">
+                        <input [(ngModel)]="address.address" name="address"
+                            class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
+                            placeholder="Address">
+                        <input [(ngModel)]="address.landmark" name="landmark"
+                            class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
+                            placeholder="Landmark">
+                    </div>
+                    <div class="w-1/2 flex flex-col gap-2">
+                        <input [(ngModel)]="address.street" name="street"
+                            class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
+                            placeholder="Street">
+                        <input [(ngModel)]="address.city" name="city"
+                            class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
+                            placeholder="City">
+                        <input [(ngModel)]="address.pincode" name="pincode"
+                            class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
+                            placeholder="Pincode">
+                        <input [(ngModel)]="address.state" name="state"
+                            class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
+                            placeholder="State">
+                    </div>
+                </form>
+                <div class="flex justify-center items-center gap-2 mt-8">
+                    <button class="w-40 p-1 rounded-3xl" (click)="visible = false">Cancel</button>
+                    <button class="w-40 p-1 rounded-3xl" (click)="addAddress()">Save</button>
+                </div>
+            </p-dialog>
         </div>
-        <!-- dialog of the add address -->
-        <p-dialog header="Add Address" [modal]="true" [(visible)]="visible"
-            [style]="{ width: '50rem', backgroundColor: '#1a1a1a', border: 'none' }">
-            <form class="flex gap-4" action="">
-                <div class="w-1/2 flex flex-col gap-2">
-                    <input [(ngModel)]="address.fullName" name="fullName"
-                        class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
-                        placeholder="Full Name">
-                    <input [(ngModel)]="address.phoneNumber" name="phoneNumber"
-                        class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
-                        placeholder="Phone Number">
-                    <input [(ngModel)]="address.address" name="address"
-                        class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
-                        placeholder="Address">
-                    <input [(ngModel)]="address.landmark" name="landmark"
-                        class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
-                        placeholder="Landmark">
-                </div>
-                <div class="w-1/2 flex flex-col gap-2">
-                    <input [(ngModel)]="address.street" name="street"
-                        class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
-                        placeholder="Street">
-                    <input [(ngModel)]="address.city" name="city"
-                        class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
-                        placeholder="City">
-                    <input [(ngModel)]="address.pincode" name="pincode"
-                        class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
-                        placeholder="Pincode">
-                    <input [(ngModel)]="address.state" name="state"
-                        class="p-2 w-full rounded-lg bg-neutral-700 text-white border-none outline-none" type="text"
-                        placeholder="State">
-                </div>
-            </form>
-            <div class="flex justify-center items-center gap-2 mt-8">
-                <button class="w-40 p-1 rounded-3xl" (click)="visible = false">Cancel</button>
-                <button class="w-40 p-1 rounded-3xl" (click)="addAddress()">Save</button>
+        <div class="py-4">
+            <p class="text-lg pb-2">Payment</p>
+            <div class="flex gap-4">
+                <label
+                    class=" border-2 border-solid border-neutral-700 p-2 w-40 flex justify-center has-[:checked]:bg-neutral-800 has-[:checked]:border-orange-600 has-[:checked]:ring-neutral-700 items-center cursor-pointer rounded-3xl hover:bg-neutral-800 transition-all duration-300">
+                        <h1 class="text-lg">Razorpay</h1>
+                    <input type="radio" value="razorpay" name="payment"
+                        class="checked:border-slate-500 hidden" />
+                </label>
+                <label pTooltip="Currently Unavailable" tooltipPosition="bottom"
+                    class=" border-2 border-solid border-neutral-700 p-2 w-40 flex justify-center has-[:checked]:bg-neutral-800 has-[:checked]:border-orange-600 has-[:checked]:ring-neutral-700 items-center rounded-3xl transition-all duration-300">
+                        <h1 class="text-lg">COD</h1>
+                    <input disabled type="radio" value="razorpay" name="payment"
+                        class="checked:border-slate-500 hidden" />
+                </label>
             </div>
-        </p-dialog>
+        </div>
     </div>
     <!-- Cart Section  -->
     <div class="w-2/5">
         <p class="text-xl">My Cart</p>
         @if (cart.length === 0) {
-                <p class="text-xl text-center relative top-36">No items</p>
+        <p class="text-xl text-center relative top-36">No items</p>
         }
         <div class="overflow-y-auto scrollbar h-80">
             @for (item of cart; track $index) {
