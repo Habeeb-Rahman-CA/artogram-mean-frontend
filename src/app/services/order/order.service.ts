@@ -15,6 +15,10 @@ export class OrderService {
     return this.http.post(`${this.baseUrl}/checkout`, { addressId }, { withCredentials: true })
   }
 
+  verifyPayment(paymentResponse: any, razorpayOrderId: string) {
+    return this.http.patch(`${this.baseUrl}/payment`, { paymentResponse, razorpayOrderId }, { withCredentials: true })
+  }
+
   //Order APIs
   getOrder() {
     return this.http.get(this.baseUrl, { withCredentials: true })

@@ -10,6 +10,9 @@ import { UserService } from '../../../services/user/user.service';
 import { OrderService } from '../../../services/order/order.service';
 import { Router } from '@angular/router';
 import { TooltipModule } from 'primeng/tooltip';
+import { WindowService } from '../../../services/window/window.service';
+
+declare var Razorpay: any
 
 @Component({
   selector: 'app-my-cart',
@@ -17,14 +20,17 @@ import { TooltipModule } from 'primeng/tooltip';
   templateUrl: './my-cart.component.html',
   styleUrl: './my-cart.component.css'
 })
+
 export class MyCartComponent implements OnInit {
 
   authService = inject(AuthService)
   cartService = inject(CartService)
   userService = inject(UserService)
   orderService = inject(OrderService)
+  windowRef = inject(WindowService)
   router = inject(Router)
 
+  Razorpay:any
   userId = this.authService.userData.value._id
   cart: IProduct[] = []
   cartId: string = ''
@@ -119,13 +125,47 @@ export class MyCartComponent implements OnInit {
   //Checkout API
   checkout() {
     this.orderService.checkout(this.selectedAddress).subscribe({
-      next: () => {
-        alert('Order placed successfully')
-        this.cart = []
+      next: (res: any) => {
+        const { razorpayOrderId, amount, currency } = res
+        const options = {
+          key: 'rzp_test_HZlSHqpedcWyNI',
+          amount: amount,
+          currency: currency,
+          name: 'ArtOgram',
+          order_id: razorpayOrderId,
+          theme: {
+            color: '#3399cc'
+          },
+          handler: (paymentResponse: any) => {
+            this.verifyPayment(paymentResponse, razorpayOrderId);
+          },
+          modal: {
+            ondismiss: () => {
+              alert('Payment process was cancelled.');
+            }
+          }
+        };
+        const razorpay = new this.windowRef.nativeWindow.Razorpay(options)
+        razorpay.open()
+        alert('Order placed and Payment Processing')
       },
       error: (err) => {
         console.error(err.message)
         alert('failed to place order')
+      }
+    })
+  }
+  
+  //Verified payment
+  verifyPayment(paymentResponse: any, razorpayOrderId: string){
+    this.orderService.verifyPayment(paymentResponse, razorpayOrderId).subscribe({
+      next: ()=>{
+        alert('Payment verified successfully and Order shipped')
+        this.cart = []
+      },
+      error: (err) => {
+        console.error(err.message);
+        alert('Payment verification failed!');
       }
     })
   }
