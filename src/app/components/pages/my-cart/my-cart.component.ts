@@ -134,7 +134,7 @@ export class MyCartComponent implements OnInit {
           name: 'ArtOgram',
           order_id: razorpayOrderId,
           theme: {
-            color: '#3399cc'
+            color: '#f56e0f',
           },
           handler: (paymentResponse: any) => {
             this.verifyPayment(paymentResponse, razorpayOrderId);
