@@ -17,24 +17,24 @@ export class ProductListComponent implements OnInit {
   productService = inject(ProductService)
   products: IProduct[] = []
   selectedProduct: IProduct = {
-    name : '',
+    name: '',
     category: '',
-    desc : '',
+    desc: '',
     price: ''
   }
 
   visible: boolean = false;
   categories: string[] = []
 
-  
+
   ngOnInit(): void {
     this.getProducts()
     this.categories = ['Painting', 'Drawing', 'Sculpture', 'Photography', 'Digital Art']
   }
-  
+
   //Dialog function
   showUpdateDialog(product: IProduct) {
-    this.selectedProduct = {...product}
+    this.selectedProduct = { ...product }
     this.visible = true;
   }
 
@@ -54,13 +54,13 @@ export class ProductListComponent implements OnInit {
 
   updateProduct(id: string | undefined, product: IProduct) {
     this.productService.updateProduct(id, product).subscribe({
-      next: () =>{
+      next: () => {
         alert("product updated successfully")
         this.visible = false
         this.getProducts()
-        
+
       },
-      error: (err) =>{
+      error: (err) => {
         alert('product updation failed')
         console.error(err.message)
       }

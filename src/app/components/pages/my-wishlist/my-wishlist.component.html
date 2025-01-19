@@ -2,7 +2,9 @@
     <div class="w-full overflow-y-auto scrollbar">
         <p class="text-xl">My Wishlist</p>
         @if (wishlist.length === 0) {
-            <div class="flex items-center justify-center h-80"><p class="text-2xl">No Wishlists</p></div>
+        <div class="flex items-center justify-center h-80">
+            <p class="text-2xl">No Wishlists</p>
+        </div>
         }
         @for (item of wishlist; track $index) {
         <div class="flex items-center justify-between my-4 hover:bg-neutral-800 rounded-3xl p-4 mr-4 cursor-pointer">

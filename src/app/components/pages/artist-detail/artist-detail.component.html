@@ -62,16 +62,15 @@
     <p class="text-center text-3xl">Popular Artists</p>
     <div class="flex overflow-x-auto hide-scrollbar scrollbar">
         @for (artist of popularArtist; track $index) {
-            <div (click)="viewArtist(artist._id)"
-                class="rounded-lg m-8 cursor-pointer flex-shrink-0 w-[250px] flex flex-col items-center justify-center gap-2">
-                <img class="w-[200px] h-[200px] object-cover rounded-full"
-                    [src]="artist.profilePic || 'https://cdn-icons-png.flaticon.com/512/147/147144.png'" alt="">
-                <div class="flex flex-col items-center justify-center">
-                    <h1 class="text-xl">{{artist.name}}</h1>
-                    <p class="text-sm">{{artist.email}}</p>
-                </div>
+        <div (click)="viewArtist(artist._id)"
+            class="rounded-lg m-8 cursor-pointer flex-shrink-0 w-[250px] flex flex-col items-center justify-center gap-2">
+            <img class="w-[200px] h-[200px] object-cover rounded-full"
+                [src]="artist.profilePic || 'https://cdn-icons-png.flaticon.com/512/147/147144.png'" alt="">
+            <div class="flex flex-col items-center justify-center">
+                <h1 class="text-xl">{{artist.name}}</h1>
+                <p class="text-sm">{{artist.email}}</p>
             </div>
+        </div>
         }
-        
     </div>
 </div>

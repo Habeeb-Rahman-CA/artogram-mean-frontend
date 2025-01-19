@@ -10,7 +10,7 @@ export class NotificationService {
 
   upgradeResCount$ = this.upgradeResCount.asObservable()
 
-  updateCount(count: number){
+  updateCount(count: number) {
     this.upgradeResCount.next(count)
   }
 }

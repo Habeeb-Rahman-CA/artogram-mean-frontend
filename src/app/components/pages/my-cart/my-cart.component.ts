@@ -156,7 +156,7 @@ export class MyCartComponent implements OnInit {
       }
     })
   }
-  
+
   //Verified payment
   verifyPayment(paymentResponse: any, razorpayOrderId: string) {
     this.orderService.verifyPayment(paymentResponse, razorpayOrderId).subscribe({

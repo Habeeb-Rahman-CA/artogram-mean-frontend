@@ -49,10 +49,6 @@ export class ManageProfileComponent implements OnInit {
     })
   }
 
-  getUpgradedRoleRes(){
-    
-  }
-
   upgradeRoleRes(upgradeRole: IUpgradeRole) {
     this.userService.upgradeRoleRes(upgradeRole).subscribe({
       next: () => {
@@ -68,11 +64,11 @@ export class ManageProfileComponent implements OnInit {
 
   rejectUpgradeRole(id: string | undefined) {
     this.userService.rejectUpgradeRole(id).subscribe({
-      next:()=>{
+      next: () => {
         alert('rejected the role')
         this.getUpgradeRoleReq()
       },
-      error:(err)=>{
+      error: (err) => {
         console.error(err.message)
         alert('failed to reject')
       }

@@ -21,7 +21,7 @@ export class RegisterComponent {
   email: string = ''
   password: string = ''
 
-  register(){
+  register() {
     this.authService.registerUser(this.name, this.email, this.password).subscribe({
       next: () => {
         alert('User registered successfully')

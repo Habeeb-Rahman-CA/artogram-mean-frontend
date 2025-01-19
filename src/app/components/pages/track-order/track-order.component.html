@@ -1,9 +1,9 @@
 <div class="m-8 p-4 secondary-bg rounded-3xl">
     <p class="text-xl">Track My Order</p>
     @if(orderList.length === 0){
-        <div class="flex items-center justify-center h-80">
-            <p class="text-2xl">No Orders</p>
-        </div>
+    <div class="flex items-center justify-center h-80">
+        <p class="text-2xl">No Orders</p>
+    </div>
     }
     @for (order of orderList; track $index) {
     <div class="flex gap-8 mt-4 mb-4 border-b border-neutral-800">
@@ -28,8 +28,7 @@
             <div class="flex items-center justify-between">
                 <p class="text-xl mb-2 underline">Delivery Details</p>
                 @if (order.status === 'Shipped') {
-                <button pTooltip="Order shipped, cancellation not possible"
-                    tooltipPosition="left" showDelay="1000"
+                <button pTooltip="Order shipped, cancellation not possible" tooltipPosition="left" showDelay="1000"
                     class="border border-orange-500 rounded-3xl bg-transparent w-28" disabled>No Cancel</button>
                 } @else if (order.status === 'Placed') {
                 <button (click)="cancelOrder(order._id)" pTooltip="Cancel your order before it is confirmed"
@@ -74,7 +73,8 @@
                 <h1 class="text-yellow-500">Order {{order.status}} <i
                         class="ri-truck-line !text-white p-1 rounded-full text-xs bg-yellow-500"></i></h1>
                 } @else {
-                <h1 class="text-green-500">Order {{order.status}}  <i class="ri-check-double-fill !text-white p-1 rounded-full text-xs bg-green-500"></i></h1>
+                <h1 class="text-green-500">Order {{order.status}} <i
+                        class="ri-check-double-fill !text-white p-1 rounded-full text-xs bg-green-500"></i></h1>
                 }
             </div>
         </div>

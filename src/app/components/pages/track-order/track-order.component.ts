@@ -52,11 +52,11 @@ export class TrackOrderComponent implements OnInit {
 
   deleteOrder(orderId: string | undefined) {
     this.orderService.removeOrder(orderId).subscribe({
-      next:() => {
+      next: () => {
         alert('Order removed successfully')
         this.getAllOrders()
       },
-      error: (err)=>{
+      error: (err) => {
         alert('Failed to remove order')
         console.error(err.message)
       }

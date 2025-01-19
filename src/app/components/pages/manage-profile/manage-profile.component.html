@@ -53,19 +53,21 @@
     <div class="w-4/12 p-4 secondary-bg rounded-3xl h-[400px] overflow-y-auto scrollbar">
         <p class="text-lg pb-4 text-center">Upgrade Request</p>
         @if (upgradeRoleReqList.length === 0) {
-            <div class="pt-32 text-lg flex items-center justify-center">
-                <p>No Requests</p>
-            </div>
+        <div class="pt-32 text-lg flex items-center justify-center">
+            <p>No Requests</p>
+        </div>
         }
         @for (upgradeRoleReq of upgradeRoleReqList; track $index) {
-            <div class="bg-neutral-800 flex items-center justify-between rounded-3xl mb-2 p-4">
-                    <h1 class="text-sm">{{upgradeRoleReq.user.email}}</h1>
-                    <span class="text-sm">{{upgradeRoleReq.newRole | uppercase}}</span>
-                <div class="flex gap-2">
-                    <button (click)="rejectUpgradeRole(upgradeRoleReq._id)" class="text-sm bg-transparent border border-orange-500 hover:border-red-500 transition-all duration-300 py-1 px-3 rounded-3xl">Reject</button>
-                    <button (click)="upgradeRoleRes(upgradeRoleReq)" class="text-sm bg-transparent border border-orange-500 hover:border-green-500 transition-all duration-300 py-1 px-3 rounded-3xl">Accept</button>
-                </div>
+        <div class="bg-neutral-800 flex items-center justify-between rounded-3xl mb-2 p-4">
+            <h1 class="text-sm">{{upgradeRoleReq.user.email}}</h1>
+            <span class="text-sm">{{upgradeRoleReq.newRole | uppercase}}</span>
+            <div class="flex gap-2">
+                <button (click)="rejectUpgradeRole(upgradeRoleReq._id)"
+                    class="text-sm bg-transparent border border-orange-500 hover:border-red-500 transition-all duration-300 py-1 px-3 rounded-3xl">Reject</button>
+                <button (click)="upgradeRoleRes(upgradeRoleReq)"
+                    class="text-sm bg-transparent border border-orange-500 hover:border-green-500 transition-all duration-300 py-1 px-3 rounded-3xl">Accept</button>
             </div>
+        </div>
         }
     </div>
 </div>

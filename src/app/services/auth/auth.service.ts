@@ -41,8 +41,8 @@ export class AuthService {
 
   //Clear user data from LS
   clearUser() {
-      this.userData.next(null)
-      localStorage.removeItem('currentUser')
+    this.userData.next(null)
+    localStorage.removeItem('currentUser')
   }
 
 }

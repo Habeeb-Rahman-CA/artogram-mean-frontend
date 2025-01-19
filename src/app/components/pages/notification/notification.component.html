@@ -1,9 +1,9 @@
 <div class="m-8 secondary-bg p-4 rounded-3xl h-[400px] overflow-y-auto scrollbar">
     <p class="text-lg mb-4">Notifications</p>
     @if(upgradeResList.length === 0){
-        <div class="mt-40 text-xl text-center">
-            <p>No Notifications</p>
-        </div>
+    <div class="mt-40 text-xl text-center">
+        <p>No Notifications</p>
+    </div>
     }
     @for (upgradeRes of upgradeResList; track $index) {
     <div
@@ -12,7 +12,8 @@
             <span>New Message</span>
             <p>12/01/2025 - 04:30pm</p>
         </div>
-        <h1 class="text-center">You account has been promoted to <span>{{upgradeRes.newRole | titlecase}}</span> Account</h1>
+        <h1 class="text-center">You account has been promoted to <span>{{upgradeRes.newRole | titlecase}}</span> Account
+        </h1>
         <div class="flex justify-between text-sm">
             <p>From: ArtOgram Admin</p>
             <div class="flex gap-2">

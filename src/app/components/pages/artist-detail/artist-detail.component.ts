@@ -74,7 +74,7 @@ export class ArtistDetailComponent implements OnInit {
     this.router.navigate(['/products', id])
   }
 
-  viewArtist(id: string | undefined){
+  viewArtist(id: string | undefined) {
     this.router.navigate(['/artist', id])
   }
 

@@ -41,7 +41,7 @@ export class CollaborationComponent implements OnInit {
     })
   }
 
-  applyFilter(){
+  applyFilter() {
     this.filteredArtist = [...this.artistList]
     this.searchFilter()
   }

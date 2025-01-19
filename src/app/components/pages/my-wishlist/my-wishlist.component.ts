@@ -19,39 +19,39 @@ export class MyWishlistComponent implements OnInit {
   router = inject(Router)
 
   userId = this.authService.userData.value._id
-  wishlist : IProduct[] = []
+  wishlist: IProduct[] = []
   wishlistId: string = ''
 
   ngOnInit(): void {
-      this.getWishlist()
+    this.getWishlist()
   }
 
-  getWishlist(){
+  getWishlist() {
     this.wishlistService.getWishlist(this.userId).subscribe({
-      next: (res: any) =>{
+      next: (res: any) => {
         this.wishlist = res.wishlist[0].products
         this.wishlistId = res.wishlist[0]._id
       },
-      error: (err) =>{
+      error: (err) => {
         console.error(err.message)
         alert('failed to fetch')
       }
     })
   }
 
-  deleteWishlist(id: string | undefined){
+  deleteWishlist(id: string | undefined) {
     this.wishlistService.deleteWishlist(this.wishlistId, id).subscribe({
       next: () => {
         alert('Item deleted from the wishlist')
         this.getWishlist()
       },
-      error: (err) =>{
+      error: (err) => {
         console.error(err.message)
       }
     })
   }
-  
-  viewProduct(id: string| undefined){
+
+  viewProduct(id: string | undefined) {
     this.router.navigate(['/products', id])
   }
 }

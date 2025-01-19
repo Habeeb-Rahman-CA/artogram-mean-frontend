@@ -17,12 +17,12 @@ export class OrdersPaymentsComponent implements OnInit {
   orders: IOrder[] = []
 
   ngOnInit(): void {
-      this.getAllOrders()
+    this.getAllOrders()
   }
 
-  getAllOrders(){
+  getAllOrders() {
     this.orderService.getArtistProductOrder().subscribe({
-      next: (res:any)=>{
+      next: (res: any) => {
         this.orders = res.filteredOrder
         console.log(this.orders);
       }

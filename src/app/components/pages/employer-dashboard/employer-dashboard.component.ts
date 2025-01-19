@@ -4,7 +4,7 @@ import { ProfileCardComponent } from "../../layout/profile-card/profile-card.com
 
 @Component({
   selector: 'app-employer-dashboard',
-  imports: [ RouterModule, ProfileCardComponent],
+  imports: [RouterModule, ProfileCardComponent],
   templateUrl: './employer-dashboard.component.html',
   styleUrl: './employer-dashboard.component.css'
 })

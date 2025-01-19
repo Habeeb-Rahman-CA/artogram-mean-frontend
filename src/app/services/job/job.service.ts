@@ -20,8 +20,8 @@ export class JobService {
     return this.http.get(this.baseUrl, { withCredentials: true })
   }
 
-  getAllJobs(){
-    return this.http.get(`${this.baseUrl}/artist`, {withCredentials: true})
+  getAllJobs() {
+    return this.http.get(`${this.baseUrl}/artist`, { withCredentials: true })
   }
 
   closeJobById(jobId: string | undefined) {

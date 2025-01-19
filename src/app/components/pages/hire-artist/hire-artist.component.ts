@@ -83,12 +83,12 @@ export class HireArtistComponent implements OnInit {
     })
   }
 
-  getHireRes(){
+  getHireRes() {
     this.jobService.getHireRes().subscribe({
-      next:(res: any)=>{
+      next: (res: any) => {
         this.hireResList = res.hireRes
       },
-      error: (err)=>{
+      error: (err) => {
         alert('failed to fetch')
         console.error(err.message)
       }

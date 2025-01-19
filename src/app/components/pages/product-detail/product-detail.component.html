@@ -7,7 +7,8 @@
                 <h1 class="text-2xl font-bold">{{product.name}}</h1>
                 <p class="text-sm">{{product.category}}</p>
             </div>
-            <i class="ri-heart-line text-3xl px-4 cursor-pointer duration-300 transition-all" (click)="addWishlist(product._id)"></i>
+            <i class="ri-heart-line text-3xl px-4 cursor-pointer duration-300 transition-all"
+                (click)="addWishlist(product._id)"></i>
         </div>
         <div class="mb-8">
             <h6>Description</h6>
@@ -39,23 +40,23 @@
 <div class="rounded-3xl m-8 mt-12">
     <p class="text-center text-3xl">Suggested Posts</p>
     @if (suggestedProductList.length === 0) {
-        <div class="flex items-center justify-center h-72">
-            <h1 class="text-lg">Suggested Posts are Unavailable</h1>
-        </div>
+    <div class="flex items-center justify-center h-72">
+        <h1 class="text-lg">Suggested Posts are Unavailable</h1>
+    </div>
     }
     <div class="flex overflow-x-auto scrollbar">
         @for (suggestedProduct of suggestedProductList; track $index) {
-            <div (click)="viewProduct(suggestedProduct._id)" class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
-                <img class="w-full h-[250px] object-cover rounded-t-3xl"
-                    [src]="suggestedProduct.img" alt="">
-                <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
-                    <div class="flex flex-col">
-                        <h1 class="text-xl">{{suggestedProduct.name}}</h1>
-                        <p class="text-sm">{{suggestedProduct.createdBy?.name}}</p>
-                    </div>
-                    <h6 class="text-xl">{{suggestedProduct.price | currency: 'INR'}}</h6>
+        <div (click)="viewProduct(suggestedProduct._id)"
+            class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
+            <img class="w-full h-[250px] object-cover rounded-t-3xl" [src]="suggestedProduct.img" alt="">
+            <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
+                <div class="flex flex-col">
+                    <h1 class="text-xl">{{suggestedProduct.name}}</h1>
+                    <p class="text-sm">{{suggestedProduct.createdBy?.name}}</p>
                 </div>
+                <h6 class="text-xl">{{suggestedProduct.price | currency: 'INR'}}</h6>
             </div>
+        </div>
         }
     </div>
 </div>
@@ -63,23 +64,23 @@
 <div class="rounded-3xl m-8">
     <p class="text-3xl text-center">Popular Posts</p>
     @if (popularProductList.length === 0) {
-        <div class="flex items-center justify-center h-72">
-            <h1 class="text-lg">Popular Posts are Unavailable</h1>
-        </div>
+    <div class="flex items-center justify-center h-72">
+        <h1 class="text-lg">Popular Posts are Unavailable</h1>
+    </div>
     }
     <div class="flex overflow-x-auto scrollbar">
         @for (popularProduct of popularProductList; track $index) {
-            <div (click)="viewProduct(popularProduct._id)" class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
-                <img class="w-full h-[250px] object-cover rounded-t-3xl"
-                    [src]="popularProduct.img" alt="">
-                <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
-                    <div class="flex flex-col">
-                        <h1 class="text-xl">{{popularProduct.name}}</h1>
-                        <p class="text-sm">{{popularProduct.createdBy?.name}}</p>
-                    </div>
-                    <h6 class="text-xl">{{popularProduct.price | currency: 'INR'}}</h6>
+        <div (click)="viewProduct(popularProduct._id)"
+            class="card rounded-lg m-8 cursor-pointer flex-shrink-0 w-[300px]">
+            <img class="w-full h-[250px] object-cover rounded-t-3xl" [src]="popularProduct.img" alt="">
+            <div class="flex justify-between items-center rounded-b-3xl bg-neutral-800 p-4">
+                <div class="flex flex-col">
+                    <h1 class="text-xl">{{popularProduct.name}}</h1>
+                    <p class="text-sm">{{popularProduct.createdBy?.name}}</p>
                 </div>
+                <h6 class="text-xl">{{popularProduct.price | currency: 'INR'}}</h6>
             </div>
+        </div>
         }
     </div>
 </div>

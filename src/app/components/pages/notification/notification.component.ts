@@ -27,13 +27,13 @@ export class NotificationComponent implements OnInit {
     })
   }
 
-  getAllRes(id: string){
+  getAllRes(id: string) {
     this.userService.getUpgradeRoleRes(id).subscribe({
-      next:(res: any) =>{
+      next: (res: any) => {
         this.upgradeResList = res.roleUpgradeRes
         this.notificationService.updateCount(this.upgradeResList.length)
       },
-      error: (err) =>{
+      error: (err) => {
         console.error(err.message)
         alert('failed to get response')
       }
