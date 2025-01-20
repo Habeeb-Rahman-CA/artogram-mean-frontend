@@ -9,7 +9,7 @@
         @for (item of wishlist; track $index) {
         <div class="flex items-center justify-between my-4 hover:bg-neutral-800 rounded-3xl p-4 mr-4 cursor-pointer">
             <div class="flex gap-4 w-2/3 items-center" (click)="viewProduct(item._id)">
-                <div class="relative group" (click)="deleteWishlist(item._id)">
+                <div class="relative group">
                     <img [src]="item.img"
                         class="h-40 w-40 object-cover rounded-lg bg-black transition-all duration-300 cursor-pointer">
                 </div>
@@ -18,15 +18,13 @@
                     <p class="text-lg">{{item.category}}</p>
                 </div>
             </div>
-            <div class="relative group">
                 <h1 class="text-xl group-hover:hidden">
                     {{ item.price | currency: 'INR' }}
                 </h1>
-                <button class="absolute inset-0 items-center justify-center hidden group-hover:flex"
+                <button class="items-center justify-center bg-transparent"
                     (click)="deleteWishlist(item._id)">
-                    <i class="ri-delete-bin-6-line mx-4 text-3xl cursor-pointer !text-red-700"></i>
+                    <i class="ri-delete-bin-6-line mx-4 text-3xl cursor-pointer  !text-red-700"></i>
                 </button>
-            </div>
         </div>
         }
     </div>

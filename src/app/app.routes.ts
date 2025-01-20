@@ -10,13 +10,13 @@ import { SettingsComponent } from './components/pages/admin/settings/settings.co
 import { ArtistDashboardComponent } from './components/pages/artist/artist-dashboard/artist-dashboard.component';
 import { CollaborationComponent } from './components/pages/artist/collaboration/collaboration.component';
 import { MyProductComponent } from './components/pages/artist/my-product/my-product.component';
-import { JobsComponent } from './components/pages/employer/jobs/jobs.component';
+import { JobsComponent } from './components/pages/artist/jobs/jobs.component';
 import { EmployerDashboardComponent } from './components/pages/employer/employer-dashboard/employer-dashboard.component';
 import { InsightComponent } from './components/pages/employer/insight/insight.component';
 import { HireArtistComponent } from './components/pages/employer/hire-artist/hire-artist.component';
-import { ManageJobsComponent } from './components/pages/artist/manage-jobs/manage-jobs.component';
+import { ManageJobsComponent } from './components/pages/employer/manage-jobs/manage-jobs.component';
 import { CustomerProfileComponent } from './components/pages/customer/customer-profile/customer-profile.component';
-import { ProductDetailComponent } from './components/pages/artist/product-detail/product-detail.component';
+import { ProductDetailComponent } from './components/pages/customer/product-detail/product-detail.component';
 import { ArtistDetailComponent } from './components/pages/artist/artist-detail/artist-detail.component';
 import { UploadProductComponent } from './components/pages/artist/upload-product/upload-product.component';
 import { ProductListComponent } from './components/pages/artist/product-list/product-list.component';

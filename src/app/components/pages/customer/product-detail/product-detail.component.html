@@ -7,8 +7,12 @@
                 <h1 class="text-2xl font-bold">{{product.name}}</h1>
                 <p class="text-sm">{{product.category}}</p>
             </div>
-            <i class="ri-heart-line text-3xl px-4 cursor-pointer duration-300 transition-all"
-                (click)="addWishlist(product._id)"></i>
+            <div class="flex items-center">
+                <i class="ri-heart-line text-3xl px-4 cursor-pointer duration-300 transition-all"
+                    (click)="addWishlist(product._id)"></i>
+                <i class="ri-shopping-cart-2-line text-3xl px-4 cursor-pointer duration-300 transition-all"
+                    routerLink="/my-cart"></i>
+            </div>
         </div>
         <div class="mb-8">
             <h6>Description</h6>

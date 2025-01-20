@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { IProduct } from '../../../../model/product';
 import { ProductService } from '../../../../services/product/product.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../../services/cart/cart.service';
 import { AuthService } from '../../../../services/auth/auth.service';
@@ -9,7 +9,7 @@ import { WishlistService } from '../../../../services/wishlist/wishlist.service'
 
 @Component({
   selector: 'app-product-detail',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css'
 })

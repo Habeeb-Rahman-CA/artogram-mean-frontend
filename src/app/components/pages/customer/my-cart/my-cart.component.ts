@@ -142,7 +142,6 @@ export class MyCartComponent implements OnInit {
           modal: {
             ondismiss: () => {
               alert('Payment process was cancelled.');
-              this.cart = []
             }
           }
         };

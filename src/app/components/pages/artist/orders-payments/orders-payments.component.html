@@ -31,7 +31,11 @@
                 } @else {
                 <td class="p-2 text-green-500">{{order.status}}</td>
                 }
-                <td class="p-2 text-red-500">Pending</td>
+                @if (order.status === 'Placed') {
+                    <td class="p-2 text-red-500">Pending</td>
+                }@else {
+                    <td class="p2 text-green-500">Paid</td>
+                }
             </tr>
             }
         </tbody>

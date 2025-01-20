@@ -26,7 +26,7 @@
         </div>
         <div class="w-1/2 h-80">
             <div class="flex items-center justify-between">
-                <p class="text-xl mb-2 underline">Delivery Details</p>
+                <p class="text-xl mb-2 underline !text-neutral-700">Delivery Details</p>
                 @if (order.status === 'Shipped') {
                 <button pTooltip="Order shipped, cancellation not possible" tooltipPosition="left" showDelay="1000"
                     class="border border-orange-500 rounded-3xl bg-transparent w-28" disabled>No Cancel</button>
@@ -52,7 +52,7 @@
                 <h1>{{order.address.address}},{{order.address.landmark}}, {{order.address.street}},
                     {{order.address.city}}, {{order.address.pincode}}, {{order.address.state}}</h1>
             </div>
-            <p class="text-xl mt-4 mb-2 underline">Order Details</p>
+            <p class="text-xl mt-4 mb-2 underline !text-neutral-700">Order Details</p>
             <div class="flex gap-2 text-lg">
                 <p>Ordered Date: </p>
                 <h1>{{order.createdAt | date: 'mediumDate'}}</h1>
