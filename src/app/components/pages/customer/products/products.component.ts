@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductService } from '../../../../services/product/product.service';
 import { IProduct } from '../../../../model/product';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -19,6 +19,9 @@ export class ProductsComponent implements OnInit {
   products: IProduct[] = []
   filteredProduct: IProduct[] = []
 
+  isLoading: boolean = false
+  loaderRows = Array(8).fill(0)
+
   categories: string[] = ['Painting', 'Drawing', 'Sculpture', 'Photography', 'Digital Art']
   selectedCategory: string = ''
   searchQuery: string = ''
@@ -31,10 +34,16 @@ export class ProductsComponent implements OnInit {
   }
 
   getAllProduct() {
+    this.isLoading = true
     this.productService.getAllProducts().subscribe({
       next: (res) => {
         this.products = res
         this.filteredProduct = [...this.products]
+        this.isLoading = false
+      },
+      error: (err) =>{
+        alert('failed to load')
+        this.isLoading = false
       }
     })
   }

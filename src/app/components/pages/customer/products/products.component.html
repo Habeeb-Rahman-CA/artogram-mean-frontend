@@ -15,14 +15,31 @@
         <i class="secondary-bg py-2 px-3 cursor-pointer text-lg rounded-full"
             [ngClass]="{'ri-sort-asc': sort, 'ri-sort-desc': !sort}" (click)="toggleSortOrder()"></i>
     </div>
+    @if (isLoading) {
+    <div class="grid lg:grid-cols-4">
+        <div *ngFor="let row of loaderRows" class="flex flex-col animate-pulse gap-2 p-4 m-4">
+            <div class="h-64 w-full mb-4 rounded-lg bg-neutral-700"></div>
+            <div class="flex gap-4">
+                <div class="flex flex-col w-full">
+                    <div class="h-5 rounded-lg mb-2 w-full bg-neutral-700 text-lg"></div>
+                    <div class="h-5 rounded-lg mb-2 w-full bg-neutral-700 text-sm"></div>
+                </div>
+                <div class="flex flex-col w-20">
+                    <div class="h-5 rounded-lg mb-2 w-full bg-neutral-700 text-sm"></div>
+                    <div class="h-5 rounded-lg mb-2 w-full bg-neutral-700 text-sm"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
     @if (filteredProduct.length === 0) {
     <p class="text-center py-40 text-2xl font-semibold">No Product is found</p>
     }
     <!-- Products based on Filter -->
     <div class="grid lg:grid-cols-4">
         @for (product of filteredProduct; track $index) {
-        <div class="card rounded-lg overflow-hidden m-8 cursor-pointer" (click)="viewProduct(product._id)">
-            <div class="card-img-top">
+        <div class="rounded-lg overflow-hidden m-8 cursor-pointer" (click)="viewProduct(product._id)">
+            <div>
                 <img class="w-full h-[250px] object-cover" [src]="product.img" alt="">
             </div>
             <div class="secondary-bg p-4">
@@ -37,5 +54,6 @@
             </div>
         </div>
         }
+
     </div>
 </div>

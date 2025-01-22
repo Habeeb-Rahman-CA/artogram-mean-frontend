@@ -9,15 +9,25 @@
                 </tr>
             </thead>
             <tbody class="text-zinc-200">
+                @if (isLoading) {
+                <tr *ngFor="let row of loaderRows">
+                    <td>
+                        <div class="animate-pulse h-5 rounded-lg mb-4 w-full bg-neutral-700 text-sm"></div>
+                    </td>
+                    <td>
+                        <div class="animate-pulse h-5 rounded-lg mb-4 w-full bg-neutral-700 text-sm"></div>
+                    </td>
+                </tr>
+                }
                 @for (user of userList; track $index) {
-                    <tr>
-                        <td class="overflow-hidden">{{user._id}}</td>
-                        <td>{{user.createdAt | date: 'shortTime'}}</td>
-                    </tr>
+                <tr>
+                    <td class="overflow-hidden">{{user._id}}</td>
+                    <td>{{user.createdAt | date: 'shortTime'}}</td>
+                </tr>
                 }
             </tbody>
         </table>
-        
+
     </div>
     <div class="w-2/4">
         <div
@@ -48,15 +58,25 @@
                 </tr>
             </thead>
             <tbody class="text-zinc-200">
-                @for (order of orderList; track $index) {
-                    <tr>
-                        <td class="overflow-hidden">{{order._id}}</td>
-                        @if (order.status === 'Placed') {
-                            <td class="text-red-500">Pending</td>
-                        } @else {
-                            <td class="text-green-500">Paid</td>
-                        }
+                @if (isLoading) {
+                    <tr *ngFor="let row of loaderRows">
+                        <td>
+                            <div class="animate-pulse h-5 rounded-lg mb-4 w-full bg-neutral-700 text-sm"></div>
+                        </td>
+                        <td>
+                            <div class="animate-pulse h-5 rounded-lg mb-4 w-full bg-neutral-700 text-sm"></div>
+                        </td>
                     </tr>
+                    }
+                @for (order of orderList; track $index) {
+                <tr>
+                    <td class="overflow-hidden">{{order._id}}</td>
+                    @if (order.status === 'Placed') {
+                    <td class="text-red-500">Pending</td>
+                    } @else {
+                    <td class="text-green-500">Paid</td>
+                    }
+                </tr>
                 }
             </tbody>
         </table>

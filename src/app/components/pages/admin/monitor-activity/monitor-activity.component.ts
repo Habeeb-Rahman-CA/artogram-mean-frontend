@@ -19,33 +19,42 @@ export class MonitorActivityComponent implements OnInit {
   orderList: IOrder[] = []
   userList: IUser[] = [] 
 
+  isLoading: boolean = false
+  loaderRows = Array(6).fill(0)
+
   ngOnInit(): void {
       this.getAllUser()
       this.getAllOrders()
   }
 
   getAllUser(){
+    this.isLoading = true
     this.userService.getAllUser().subscribe({
       next: (res:any)=>{
         console.log(res.user);
         this.userList = res.user
+        this.isLoading = false
       },
       error:(err)=>{
         console.error(err.message)
         alert('failed to fetch')
+        this.isLoading = false
       }
     })
   }
 
   getAllOrders(){
+    this.isLoading = true
     this.orderService.getAllOrders().subscribe({
       next: (res: any)=>{
         console.log(res.orders);
         this.orderList = res.orders
+        this.isLoading = false
       },
       error: (err)=>{
         console.error(err.message)
         alert('failed to fetch')
+        this.isLoading = false
       }
     })
   }
