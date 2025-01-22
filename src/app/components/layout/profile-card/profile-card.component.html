@@ -1,4 +1,14 @@
 <p class="text-xl pb-8">My Profile</p>
+@if (isLoading) {
+<div class="flex flex-col animate-pulse gap-2 p-4">
+    <div class="h-24 w-24 mb-4 rounded-full bg-neutral-700"></div>
+    <div class="flex flex-col w-full">
+        <div class="h-5 rounded-lg mb-2 w-full bg-neutral-700 text-lg"></div>
+        <div class="h-5 rounded-lg mb-2 w-full bg-neutral-700 text-sm"></div>
+        <div class="h-5 rounded-lg mb-2 w-full bg-neutral-700 text-sm"></div>
+    </div>
+</div>
+} @else {
 <img [src]="currentUserData.profilePic || 'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg'"
     class="h-24 w-24 object-cover mb-4 rounded-full" />
 <h4 class="mb-2">Name : {{currentUserData.name}}</h4>
@@ -9,6 +19,7 @@
         class="text-gray-400 overflow-hidden bg-transparent w-full border-none outline-none" readonly>
     <i (click)="copyText()" pTooltip="Copy URL" class="ri-file-copy-line text-xl"></i>
 </div>
+}
 <div class="flex gap-2">
     <button class="w-full p-2 rounded-3xl" (click)="showDialog()">Edit Profile</button>
     <!-- dialog for profile editor -->
@@ -122,7 +133,8 @@
                         job management, employee hiring, in-depth insights, and more, empowering you to streamline
                         your
                         recruitment process and grow your team effectively.</p>
-                    <input [(ngModel)]="selectedRole" type="radio" value="employer" name="account" class="checked:border-slate-500" hidden />
+                    <input [(ngModel)]="selectedRole" type="radio" value="employer" name="account"
+                        class="checked:border-slate-500" hidden />
                 </label>
             </div>
             <div class="w-1/2">
@@ -136,7 +148,8 @@
                         you to showcase your talent, connect with opportunities, and grow your artistic career
                         effectively.
                     </p>
-                    <input [(ngModel)]="selectedRole" type="radio" value="artist" name="account" class="checked:border-slate-500" hidden />
+                    <input [(ngModel)]="selectedRole" type="radio" value="artist" name="account"
+                        class="checked:border-slate-500" hidden />
                 </label>
             </div>
         </div>

@@ -11,6 +11,23 @@
                 </tr>
             </thead>
             <tbody class="text-white">
+                <!-- loader for table -->
+                @if (isLoading) {
+                <tr *ngFor="let row of loaderRows">
+                    <td class="p-2">
+                        <div class="animate-pulse h-5 rounded-lg mb-2 w-full bg-neutral-700 text-sm"></div>
+                    </td>
+                    <td class="p-2">
+                        <div class="animate-pulse h-5 rounded-lg mb-2 w-full bg-neutral-700 text-sm"></div>
+                    </td>
+                    <td class="p-2">
+                        <div class="animate-pulse h-5 rounded-lg mb-2 w-full bg-neutral-700 text-sm"></div>
+                    </td>
+                    <td class="p-2">
+                        <div class="animate-pulse h-5 rounded-lg mb-2 w-full bg-neutral-700 text-sm"></div>
+                    </td>
+                </tr>
+                }
                 @for (user of userList; track $index) {
                 <tr>
                     <td class="p-2">{{user.name | titlecase}}</td>
@@ -55,6 +72,15 @@
         @if (upgradeRoleReqList.length === 0) {
         <div class="pt-32 text-lg flex items-center justify-center">
             <p>No Requests</p>
+        </div>
+        } @else if (isLoading) {
+        <div class="flex flex-col w-full">
+            <div class="h-5 rounded-lg mb-4 w-full bg-neutral-700 text-lg"></div>
+            <div class="h-5 rounded-lg mb-4 w-full bg-neutral-700 text-sm"></div>
+            <div class="h-5 rounded-lg mb-4 w-full bg-neutral-700 text-sm"></div>
+            <div class="h-5 rounded-lg mb-4 w-full bg-neutral-700 text-lg"></div>
+            <div class="h-5 rounded-lg mb-4 w-full bg-neutral-700 text-sm"></div>
+            <div class="h-5 rounded-lg mb-4 w-full bg-neutral-700 text-sm"></div>
         </div>
         }
         @for (upgradeRoleReq of upgradeRoleReqList; track $index) {

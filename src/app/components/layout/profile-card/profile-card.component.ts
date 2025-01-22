@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
-import { Avatar } from 'primeng/avatar';
 import { Tooltip } from 'primeng/tooltip';
 import { RouterModule } from '@angular/router';
 import { IUser } from '../../../model/user';
@@ -9,10 +8,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../services/user/user.service';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { SkeletonModule } from 'primeng/skeleton'; 
 
 @Component({
   selector: 'app-profile-card',
-  imports: [Tooltip, RouterModule, DialogModule, FormsModule, CommonModule, RadioButtonModule],
+  imports: [Tooltip, RouterModule, DialogModule, FormsModule, CommonModule, RadioButtonModule, SkeletonModule],
   templateUrl: './profile-card.component.html',
   styleUrl: './profile-card.component.css'
 })
@@ -25,6 +25,7 @@ export class ProfileCardComponent implements OnInit {
   visible: boolean = false
   isUpgradeOpen: boolean = false
   selectedRole: string = ''
+  isLoading: boolean = false
 
   userDetails: Partial<IUser> = {
     name: '',
@@ -65,15 +66,18 @@ export class ProfileCardComponent implements OnInit {
   }
   
   getUser() {
+    this.isLoading = true
     this.userService.getUser().subscribe({
       next: (res: any) => {
         this.authService.setUser(res.user)
         this.currentUserData = res.user
         this.textToCopy = 'www.artogram.com/' + this.currentUserData.name.replace(/\s+/g, '-')
+        this.isLoading = false
       },
       error: (err) => {
         console.error(err.message)
         alert('failed to load user data')
+        this.isLoading = false
       }
     })
   }

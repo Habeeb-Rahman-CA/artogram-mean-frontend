@@ -19,6 +19,9 @@ export class ManageProfileComponent implements OnInit {
   upgradeRoleReqList: IUpgradeRole[] = []
   visible: boolean = false
 
+  isLoading: boolean = false
+  loaderRows = Array(6).fill(0)
+
   ngOnInit(): void {
     this.getAllUser()
     this.getUpgradeRoleReq()
@@ -26,21 +29,26 @@ export class ManageProfileComponent implements OnInit {
 
   //Get All User API
   getAllUser() {
+    this.isLoading = true
     this.userService.getAllUser().subscribe({
       next: (res: any) => {
         this.userList = res.user
+        this.isLoading = false
       },
       error: (err) => {
         alert('failed to fetch all the users')
         console.error(err.message)
+        this.isLoading = false
       }
     })
   }
 
   getUpgradeRoleReq() {
+    this.isLoading = true
     this.userService.getUpgradeRoleReq().subscribe({
       next: (res: any) => {
         this.upgradeRoleReqList = res.roleUpgradeReq
+        this.isLoading = false
       },
       error: (err) => {
         alert('failed to get all req')
