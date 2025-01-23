@@ -28,6 +28,9 @@ export class ProductDetailComponent implements OnInit {
   popularProductList: IProduct[] = []
   suggestedProductList: IProduct[] = []
 
+  isLoading: boolean = false
+  loaderRows = Array(4).fill(0)
+
   product: IProduct = {
     name: '',
     desc: '',
@@ -50,11 +53,17 @@ export class ProductDetailComponent implements OnInit {
 
   //Product APIs 
   getProductById(id: string | null) {
+    this.isLoading = true
     this.productService.getProductById(id).subscribe({
       next: (res: any) => {
         this.product = res.product
         this.suggestedProductList = res.suggestedProduct
         this.popularProductList = res.popularProduct
+        this.isLoading = false
+      },
+      error:(err)=>{
+        console.error(err.message)
+        alert('failed to fetch the data')
       }
     })
   }
