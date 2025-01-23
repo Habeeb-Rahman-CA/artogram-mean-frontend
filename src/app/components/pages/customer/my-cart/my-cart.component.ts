@@ -40,6 +40,7 @@ export class MyCartComponent implements OnInit {
   addressShown: boolean = false
   addressList: IAddress[] = []
   selectedAddress: string = ''
+  isLoading: boolean = false
 
   address: IAddress = {
     address: '',
@@ -59,15 +60,18 @@ export class MyCartComponent implements OnInit {
 
   //Cart based APIs
   getCart() {
+    this.isLoading = true
     this.cartService.getCart(this.userId).subscribe({
       next: (res: any) => {
         this.cart = res.cart[0].products
         this.cartId = res.cart[0]._id
         this.cartTotal = this.cart.reduce((sum, product) => sum + parseFloat(product.price), 0)
+        this.isLoading = false
       },
       error: (err) => {
         alert('Error while fetching')
         console.error(err.message)
+        this.isLoading = false
       }
     })
   }
@@ -101,9 +105,15 @@ export class MyCartComponent implements OnInit {
   }
 
   getAddress() {
+    this.isLoading = true
     this.userService.getAddresses().subscribe({
       next: (res: any) => {
         this.addressList = res.addresses
+        // this.isLoading = false
+      },
+      error: (err) =>{
+        console.error(err.message)
+        alert('failed to fetch address')
       }
     })
   }

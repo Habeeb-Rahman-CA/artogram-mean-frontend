@@ -3,6 +3,9 @@
     <div class="w-3/5 ">
         <div class="h-[349px] border-b border-neutral-700  overflow-y-auto scrollbar">
             <p class="text-xl">Add Delivery Address</p>
+            @if (isLoading) {
+            <div class="animate-pulse w-full h-16 bg-neutral-700 rounded-xl mt-4"></div>
+            }
             @for (address of addressList; track $index) {
             <label
                 class="my-4 border-2 border-solid border-neutral-700 p-4 w-full flex justify-between has-[:checked]:bg-neutral-800 has-[:checked]:border-orange-600 has-[:checked]:ring-neutral-700 items-center cursor-pointer rounded-xl hover:bg-neutral-800 transition-all duration-300">
@@ -89,7 +92,15 @@
     <!-- Cart Section  -->
     <div class="w-2/5">
         <p class="text-xl">My Cart</p>
-        @if (cart.length === 0) {
+        @if (isLoading) {
+        <div class="animate-pulse flex gap-4 items-center">
+            <div class="w-20 h-20 bg-neutral-700 rounded-xl mt-4"></div>
+            <div class="flex-1">
+                <div class="w-full h-6 bg-neutral-700 rounded-xl mt-4"></div>
+                <div class="w-full h-6 bg-neutral-700 rounded-xl mt-4"></div>
+            </div>
+        </div>
+        } @else if (cart.length === 0) {
         <p class="text-xl text-center relative top-36">No items</p>
         }
         <div class="overflow-y-auto scrollbar h-72">
