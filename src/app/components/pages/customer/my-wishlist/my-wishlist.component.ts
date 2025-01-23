@@ -22,19 +22,24 @@ export class MyWishlistComponent implements OnInit {
   wishlist: IProduct[] = []
   wishlistId: string = ''
 
+  isLoading: boolean = false
+
   ngOnInit(): void {
     this.getWishlist()
   }
 
   getWishlist() {
+    this.isLoading = true
     this.wishlistService.getWishlist(this.userId).subscribe({
       next: (res: any) => {
         this.wishlist = res.wishlist[0].products
         this.wishlistId = res.wishlist[0]._id
+        this.isLoading = false
       },
       error: (err) => {
         console.error(err.message)
         alert('failed to fetch')
+        this.isLoading = false
       }
     })
   }

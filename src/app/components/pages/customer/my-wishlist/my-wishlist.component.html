@@ -1,7 +1,21 @@
 <div class="flex gap-8 secondary-bg rounded-3xl m-8 p-4 h-[500px]">
     <div class="w-full overflow-y-auto scrollbar">
         <p class="text-xl">My Wishlist</p>
-        @if (wishlist.length === 0) {
+        @if (isLoading) {
+        <div class="flex items-center justify-between animate-pulse">
+            <div class="flex gap-4 items-center">
+                <div class="h-40 w-40 bg-neutral-700 m-4 rounded-xl"></div>
+                <div class="flex-1">
+                    <div class="h-6 w-24 bg-neutral-700 m-4 rounded-xl"></div>
+                    <div class="h-6 w-40 bg-neutral-700 m-4 rounded-xl"></div>
+                </div>
+            </div>
+            <div class="flex gap-24">
+                <div class="h-6 w-28 bg-neutral-700 m-4 rounded-xl"></div>
+                <div class="h-6 w-24 bg-neutral-700 m-4 rounded-xl"></div>
+            </div>
+        </div>
+        } @else if (wishlist.length === 0) {
         <div class="flex items-center justify-center h-80">
             <p class="text-2xl">No Wishlists</p>
         </div>
@@ -18,13 +32,12 @@
                     <p class="text-lg">{{item.category}}</p>
                 </div>
             </div>
-                <h1 class="text-xl group-hover:hidden">
-                    {{ item.price | currency: 'INR' }}
-                </h1>
-                <button class="items-center justify-center bg-transparent"
-                    (click)="deleteWishlist(item._id)">
-                    <i class="ri-delete-bin-6-line mx-4 text-3xl cursor-pointer  !text-red-700"></i>
-                </button>
+            <h1 class="text-xl group-hover:hidden">
+                {{ item.price | currency: 'INR' }}
+            </h1>
+            <button class="items-center justify-center bg-transparent" (click)="deleteWishlist(item._id)">
+                <i class="ri-delete-bin-6-line mx-4 text-3xl cursor-pointer  !text-red-700"></i>
+            </button>
         </div>
         }
     </div>
