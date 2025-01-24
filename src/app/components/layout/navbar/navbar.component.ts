@@ -4,15 +4,18 @@ import { Tooltip } from 'primeng/tooltip';
 import { AuthService } from '../../../services/auth/auth.service';
 import { NotificationService } from '../../../services/notification/notification.service';
 import { BadgeModule } from 'primeng/badge';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterModule, Tooltip, BadgeModule],
+  imports: [RouterModule, Tooltip, BadgeModule, ToastModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
 
+  messageService = inject(MessageService)
   authService = inject(AuthService)
   notificationService = inject(NotificationService)
   router = inject(Router)
@@ -39,7 +42,7 @@ export class NavbarComponent implements OnInit {
         this.router.navigate(['/employer-dashboard'])
       }
     } else {
-      alert('You are not logged In')
+      this.messageService.add({severity: 'info', summary: 'Info', detail: 'Please login', life: 3000})
       this.router.navigate(['/login'])
     }
   }
@@ -49,13 +52,13 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    if (this.currentUser === null) {
-      alert('You are not logged In')
+    if (this.currentUser.value === null) {
+      this.messageService.add({severity: 'error', summary: 'Error', detail: 'You are not logged in', life: 3000})
       this.router.navigate(['/login'])
     } else {
       this.authService.logoutUser().subscribe(() => {
         this.authService.clearUser()
-        alert('You have been logged out successfully')
+        this.messageService.add({severity: 'success', summary: 'Success', detail: 'You have been logged out successfully', life: 3000})
         this.router.navigate(['/home'])
       })
     }

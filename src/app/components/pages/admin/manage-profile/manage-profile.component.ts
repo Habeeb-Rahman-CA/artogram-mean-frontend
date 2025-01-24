@@ -4,16 +4,19 @@ import { UserService } from '../../../../services/user/user.service';
 import { IUpgradeRole, IUser } from '../../../../model/user';
 import { CommonModule } from '@angular/common';
 import { PopoverModule } from 'primeng/popover';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-manage-profile',
-  imports: [TableModule, CommonModule, PopoverModule],
+  imports: [TableModule, CommonModule, PopoverModule, ToastModule],
   templateUrl: './manage-profile.component.html',
   styleUrl: './manage-profile.component.css'
 })
 export class ManageProfileComponent implements OnInit {
 
   userService = inject(UserService)
+  messageService = inject(MessageService)
 
   userList: IUser[] = []
   upgradeRoleReqList: IUpgradeRole[] = []
@@ -36,7 +39,7 @@ export class ManageProfileComponent implements OnInit {
         this.isLoading = false
       },
       error: (err) => {
-        alert('failed to fetch all the users')
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Network issue, failed to fetch', life: 3000})
         console.error(err.message)
         this.isLoading = false
       }
@@ -51,7 +54,7 @@ export class ManageProfileComponent implements OnInit {
         this.isLoading = false
       },
       error: (err) => {
-        alert('failed to get all req')
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Network issue, failed to fetch', life: 3000})
         console.error(err.message)
       }
     })
@@ -60,11 +63,11 @@ export class ManageProfileComponent implements OnInit {
   upgradeRoleRes(upgradeRole: IUpgradeRole) {
     this.userService.upgradeRoleRes(upgradeRole).subscribe({
       next: () => {
-        alert('upgraded user role')
+        this.messageService.add({severity: 'success', summary: 'Success', detail: 'Upgraded user role', life: 3000})
         this.getUpgradeRoleReq()
       },
       error: (err) => {
-        alert('failed to upgrade')
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to upgrade', life: 3000})
         console.error(err.message)
       }
     })
@@ -73,12 +76,12 @@ export class ManageProfileComponent implements OnInit {
   rejectUpgradeRole(id: string | undefined) {
     this.userService.rejectUpgradeRole(id).subscribe({
       next: () => {
-        alert('rejected the role')
+        this.messageService.add({severity: 'info', summary: 'Info', detail: 'Rejected the role', life: 3000})
         this.getUpgradeRoleReq()
       },
       error: (err) => {
         console.error(err.message)
-        alert('failed to reject')
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to reject', life: 3000})
       }
     })
   }

@@ -5,25 +5,28 @@ import { PasswordModule } from 'primeng/password';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
-  imports: [InputTextModule, FloatLabel, PasswordModule, RouterModule, FormsModule],
+  imports: [InputTextModule, FloatLabel, PasswordModule, RouterModule, FormsModule, ToastModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
+  messageService = inject(MessageService)
   authService = inject(AuthService)
   router = inject(Router)
 
-  email: string = 'emp@gmail.com'
-  password: string = 'emp'
+  email: string = ''
+  password: string = ''
 
   login() {
     this.authService.loginUser(this.email, this.password).subscribe({
       next: (res: any) => {
-        alert('Logged in successfully')
+        this.messageService.add({severity: 'success', summary: 'Success', detail: 'Logged in successfully', life: 3000})
         this.email = ''
         this.password = ''
         this.authService.setUser(res.user)
@@ -38,10 +41,10 @@ export class LoginComponent {
         } else if (role === 'customer') {
           this.router.navigate(['/products'])
         } else {
-          alert('Something went wrong')
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'failed to navigate', life: 3000})
         }
       },
-      error: () => alert('Error logging in')
+      error: (err) => this.messageService.add({severity: 'error', summary: 'Error', detail: 'Something went wrong', life: 3000})
     })
   }
 

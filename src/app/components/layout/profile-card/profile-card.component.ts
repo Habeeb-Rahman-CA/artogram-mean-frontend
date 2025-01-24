@@ -9,14 +9,18 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../../../services/user/user.service';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SkeletonModule } from 'primeng/skeleton'; 
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-profile-card',
-  imports: [Tooltip, RouterModule, DialogModule, FormsModule, CommonModule, RadioButtonModule, SkeletonModule],
+  imports: [Tooltip, RouterModule, DialogModule, FormsModule, CommonModule, RadioButtonModule, SkeletonModule, ToastModule],
   templateUrl: './profile-card.component.html',
   styleUrl: './profile-card.component.css'
 })
 export class ProfileCardComponent implements OnInit {
+
+  messageService = inject(MessageService)
   authService = inject(AuthService)
   userService = inject(UserService)
 
@@ -55,12 +59,12 @@ export class ProfileCardComponent implements OnInit {
   upgradeRole(){
     this.userService.upgradeRoleReq(this.selectedRole).subscribe({
       next: ()=>{
-        alert('Sented upgrade request to admin, you account will be upgraded within 24h')
+      this.messageService.add({severity: 'info', summary: 'Info', detail: 'Sented upgrade request to admin, you account will be upgraded within 24h', life: 3000})
         this.isUpgradeOpen = false
       },
       error: (err)=>{
         console.error(err.message)
-        alert('failed to sent the request')
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to sent request', life: 3000})
       }
     })
   }
@@ -76,7 +80,7 @@ export class ProfileCardComponent implements OnInit {
       },
       error: (err) => {
         console.error(err.message)
-        alert('failed to load user data')
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to load user data', life: 3000})
         this.isLoading = false
       }
     })
@@ -88,10 +92,10 @@ export class ProfileCardComponent implements OnInit {
     this.userService.uploadUserImage(formData).subscribe({
       next: (res: any) => {
         this.userDetails[imgType] = res.img
-        alert('image uploaded')
+        this.messageService.add({severity: 'success', summary: 'Success', detail: 'Image uploaded successfully', life: 3000})
       },
       error: (err) => {
-        alert('failed to get the image')
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to get the image', life: 3000})
         console.error(err.message)
       }
     })
@@ -100,12 +104,12 @@ export class ProfileCardComponent implements OnInit {
   updateProfile() {
     this.userService.updateUserProfile(this.userDetails).subscribe({
       next: (res) => {
-        alert('Profile Updated')
+        this.messageService.add({severity: 'success', summary: 'Success', detail: 'Profile updated', life: 3000})
         this.getUser()
         this.visible = false
       },
       error: (err) => {
-        alert('Profile failed updated')
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Profile failed to update', life: 3000})
         console.error(err.message)
       }
     })
