@@ -32,6 +32,9 @@ export class HireArtistComponent implements OnInit {
     location: '',
   }
 
+  isLoading = false
+  loaderRows = Array(4).fill(0)
+
   ngOnInit(): void {
     this.getAllArtist()
     this.getHireRes()
@@ -39,13 +42,16 @@ export class HireArtistComponent implements OnInit {
 
   //get all artist
   getAllArtist() {
+    this.isLoading = true
     this.userService.getAllArtist().subscribe({
       next: (res: any) => {
         this.artistList = res.user
+        this.isLoading = false
       },
       error: (err) => {
         console.error(err.message)
         alert('failed to fetch')
+        this.isLoading = false
       }
     })
   }
@@ -84,13 +90,16 @@ export class HireArtistComponent implements OnInit {
   }
 
   getHireRes() {
+    this.isLoading = true
     this.jobService.getHireRes().subscribe({
       next: (res: any) => {
         this.hireResList = res.hireRes
+        this.isLoading = false
       },
       error: (err) => {
         alert('failed to fetch')
         console.error(err.message)
+        this.isLoading = false
       }
     })
   }

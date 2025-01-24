@@ -20,6 +20,9 @@ export class NotificationComponent implements OnInit {
 
   upgradeResList: IUpgradeRole[] = []
 
+  isLoading = false
+  loaderRows = Array(4).fill(0)
+
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const id = params['id']
@@ -28,14 +31,17 @@ export class NotificationComponent implements OnInit {
   }
 
   getAllRes(id: string) {
+    this.isLoading = true
     this.userService.getUpgradeRoleRes(id).subscribe({
       next: (res: any) => {
         this.upgradeResList = res.roleUpgradeRes
         this.notificationService.updateCount(this.upgradeResList.length)
+        this.isLoading = false
       },
       error: (err) => {
         console.error(err.message)
         alert('failed to get response')
+        this.isLoading = false
       }
     })
   }

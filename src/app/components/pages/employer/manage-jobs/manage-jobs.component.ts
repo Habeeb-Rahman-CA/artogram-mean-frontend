@@ -31,6 +31,9 @@ export class ManageJobsComponent implements OnInit {
     location: '',
   }
 
+  isLoading = false
+  laoderRows = Array(8).fill(0)
+
   ngOnInit(): void {
     this.categories = ['Painting', 'Drawing', 'Sculpture', 'Photography', 'Digital Art']
     this.jobTypes = ['Full-Time', 'Part-Time', 'Contract', 'Freelance']
@@ -63,13 +66,16 @@ export class ManageJobsComponent implements OnInit {
   }
 
   getJobs() {
+    this.isLoading = true
     this.jobService.getJobsByEmp().subscribe({
       next: (res: any) => {
         this.jobList = res.job
+        this.isLoading =false
       },
       error: (err) => {
         console.error(err.message)
         alert('failed to fetch')
+        this.isLoading = false
       }
     })
   }

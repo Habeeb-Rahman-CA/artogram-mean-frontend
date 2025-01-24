@@ -1,5 +1,8 @@
 <div class="m-8 secondary-bg p-4 rounded-3xl h-[400px] overflow-y-auto scrollbar">
     <p class="text-lg mb-4">Notifications</p>
+    @if (isLoading) {
+        <div *ngFor="let row of loaderRows" class="bg-neutral-700 h-16 animate-pulse w-full my-2 rounded-3xl"></div>
+    }
     @if(upgradeResList.length === 0){
     <div class="mt-40 text-xl text-center">
         <p>No Notifications</p>
