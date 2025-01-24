@@ -16,15 +16,24 @@ export class OrdersPaymentsComponent implements OnInit {
 
   orders: IOrder[] = []
 
+  isLoading: boolean = false
+  loaderRows = Array(5).fill(0)
+
   ngOnInit(): void {
     this.getAllOrders()
   }
 
   getAllOrders() {
+    this.isLoading = true
     this.orderService.getArtistProductOrder().subscribe({
       next: (res: any) => {
         this.orders = res.filteredOrder
-        console.log(this.orders);
+        this.isLoading = false
+      },
+      error: (err)=>{
+        console.error(err.message)
+        alert('failed to load orders')
+        this.isLoading = false
       }
     })
   }

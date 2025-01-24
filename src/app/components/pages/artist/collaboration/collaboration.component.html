@@ -26,6 +26,22 @@
                     </tr>
                 </thead>
                 <tbody class="text-white">
+                    @if (isLoading) {
+                        <tr *ngFor="let row of loaderRows" class="animate-pulse">
+                            <td class="p-2">
+                                <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
+                            </td>
+                            <td class="p-2">
+                                <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
+                            </td>
+                            <td class="p-2">
+                                <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
+                            </td>
+                            <td class="p-2">
+                                <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
+                            </td>
+                        </tr>
+                    }
                     @for (artist of filteredArtist; track $index) {
                     <tr>
                         <td class="p-2 overflow-x-hidden">{{artist.name}}</td>

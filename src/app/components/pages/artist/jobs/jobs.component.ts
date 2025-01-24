@@ -25,32 +25,41 @@ export class JobsComponent implements OnInit {
     location: '',
   }
 
+  isLoading = false
+  loaderRows = Array(6).fill(0)
+
   ngOnInit(): void {
     this.getHireReqs()
     this.getAllJobs()
   }
 
   getHireReqs() {
+    this.isLoading = true
     this.jobService.getHireReq().subscribe({
       next: (res: any) => {
         console.log(res.hireReq);
         this.hireReqList = res.hireReq
+        this.isLoading = false
       },
       error: (err) => {
         alert('failed to fetch')
         console.error(err.message)
+        this.isLoading = false
       }
     })
   }
 
   getAllJobs() {
+    this.isLoading = true
     this.jobService.getAllJobs().subscribe({
       next: (res: any) => {
         this.jobList = res.jobs
+        this.isLoading = false
       },
       error: (err) => {
         alert('failed to fetch all the jobs')
         console.error(err.message)
+        this.isLoading = false
       }
     })
   }

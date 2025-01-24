@@ -12,6 +12,28 @@
             </tr>
         </thead>
         <tbody>
+            @if (isLoading) {
+            <tr *ngFor="let row of loaderRows" class="animate-pulse">
+                <td class="p-2">
+                    <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
+                </td>
+                <td class="p-2">
+                    <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
+                </td>
+                <td class="p-2">
+                    <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
+                </td>
+                <td class="p-2">
+                    <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
+                </td>
+                <td class="p-2">
+                    <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
+                </td>
+                <td class="p-2">
+                    <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
+                </td>
+            </tr>
+            }
             @for (order of orders; track $index) {
             <tr>
                 <td class="p-2">{{order.user}}</td>
@@ -32,9 +54,9 @@
                 <td class="p-2 text-green-500">{{order.status}}</td>
                 }
                 @if (order.status === 'Placed') {
-                    <td class="p-2 text-red-500">Pending</td>
+                <td class="p-2 text-red-500">Pending</td>
                 }@else {
-                    <td class="p2 text-green-500">Paid</td>
+                <td class="p2 text-green-500">Paid</td>
                 }
             </tr>
             }

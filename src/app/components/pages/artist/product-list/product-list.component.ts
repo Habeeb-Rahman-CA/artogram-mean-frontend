@@ -26,6 +26,8 @@ export class ProductListComponent implements OnInit {
   visible: boolean = false;
   categories: string[] = []
 
+  isLoading: boolean = false
+  loaderRows = Array(4).fill(0)
 
   ngOnInit(): void {
     this.getProducts()
@@ -40,14 +42,16 @@ export class ProductListComponent implements OnInit {
 
   //Product APIs
   getProducts() {
+    this.isLoading = true
     this.productService.getProductByUserId().subscribe({
       next: (res) => {
         this.products = res
-        console.log('Fetched all the products')
+        this.isLoading = false
       },
       error: (err) => {
         alert('Something went wrong on fetching')
         console.error(err.message)
+        this.isLoading = false
       }
     })
   }

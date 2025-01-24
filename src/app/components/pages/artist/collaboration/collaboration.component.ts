@@ -18,19 +18,25 @@ export class CollaborationComponent implements OnInit {
   filteredArtist: IUser[] = []
   searchQuery: string = ''
 
+  isLoading = false
+  loaderRows = Array(7).fill(0)
+
   ngOnInit(): void {
     this.getAllArtist()
   }
 
   getAllArtist() {
+    this.isLoading = true
     this.userService.getAllArtistExceptLogger().subscribe({
       next: (res: any) => {
         this.artistList = res.user
         this.filteredArtist = [...this.artistList]
+        this.isLoading = false
       },
       error: (err) => {
         console.error(err)
         alert('failed to fetch')
+        this.isLoading = false
       }
     })
   }
