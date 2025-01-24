@@ -19,20 +19,24 @@ export class TrackOrderComponent implements OnInit {
 
   orderService = inject(OrderService)
 
+  isLoading: boolean = false
+
   ngOnInit(): void {
     this.getAllOrders()
   }
 
   //Order APIs
   getAllOrders() {
+    this.isLoading = true
     this.orderService.getOrder().subscribe({
       next: (res: any) => {
         this.orderList = res.orders
-        console.log(this.orderList);
+        this.isLoading = false
       },
       error: (err) => {
         alert('something went wrong')
         console.error(err.message)
+        this.isLoading = false
       }
     })
   }
