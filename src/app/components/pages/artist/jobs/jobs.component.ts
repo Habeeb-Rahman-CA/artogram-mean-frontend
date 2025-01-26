@@ -3,16 +3,19 @@ import { JobService } from '../../../../services/job/job.service';
 import { IHireJob, IJob } from '../../../../model/job';
 import { DialogModule } from 'primeng/dialog';
 import { CommonModule } from '@angular/common';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-jobs',
-  imports: [DialogModule, CommonModule],
+  imports: [DialogModule, CommonModule, ToastModule],
   templateUrl: './jobs.component.html',
   styleUrl: './jobs.component.css'
 })
 export class JobsComponent implements OnInit {
 
   jobService = inject(JobService)
+  messageService = inject(MessageService)
 
   visible: boolean = false
   hireReqList: IHireJob[] = []
@@ -37,12 +40,11 @@ export class JobsComponent implements OnInit {
     this.isLoading = true
     this.jobService.getHireReq().subscribe({
       next: (res: any) => {
-        console.log(res.hireReq);
         this.hireReqList = res.hireReq
         this.isLoading = false
       },
       error: (err) => {
-        alert('failed to fetch')
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Network error, Failed to fetch', life: 3000 })
         console.error(err.message)
         this.isLoading = false
       }
@@ -57,7 +59,7 @@ export class JobsComponent implements OnInit {
         this.isLoading = false
       },
       error: (err) => {
-        alert('failed to fetch all the jobs')
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Network error, Failed to fetch', life: 3000})
         console.error(err.message)
         this.isLoading = false
       }
@@ -67,12 +69,12 @@ export class JobsComponent implements OnInit {
   sentResponseAccepted(requestId: string | undefined) {
     this.jobService.sentHireRes(requestId, 'Accepted').subscribe({
       next: () => {
-        alert("Response sented successfully")
+        this.messageService.add({severity: 'success', summary: 'Sented', detail: 'Response sented successfully', life: 3000})
         this.getHireReqs()
         this.visible = false
       },
       error: (err) => {
-        alert('failed to sent the response')
+        this.messageService.add({severity: 'error', summary: 'Failed', detail: 'Failed to sent the response', life: 3000})
         console.error(err.message)
       }
     })
@@ -81,12 +83,12 @@ export class JobsComponent implements OnInit {
   sentResponseRejected(requestId: string | undefined) {
     this.jobService.sentHireRes(requestId, 'Rejected').subscribe({
       next: () => {
-        alert("Response sented successfully")
+        this.messageService.add({severity: 'success', summary: 'Sented', detail: 'Response sented successfully', life: 3000})
         this.getHireReqs()
         this.visible = false
       },
       error: (err) => {
-        alert('failed to sent the response')
+        this.messageService.add({severity: 'error', summary: 'Failed', detail: 'Failed to sent the response', life: 3000})
         console.error(err.message)
       }
     })

@@ -5,16 +5,20 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-product-list',
-  imports: [RouterModule, CommonModule, DialogModule, FormsModule],
+  imports: [RouterModule, CommonModule, DialogModule, FormsModule, ToastModule],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
 export class ProductListComponent implements OnInit {
 
   productService = inject(ProductService)
+  messageService = inject(MessageService)
+
   products: IProduct[] = []
   selectedProduct: IProduct = {
     name: '',
@@ -49,7 +53,7 @@ export class ProductListComponent implements OnInit {
         this.isLoading = false
       },
       error: (err) => {
-        alert('Something went wrong on fetching')
+        this.messageService.add({severity: 'error', summary: 'Failed', detail: 'Failed to fetch', life: 3000})
         console.error(err.message)
         this.isLoading = false
       }
@@ -59,13 +63,13 @@ export class ProductListComponent implements OnInit {
   updateProduct(id: string | undefined, product: IProduct) {
     this.productService.updateProduct(id, product).subscribe({
       next: () => {
-        alert("product updated successfully")
+        this.messageService.add({severity: 'success', summary: 'Updated', detail: 'Successfully updated product detail', life: 3000})
         this.visible = false
         this.getProducts()
 
       },
       error: (err) => {
-        alert('product updation failed')
+        this.messageService.add({severity: 'error', summary: 'Failed', detail: 'Failed to sent the response', life: 3000})
         console.error(err.message)
       }
     })
@@ -74,8 +78,12 @@ export class ProductListComponent implements OnInit {
   deleteProduct(id: string | undefined) {
     this.productService.deleteProduct(id).subscribe({
       next: () => {
-        alert('Product deleted successfully')
+        this.messageService.add({severity: 'success', summary: 'Deleted', detail: 'Product deleted successfully', life: 3000})
         this.getProducts()
+      },
+      error: (err) =>{
+        console.error(err.message)
+        this.messageService.add({severity: 'error', summary: 'Failed', detail: 'Failed to delete the product', life: 3000})
       }
     })
   }

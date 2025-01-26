@@ -7,16 +7,19 @@ import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { ProductService } from '../../../../services/product/product.service';
 import { IProduct } from '../../../../model/product';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-upload-product',
-  imports: [FormsModule, CommonModule, RouterModule, FloatLabelModule, SelectModule, TextareaModule],
+  imports: [FormsModule, CommonModule, RouterModule, FloatLabelModule, SelectModule, TextareaModule, ToastModule],
   templateUrl: './upload-product.component.html',
   styleUrl: './upload-product.component.css'
 })
 export class UploadProductComponent implements OnInit {
 
   productService = inject(ProductService)
+  messageService = inject(MessageService)
 
   product: IProduct = {
     name: '',
@@ -39,10 +42,10 @@ export class UploadProductComponent implements OnInit {
     this.productService.uploadImg(formData).subscribe({
       next: (res: any) => {
         this.product.img = res.img
-        alert('image uploaded')
+        this.messageService.add({severity: 'success', summary: 'Uploaded', detail: 'Image uploaded successfully', life: 3000})
       },
       error: (err) => {
-        alert('failed to get the image')
+        this.messageService.add({severity: 'error', summary: 'Failed', detail: 'Failed to upload image', life: 3000})
         console.log(err.message)
       }
     })
@@ -52,7 +55,7 @@ export class UploadProductComponent implements OnInit {
   uploadProduct() {
     this.productService.createProduct(this.product).subscribe({
       next: () => {
-        alert('New Product Added')
+        this.messageService.add({severity: 'success', summary: 'Uploaded', detail: 'Product Uploaded successfully', life: 3000})
         this.product = {
           name: '',
           desc: '',
@@ -62,7 +65,7 @@ export class UploadProductComponent implements OnInit {
         }
       },
       error: (error) => {
-        alert('Something went wrong')
+        this.messageService.add({severity: 'error', summary: 'Failed', detail: 'Failed upload product', life: 3000})
         console.error(error.message)
       }
     })

@@ -1,6 +1,7 @@
 <div class="flex gap-4 m-8">
     <div class="w-1/3 flex flex-col gap-4">
-        <div class="secondary-bg text-white p-4 rounded-3xl flex flex-col gap-2 items-center justify-center h-44 cursor-pointer transition-all duration-300">
+        <div
+            class="secondary-bg text-white p-4 rounded-3xl flex flex-col gap-2 items-center justify-center h-44 cursor-pointer transition-all duration-300">
             <i class="ri-chat-3-line text-4xl"></i>
             <h1 class="text-2xl">My Collaborations</h1>
         </div>
@@ -27,20 +28,20 @@
                 </thead>
                 <tbody class="text-white">
                     @if (isLoading) {
-                        <tr *ngFor="let row of loaderRows" class="animate-pulse">
-                            <td class="p-2">
-                                <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
-                            </td>
-                            <td class="p-2">
-                                <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
-                            </td>
-                            <td class="p-2">
-                                <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
-                            </td>
-                            <td class="p-2">
-                                <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
-                            </td>
-                        </tr>
+                    <tr *ngFor="let row of loaderRows" class="animate-pulse">
+                        <td class="p-2">
+                            <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
+                        </td>
+                        <td class="p-2">
+                            <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
+                        </td>
+                        <td class="p-2">
+                            <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
+                        </td>
+                        <td class="p-2">
+                            <div class="bg-neutral-700 h-4 w-full rounded-3xl"></div>
+                        </td>
+                    </tr>
                     }
                     @for (artist of filteredArtist; track $index) {
                     <tr>
@@ -58,3 +59,4 @@
         </div>
     </div>
 </div>
+<p-toast />

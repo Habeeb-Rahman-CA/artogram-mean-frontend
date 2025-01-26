@@ -5,10 +5,12 @@ import { CommonModule } from '@angular/common';
 import { IProduct } from '../../../../model/product';
 import { UserService } from '../../../../services/user/user.service';
 import { ProductService } from '../../../../services/product/product.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-artist-detail',
-  imports: [CommonModule],
+  imports: [CommonModule, ToastModule],
   templateUrl: './artist-detail.component.html',
   styleUrl: './artist-detail.component.css'
 })
@@ -16,6 +18,7 @@ export class ArtistDetailComponent implements OnInit {
 
   userService = inject(UserService)
   productService = inject(ProductService)
+  messageService = inject(MessageService)
   route = inject(ActivatedRoute)
   router = inject(Router)
 
@@ -39,7 +42,7 @@ export class ArtistDetailComponent implements OnInit {
         this.artistDetails = res.user
       },
       error: (err) => {
-        alert('failed to fetch artist data')
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to fetch artist data', life: 3000})
         console.error(err.message)
       }
     })
@@ -51,7 +54,7 @@ export class ArtistDetailComponent implements OnInit {
         this.latestProducts = res.product
       },
       error: (err) => {
-        alert('failed to fetch artist product')
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to fetch artist products', life: 3000})
         console.error(err.message)
       }
     })
@@ -63,7 +66,7 @@ export class ArtistDetailComponent implements OnInit {
         this.popularArtist = res.user
       },
       error: (err) => {
-        alert('failed to fetch artists')
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Failed to fetch artists', life: 3000})
         console.error(err.message)
       }
     })
