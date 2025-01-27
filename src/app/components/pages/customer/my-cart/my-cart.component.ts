@@ -11,12 +11,14 @@ import { OrderService } from '../../../../services/order/order.service';
 import { Router } from '@angular/router';
 import { TooltipModule } from 'primeng/tooltip';
 import { WindowService } from '../../../../services/window/window.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 declare var Razorpay: any
 
 @Component({
   selector: 'app-my-cart',
-  imports: [CommonModule, FormsModule, DialogModule, TooltipModule],
+  imports: [CommonModule, FormsModule, DialogModule, TooltipModule, ToastModule],
   templateUrl: './my-cart.component.html',
   styleUrl: './my-cart.component.css'
 })
@@ -29,6 +31,7 @@ export class MyCartComponent implements OnInit {
   orderService = inject(OrderService)
   windowRef = inject(WindowService)
   router = inject(Router)
+  messageService = inject(MessageService)
 
   Razorpay: any
   userId = this.authService.userData.value._id
@@ -70,6 +73,7 @@ export class MyCartComponent implements OnInit {
       },
       error: (err) => {
         alert('Error while fetching')
+        this.messageService.add({ severity: 'error', summary: 'Error', data: 'Network error, failed to fetch', life: 3000 })
         console.error(err.message)
         this.isLoading = false
       }
@@ -79,11 +83,13 @@ export class MyCartComponent implements OnInit {
   deleteCart(id: string | undefined) {
     this.cartService.deleteCartItem(this.cartId, id).subscribe({
       next: () => {
-        alert('Product deleted from the cart')
+        alert('Product removed from the cart')
+        this.messageService.add({ severity: 'success', summary: 'Deleted', data: 'Product removed from the cart', life: 3000 })
         this.getCart()
       },
       error: (err) => {
         alert('Product failed to delete')
+        this.messageService.add({ severity: 'error', summary: 'Failed', data: 'Product failed to remove from the cart', life: 3000 })
         console.error(err.message)
       }
     })
@@ -94,11 +100,11 @@ export class MyCartComponent implements OnInit {
     this.userService.addAddress(this.address).subscribe({
       next: () => {
         this.visible = false
-        alert('added new address')
+        this.messageService.add({ severity: 'success', summary: 'Added', data: 'Successfully added new address', life: 3000 })
         this.getAddress()
       },
       error: (err) => {
-        alert('failed to add address')
+        this.messageService.add({ severity: 'error', summary: 'Failed', data: 'Failed to add new address', life: 3000 })
         console.error(err.message)
       }
     })
@@ -109,11 +115,11 @@ export class MyCartComponent implements OnInit {
     this.userService.getAddresses().subscribe({
       next: (res: any) => {
         this.addressList = res.addresses
-        // this.isLoading = false
+        this.isLoading = false
       },
-      error: (err) =>{
+      error: (err) => {
         console.error(err.message)
-        alert('failed to fetch address')
+        this.messageService.add({ severity: 'error', summary: 'Error', data: 'Network error, failed to fetch', life: 3000 })
       }
     })
   }
@@ -121,12 +127,13 @@ export class MyCartComponent implements OnInit {
   deleteAddress(addressId: string | undefined) {
     this.userService.deleteAddress(addressId).subscribe({
       next: () => {
-        alert('deleted successfully')
+        this.messageService.add({ severity: 'success', summary: 'Deleted', data: 'Successfully deleted the address', life: 3000 })
         this.addressShown = false
         this.getAddress()
       },
       error: (err) => {
         alert('failed to delete')
+        this.messageService.add({ severity: 'error', summary: 'Failed', data: 'Failed to delete the address', life: 3000 })
         console.error(err.message)
       }
     })
@@ -151,16 +158,17 @@ export class MyCartComponent implements OnInit {
           },
           modal: {
             ondismiss: () => {
-              alert('Payment process was cancelled.');
+              this.messageService.add({ severity: 'info', summary: 'Cancelled', data: 'Payment process has been cancelled', life: 3000 })
             }
           }
         };
         const razorpay = new this.windowRef.nativeWindow.Razorpay(options)
         razorpay.open()
-        alert('Order placed and Payment Processing...')
+        this.messageService.add({ severity: 'success', summary: 'Processing...', data: 'Order placed and payment has been processing', life: 3000 })
       },
       error: (err) => {
         console.error(err.message)
+        this.messageService.add({ severity: 'error', summary: 'Error', data: 'Failed to Place the order', life: 3000 })
         alert('failed to place order')
       }
     })
@@ -171,11 +179,12 @@ export class MyCartComponent implements OnInit {
     this.orderService.verifyPayment(paymentResponse, razorpayOrderId).subscribe({
       next: () => {
         alert('Payment verified successfully and Order shipped!')
+        this.messageService.add({ severity: 'success', summary: 'Verified', data: 'Payment has been verified and Order shipped successfully', life: 3000 })
         this.cart = []
       },
       error: (err) => {
         console.error(err.message);
-        alert('Payment verification failed!');
+        this.messageService.add({ severity: 'error', summary: 'Failed', data: 'Payment verification failed', life: 3000 })
         this.cart = []
       }
     })

@@ -6,10 +6,12 @@ import { TableModule } from 'primeng/table';
 import { AddDaysPipe } from '../../../../pipes/add-days.pipe'
 import { DialogModule } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-track-order',
-  imports: [CommonModule, TableModule, AddDaysPipe, DialogModule, TooltipModule],
+  imports: [CommonModule, TableModule, AddDaysPipe, DialogModule, TooltipModule, ToastModule],
   templateUrl: './track-order.component.html',
   styleUrl: './track-order.component.css'
 })
@@ -18,6 +20,7 @@ export class TrackOrderComponent implements OnInit {
   orderList: IOrder[] = []
 
   orderService = inject(OrderService)
+  messageService = inject(MessageService)
 
   isLoading: boolean = false
 
@@ -34,7 +37,7 @@ export class TrackOrderComponent implements OnInit {
         this.isLoading = false
       },
       error: (err) => {
-        alert('something went wrong')
+        this.messageService.add({ severity: 'error', summary: 'Error', data: 'Network Error, Failed to fetch', life: 3000 })
         console.error(err.message)
         this.isLoading = false
       }
@@ -44,11 +47,11 @@ export class TrackOrderComponent implements OnInit {
   cancelOrder(orderId: string | undefined) {
     this.orderService.cancelOrder(orderId).subscribe({
       next: () => {
-        alert('Order cancelled')
+        this.messageService.add({ severity: 'success', summary: 'Cancelled', data: 'Order has been cancelled', life: 3000 })
         this.getAllOrders()
       },
       error: (err) => {
-        alert('Order failed to cancel')
+        this.messageService.add({ severity: 'error', summary: 'Error', data: 'Order has been failed to cancel', life: 3000 })
         console.error(err)
       }
     })
@@ -57,11 +60,11 @@ export class TrackOrderComponent implements OnInit {
   deleteOrder(orderId: string | undefined) {
     this.orderService.removeOrder(orderId).subscribe({
       next: () => {
-        alert('Order removed successfully')
+        this.messageService.add({ severity: 'success', summary: 'Deleted', data: 'Order has been deleted', life: 3000 })
         this.getAllOrders()
       },
       error: (err) => {
-        alert('Failed to remove order')
+        this.messageService.add({ severity: 'error', summary: 'Failed', data: 'Order has been failed to delete', life: 3000 })
         console.error(err.message)
       }
     })
