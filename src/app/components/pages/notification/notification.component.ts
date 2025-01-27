@@ -40,7 +40,6 @@ export class NotificationComponent implements OnInit {
       },
       error: (err) => {
         console.error(err.message)
-        alert('failed to get response')
         this.isLoading = false
       }
     })

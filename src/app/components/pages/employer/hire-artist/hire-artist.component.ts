@@ -7,10 +7,12 @@ import { IHireJob } from '../../../../model/job';
 import { DialogModule } from 'primeng/dialog';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-hire-artist',
-  imports: [DialogModule, CommonModule, FormsModule],
+  imports: [DialogModule, CommonModule, FormsModule, ToastModule],
   templateUrl: './hire-artist.component.html',
   styleUrl: './hire-artist.component.css'
 })
@@ -19,6 +21,7 @@ export class HireArtistComponent implements OnInit {
   userService = inject(UserService)
   jobService = inject(JobService)
   router = inject(Router)
+  messageService = inject(MessageService)
 
   visible: boolean = false
   selectedArtist!: IUser
@@ -50,7 +53,7 @@ export class HireArtistComponent implements OnInit {
       },
       error: (err) => {
         console.error(err.message)
-        alert('failed to fetch')
+        this.messageService.add({ severity: 'error', summary: 'Error', data: 'Network error, failed to fetch', life: 3000 })
         this.isLoading = false
       }
     })
@@ -69,10 +72,9 @@ export class HireArtistComponent implements OnInit {
 
   //Senting Hiring Request
   sentHireReq(artistId: string | undefined) {
-    console.log(artistId);
     this.jobService.sentHireReq(artistId, this.hireReq).subscribe({
       next: () => {
-        alert('Successfully sented the hire request')
+        this.messageService.add({ severity: 'success', summary: 'Sented', data: 'Successfully sented hiring request', life: 3000 })
         this.visible = false
         this.hireReq = {
           title: '',
@@ -83,7 +85,7 @@ export class HireArtistComponent implements OnInit {
         }
       },
       error: (err) => {
-        alert('failed to sent the request')
+        this.messageService.add({ severity: 'error', summary: 'Failed', data: 'Failed to sent the request', life: 3000 })
         console.error(err.message)
       }
     })
@@ -97,7 +99,7 @@ export class HireArtistComponent implements OnInit {
         this.isLoading = false
       },
       error: (err) => {
-        alert('failed to fetch')
+        this.messageService.add({ severity: 'error', summary: 'Failed', data: 'Network error, failed to fetch', life: 3000 })
         console.error(err.message)
         this.isLoading = false
       }

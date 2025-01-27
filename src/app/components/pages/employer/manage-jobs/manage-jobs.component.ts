@@ -4,16 +4,19 @@ import { JobService } from '../../../../services/job/job.service';
 import { IJob } from '../../../../model/job';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-manage-jobs',
-  imports: [DialogModule, CommonModule, FormsModule],
+  imports: [DialogModule, CommonModule, FormsModule, ToastModule],
   templateUrl: './manage-jobs.component.html',
   styleUrl: './manage-jobs.component.css'
 })
 export class ManageJobsComponent implements OnInit {
 
   jobService = inject(JobService)
+  messageService = inject(MessageService)
 
   visible: boolean = false
   categories: string[] = []
@@ -43,7 +46,7 @@ export class ManageJobsComponent implements OnInit {
   createJob() {
     this.jobService.createJob(this.job).subscribe({
       next: () => {
-        alert('New Job oppertunity posted')
+        this.messageService.add({ severity: 'success', summary: 'Posted', data: 'New job oppertunity posted', life: 3000 })
         this.visible = false
         this.job = {
           title: '',
@@ -59,7 +62,7 @@ export class ManageJobsComponent implements OnInit {
         this.getJobs()
       },
       error: (err) => {
-        alert('failed to post new job')
+        this.messageService.add({ severity: 'error', summary: 'Error', data: 'Failed to post the job', life: 3000 })
         console.error(err.message)
       }
     })
@@ -70,11 +73,11 @@ export class ManageJobsComponent implements OnInit {
     this.jobService.getJobsByEmp().subscribe({
       next: (res: any) => {
         this.jobList = res.job
-        this.isLoading =false
+        this.isLoading = false
       },
       error: (err) => {
         console.error(err.message)
-        alert('failed to fetch')
+        this.messageService.add({ severity: 'error', summary: 'Failed', data: 'Network error, failed to fetch', life: 3000 })
         this.isLoading = false
       }
     })
@@ -83,12 +86,12 @@ export class ManageJobsComponent implements OnInit {
   closeJob(id: string | undefined) {
     this.jobService.closeJobById(id).subscribe({
       next: () => {
-        alert('Job closed successfully')
+        this.messageService.add({ severity: 'success', summary: 'Closed', data: 'Job closed successfully', life: 3000 })
         this.getJobs()
       },
       error: (err) => {
         console.error(err.message)
-        alert("failed to close")
+        this.messageService.add({ severity: 'error', summary: 'Failed', data: 'Failed to close the job', life: 3000 })
       }
     })
   }
@@ -96,11 +99,11 @@ export class ManageJobsComponent implements OnInit {
   deleteJob(id: string | undefined) {
     this.jobService.deleteJobById(id).subscribe({
       next: () => {
-        alert("Deleted successfully")
+        this.messageService.add({ severity: 'success', summary: 'Deleted', data: 'Job deleted successfully', life: 3000 })
         this.getJobs()
       },
       error: (err) => {
-        alert('failed to delete')
+        this.messageService.add({ severity: 'error', summary: 'Failed', data: 'Failed to delete the job', life: 3000 })
         console.error(err.message)
       }
     })

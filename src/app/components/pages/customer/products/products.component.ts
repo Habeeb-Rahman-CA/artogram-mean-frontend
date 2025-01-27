@@ -42,7 +42,7 @@ export class ProductsComponent implements OnInit {
         this.isLoading = false
       },
       error: (err) =>{
-        alert('failed to load')
+        console.error(err.message)
         this.isLoading = false
       }
     })
