@@ -9,7 +9,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl: string = 'http://localhost:8001/api/auth';
+  baseUrl: string = 'https://artogram-mean-backend.onrender.com/api/auth';
   userData = new BehaviorSubject<any>(null)
 
   //Register API

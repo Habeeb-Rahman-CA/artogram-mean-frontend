@@ -7,7 +7,7 @@ import { IAddress, IUpgradeRole, IUser } from '../../model/user';
 })
 export class UserService {
 
-  baseUrl = 'http://localhost:8001/api/user'
+  baseUrl = 'https://artogram-mean-backend.onrender.com/api/user'
 
   constructor(private http: HttpClient) { }
 

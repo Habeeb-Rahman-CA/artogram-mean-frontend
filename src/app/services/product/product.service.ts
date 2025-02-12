@@ -10,7 +10,7 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl = 'http://localhost:8001/api/product';
+  baseUrl = 'https://artogram-mean-backend.onrender.com/api/product';
 
   //Product APIs
   getAllProducts(): Observable<IProduct[]> {

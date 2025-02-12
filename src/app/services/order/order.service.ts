@@ -6,7 +6,7 @@ import { inject, Injectable } from '@angular/core';
 })
 export class OrderService {
 
-  baseUrl = 'http://localhost:8001/api/order'
+  baseUrl = 'https://artogram-mean-backend.onrender.com/api/order'
 
   constructor(private http: HttpClient) { }
 

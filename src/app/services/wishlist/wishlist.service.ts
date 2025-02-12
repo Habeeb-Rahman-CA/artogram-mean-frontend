@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class WishlistService {
 
-  baseUrl = 'http://localhost:8001/api/wishlist'
+  baseUrl = 'https://artogram-mean-backend.onrender.com/api/wishlist'
 
   constructor(private http: HttpClient) { }
 

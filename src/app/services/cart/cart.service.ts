@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class CartService {
 
-  baseUrl = 'http://localhost:8001/api/cart'
+  baseUrl = 'https://artogram-mean-backend.onrender.com/api/cart'
 
   constructor(private http: HttpClient) { }
 

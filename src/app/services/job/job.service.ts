@@ -7,7 +7,7 @@ import { IHireJob, IJob } from '../../model/job';
 })
 export class JobService {
 
-  baseUrl = 'http://localhost:8001/api/job'
+  baseUrl = 'https://artogram-mean-backend.onrender.com/api/job'
 
   constructor(private http: HttpClient) { }
 
